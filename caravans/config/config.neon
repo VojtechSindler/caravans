@@ -1,0 +1,49 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+parameters:
+
+
+php:
+	date.timezone: Europe/Prague
+
+
+nette:
+	application:
+		errorPresenter: Error
+		mapping:
+			*: Caravans\*Module\Presenters\*Presenter
+
+	session:
+		expiration: 14 days
+	database:
+		dsn: 'mysql:host=127.0.0.1;dbname=karavany'
+		user: root
+		password:
+		debugger: yes
+		options:
+			lazy: yes
+
+services:
+	- Caravans\Backend\Model\UserAuthenticator
+	- Caravans\RouterFactory
+	- Caravans\Model\CaravanManager
+	- Caravans\Model\CaravanImage
+	- Caravans\Model\CategoryManager
+	- Caravans\Model\ArticleManager
+	router: @Caravans\RouterFactory::createRouter
+
+constants:
+	website: 'www.karavany.cz'
+	caravanCostMin: 10000
+	caravanCostMax: 1000000
+	maxImageSize: 3000
+	caravanIdLength: 6
+	caravanImageIdLength: 10
+	imageNameLength: 24
+	galleryPath: '/htdocs/caravans/www/gallery/'
+	caravanGalleryPath: '/caravans/www/gallery/caravans/'
+	categoryItemsPerPage: 6

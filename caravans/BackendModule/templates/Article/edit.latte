@@ -1,0 +1,36 @@
+{* Latte template *}
+
+{block content}
+{form addEditForm }
+    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+    <div class="msg msg-error" n:if="$form->hasErrors()">
+        <p n:foreach="$form->ownErrors as $error">{$error}</p>
+    </div>
+    <table class="table1" style="width:100%">
+        {input id_clanek}
+        <tr>
+            <td>{label nadpis /}</td>
+            <td>{input nadpis class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label perex /}</td>
+            <td>{input perex class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label text /}</td>
+            <td>{input text class => 'field'}</td>
+        </tr>
+    </tr>
+
+    <tr>
+        <th colspan="6">Nastavení</th>
+    </tr>
+    <tr>
+        <td>{input novinka class => 'field'}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>{input odeslat class=>"button"}</td>
+    </tr>
+</table>
+{/form}

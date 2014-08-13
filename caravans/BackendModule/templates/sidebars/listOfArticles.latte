@@ -1,0 +1,19 @@
+{* Latte template *}
+
+{block content}
+<div class="table">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>Nadpis</th>
+            <th>Perex</th>
+            <th>Akce</th>
+        </tr>
+        {foreach $articles as $article}
+            <tr>        
+                <td>{$article['nadpis']}</td>
+                <td>{$article['perex']}</td>
+                <td><a n:href="view, $article->id_clanek" class="ico view">Zobrazit</a></td>
+            </tr>
+        {/foreach}
+    </table>
+</div>

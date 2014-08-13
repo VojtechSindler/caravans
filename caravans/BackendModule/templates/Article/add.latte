@@ -1,0 +1,34 @@
+{* Latte template *}
+{control addArticleForm}
+{block content}
+{form addArticleForm}
+    <div n:if="$form->ownErrors" class="msg msg-error" >
+        <p n:foreach="$form->ownErrors as $error">{$error}</p>
+    </div>
+    <table class="table1" style="width:100%">
+        <tr>
+            <td>{label nadpis /}</td>
+            <td>{input nadpis class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label perex /}</td>
+            <td>{input perex class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label text /}</td>
+            <td>{input text class => 'field'}</td>
+        </tr>
+    </tr>
+
+    <tr>
+        <th colspan="6">Nastavení</th>
+    </tr>
+    <tr>
+        <td>{input novinka class => 'field'}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>{input odeslat class=>"button"}</td>
+    </tr>
+</table>
+{/form}

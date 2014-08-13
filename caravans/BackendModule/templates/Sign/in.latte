@@ -1,0 +1,39 @@
+{block content}
+<div id="loginbox">
+
+    <!-- Box -->
+    <div class="box">
+
+        <!-- Box Head -->
+        <div class="box-head">
+            <h2 n:block="title">Přihlášení do administrace</h2>
+        </div>
+        <!-- End Box Head-->
+
+        <div class="box-content">
+            <a href="">Zpět na {$website}</a>
+            <div class="form">
+                {form signInForm}
+                    <div class="msg msg-error" n:if="$form->ownErrors">
+	<p n:foreach="$form->ownErrors as $error">{$error}</p>
+</div>
+                    <table class="table1">
+                        <tr>
+                            <td>{label email /}</td>
+                            <td>{input email class => 'field'}</td>
+                        </tr>
+                        <tr>
+                            <td>{label heslo /}</td>
+                            <td>{input heslo class => 'field'}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>{input odeslat class=>"button"}</td>
+                        </tr>
+                    </table>
+                {/form}
+            </div>
+        </div>
+    </div>
+    <!-- End Box -->
+</div>
