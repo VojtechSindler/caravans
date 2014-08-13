@@ -18,10 +18,7 @@
             <td>{$caravan->vyska." x ".$caravan->sirka." x ".$caravan->delka}</td>
             <td>{$caravan->datum_vlozeni}</td>
             <td><a n:href="delete! idCaravan => $caravan->id_karavan" class="ico del">Smazat</a>
-                <a n:href="Caravan:edit idCaravan => $caravan->id_karavan" class="ico edit">Upravit</a>
-                <a n:href="current!, $caravan->id_karavan" class="ico edit">Aktuální</a>
-                <a n:href="uncurrent!, $caravan->id_karavan" class="ico edit">Neaktuální</a>
-            </td>
+                <a n:href="Caravan:edit idCaravan => $caravan->id_karavan" class="ico edit">Upravit</a></td>
         </tr>
     </table>
 </div>

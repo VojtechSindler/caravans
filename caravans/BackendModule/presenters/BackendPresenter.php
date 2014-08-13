@@ -25,4 +25,21 @@ class BackendPresenter extends Caravans\Presenters\BasePresenter{
             $this->redirect("Sign:in");
         $this->template->userName = $this->getUser()->identity->jmeno." ".$this->getUser()->identity->prijmeni;
     }
+    
+        /**
+     * Nastavuje nadpis sidebaru.
+     * @param string $title
+     */
+    public function sidebar($file, $title){
+        $this->template->scontent = $file;
+        $this->template->stitle = $title;
+    }
+    
+    /**
+     * Nastavuje data pro navigační panel.
+     * @params string ...
+     */
+    public function navigation(){
+        $this->template->navigation = func_get_args();
+    }
 }

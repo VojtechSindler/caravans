@@ -3,8 +3,7 @@
 namespace Caravans\Presenters;
 
 use Nette,
-	Caravans\Model;
-
+    Caravans\Model;
 
 /**
  * Homepage presenter.
@@ -12,12 +11,16 @@ use Nette,
  * @author Vladimír Antoš
  * @package caravans_presenters
  */
-class HomepagePresenter extends BasePresenter
-{
+class HomepagePresenter extends BasePresenter {
 
-	public function renderDefault()
-	{
-		$this->template->anyVariable = 'any value';
-	}
+    public function startup() {
+        parent::startup();
+        $this->setLayout("layout");
+        
+    }
+    
+    public function renderDefault() {
+        $this->title = "AHOJ";
+    }
 
 }

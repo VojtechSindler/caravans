@@ -25,29 +25,33 @@ class CaravanPresenter extends \BackendPresenter {
      * @var \Caravans\Model\CategoryManager @inject
      */
     public $category;
-    private $idCaravan;
 
+    private $idCaravan;
+    
     public function startup() {
         parent::startup();
         $this->template->maxImageSize = maxImageSize;
-        if (isset($this->params["idCaravan"])) {
+        if(isset($this->params["idCaravan"])){
             $this->idCaravan = $this->params["idCaravan"];
             $this->caravan->id = $this->idCaravan;
         }
     }
 
     public function renderAdd() {
+        $this->navigation("Vytvořit karavan");
         $this->isEdit = false;
         $this->title = "Vytvořit karavan";
         $this->sidebar("listOfCaravans", "Seznam karavanů");
     }
 
     public function renderShow() {
+        $this->navigation("Výpis karavanů");
         $this->title = "Seznam karavanů";
         $this->template->caravans = $this->caravan->readCaravans();
     }
 
     public function renderEdit($idCaravan) {
+        $this->navigation("Editace karavanu");
         $this->isEdit = true;
         $this->idCaravan = $idCaravan;
         $this->template->idCaravan = $idCaravan;
@@ -57,14 +61,15 @@ class CaravanPresenter extends \BackendPresenter {
         $this->sidebar("editCaravanMenu", "Menu");
     }
 
-    public function renderEquipment($idCaravan) {
+    public function renderEquipment($idCaravan){
+        $this->navigation("Editace výbavy karavanu");
         $this->idCaravan = $idCaravan;
         $caravan = $this->caravan->getCaravan($idCaravan);
-        $this->title = "Přidat výbavu pro karavan " . $caravan->znacka
-                . " " . $caravan->typ . " (s číslem " . $caravan->id_karavan . ")";
+        $this->title = "Přidat výbavu pro karavan " . $caravan->znacka 
+                . " " . $caravan->typ." (s číslem ".$caravan->id_karavan.")";
         $this->template->equipments = $this->caravan->caravanEquipment()->getEquipments();
     }
-
+    
     protected function createComponentAddCaravanForm() {
         $form = new Form();
 
@@ -199,6 +204,9 @@ class CaravanPresenter extends \BackendPresenter {
                 ->addCondition(Form::FILLED)
                 ->addRule(Form::MAX_LENGTH, "%label může mít maximálně %d znaků", 4)
                 ->addRule(Form::NUMERIC, "%label musí být číselná hodnota");
+        
+        $form->addTextArea("specialni_edice", "Popis speciální edice");
+        
         $form->addHidden("id_karavan");
         $form->addSubmit("odeslat", ($this->isEdit ? "Upravit" : "Vytvořit"));
         $form->onSuccess[] = $this->addCaravanFormSucceeded;
@@ -221,7 +229,7 @@ class CaravanPresenter extends \BackendPresenter {
                 $this->caravanImage->addImages($data->images, $data->kategorie);
                 $this->flashMessage("Karavan byl úspěšně vytvořen", \FlashMessageTypes::OK);
                 $this->redirect("this");
-            }else {
+            }else{
                 //editace
                 $values->remove("mainImage")->remove("images")->remove("kategorie");
                 $this->caravan->edit($values->id_karavan, $values->remove("id_karavan"));
@@ -233,7 +241,7 @@ class CaravanPresenter extends \BackendPresenter {
         }
     }
 
-    protected function createComponentAddEquipmentForm() {
+    protected function createComponentAddEquipmentForm(){
         $form = new Form();
         $form->addText("nazev", "Název*")->setRequired("Nevyplnil jsi pole %label");
         $form->addText("cena", "Cena*")
@@ -245,43 +253,28 @@ class CaravanPresenter extends \BackendPresenter {
         $form->addSubmit("odeslat", "Uložit");
         return $form;
     }
-
-    public function addEquipmentFormSucceeded($form, $values) {
-        try {
-            $this->caravan->caravanEquipment()->save($values->nazev, $values->cena, $values->popis);
+    
+    public function addEquipmentFormSucceeded($form, $values){
+        try{
+            $this->caravan->caravanEquipment()->save($values->nazev, 
+                    $values->cena, $values->popis);
         } catch (\Nette\InvalidArgumentException $ex) {
             $form->addError($ex->getMessage());
         }
     }
 
-    protected function createComponentGalleryManager() {
-        if ($this->idCaravan == null)
+    protected function createComponentGalleryManager(){
+        if($this->idCaravan == null)
             $this->idCaravan = $this->params["idCaravan"];
-        $gm = new BackendModule\Controls\GalleryManagerControl($this->category, $this->caravanImage, $this->idCaravan);
-
+        $gm = new BackendModule\Controls\GalleryManagerControl($this->category, 
+                $this->caravanImage, $this->idCaravan);
+        
         return $gm;
     }
-
+    
     public function handleDelete($idCaravan) {
         $this->caravanImage->setIdCaravan($idCaravan);
         $this->caravanImage->deleteMainImage()->deleteAllImages();
         $this->caravan->delete($idCaravan);
     }
-
-    public function handleCurrent($idCaravan,$idBase=null) {
-        if(is_null($idBase))
-            $idBase=$idCaravan;
-        $vlozeno=$this->caravan->currentCaravan()->setCurrent($idCaravan, $idBase);
-        if($vlozeno==false){
-            $this->flashMessage("Tento karavan je již nastaven jako aktuální", \FlashMessageTypes::ERROR);
-        }else{
-            $this->flashMessage("Karavan nastaven jako aktuální", \FlashMessageTypes::OK);
-        }
-    }
-    
-    public function handleUncurrent($idCaravan){
-        $this->caravan->currentCaravan()->unsetCurrent($idCaravan);
-    }
-    
-
 }

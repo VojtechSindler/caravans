@@ -20,6 +20,7 @@ class SettingsPresenter extends \BackendPresenter {
     }
 
     public function renderDefault() {
+        $this->navigation("Nastavení");
         $this->title = "Nastavení systému";
     }
 

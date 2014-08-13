@@ -32,8 +32,9 @@ class ArticlePreviewControl extends UI\Control {
         $view = $httpRequest->getPost("view");
         if ($view == 0)
             $this->template->render(__DIR__ . "/table.latte");
-        else
+        else{
             $this->template->render(__DIR__ . "/view.latte");
+        }
     }
 
     public function handleEdit($id) {

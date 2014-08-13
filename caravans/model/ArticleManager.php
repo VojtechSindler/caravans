@@ -4,7 +4,7 @@ namespace Caravans\Model;
 
 /**
  * Description of ArticleManager
- * 
+ *
  * @author Bruno
  */
 class ArticleManager extends \Caravans\Model\ModelContainer {
@@ -33,24 +33,15 @@ class ArticleManager extends \Caravans\Model\ModelContainer {
         return (int) $id;
     }
 
-    /** Vrací vrací id článku
-     *
-     * @return int
-     */
     public function getId() {
         return $this->id;
     }
-
-    /** Nastavuje id článku
-     * 
-     * @param type $id
-     */
-    public function setId($id) {
-        $this->id = $id;
+    
+    public function setId($id){
+        $this->id=$id;
     }
 
-    /** Uloží článek
-     * 
+    /**
      * @param \Nette\Utils\ArrayHash $data
      * @return bool
      */
@@ -60,58 +51,27 @@ class ArticleManager extends \Caravans\Model\ModelContainer {
         return $this->database->table("clanky")->insert($data);
     }
 
-    /** Upraví článek
-     * 
-     * @param \Nette\Utils\ArrayHash $data
-     * @return bool
-     */
     public function edit(\Nette\Utils\ArrayHash $data) {
         $data->id_autor = $this->userId;
-        $id = $data->id_clanek;
+        $id=$data->id_clanek;
         $data->remove("id_clanek");
         return $this->database->table("clanky")->where("id_clanek=$id")->update($data);
     }
-
-    /** Vymaže článek
-     * 
-     * @param int $id
-     * @return bool
-     */
-    public function delete($id) {
+    public function delete($id){
         return $this->database->table("clanky")->where("id_clanek=$id")->delete();
     }
 
-    /**
-     * Vrací všechny články.
-     * Pokud se vloží parametr $id, vrátí pouze daný článek
-     * 
-     * @param type $id
-     * @return type
-     */
     public function getArticles($id = null) {
         if (is_null($id)) {
-            $articles = $this->database->query("SELECT c.id_clanek,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor ORDER BY datum desc")->fetchAll();
+            $articles = $this->database->query("SELECT c.id_clanek,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor")->fetchAll();
         } else {
-            $articles = $this->database->query("SELECT c.id_clanek,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor and id_clanek=$id  ORDER BY datum desc")->fetchAll();
+            $articles = $this->database->query("SELECT c.id_clanek,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor and id_clanek=$id")->fetchAll();
         }
         return $articles;
     }
 
-    /** Vytváří perex
-     * Ze zadaného textu vezme x znaků (dle $limit) a následně testuje, jestli je xtý znak mezera, 
-     * pokud ne ořezává text, dokud není poslední znak právě mezera
-     * 
-     * @param type $text
-     * @param type $limit
-     * @return string
-     */
-    public function createPerex($text, $limit = 50) {
-        if (strlen($text) > $limit) {
-            $text = substr($text, 0, $limit + 1);
-            $pos = strrpos($text, " ");
-            $text = substr($text, 0, ($pos ? $pos : -1)) . "…";
-        }
-        return $text;
+    public function createPerex() {
+        
     }
 
 }

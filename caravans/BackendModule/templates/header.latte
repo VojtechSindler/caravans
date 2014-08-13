@@ -5,7 +5,7 @@
 	<div class="shell">
 		<!-- Logo + Top Nav -->
 		<div id="top">
-			<h1><a href="#">TODO: název systému</a></h1>
+			<h1><a n:href="Homepage:">CaravanAdmin<sup style="font-size: 13px">TN</sup></a></h1>
 			<div id="top-navigation">
 				Vítejte <strong>{$userName}</strong>
 				<span>|</span>
@@ -19,12 +19,12 @@
 		<!-- Main Nav -->
 		<div id="navigation">
 			<ul>
-			    <li><a id="trá" n:href="Homepage:" class="menu active"><span>Domů</span></a></li>
-			    <li><a id="ara" n:href="Caravan:add" class="menu"><span>Vytvořit karavan</span></a></li>
-			    <li><a id="ava" n:href="Caravan:show"><span>Výpis karavanů</span></a></li>
-                            <li><a id="lán" n:href="Article:add"><span>Vytvořit článek</span></a></li>
-                            <li><a id="nků" n:href="Article:"><span>Seznam článků</span></a></li>
-			    <li><a id="sys" n:href="Settings:"><span>Nastavení</span></a></li>
+			    <li><a n:href="Homepage:" class="menu active"><span>Domů</span></a></li>
+			    <li><a n:href="Caravan:add" class="menu" onclick="menu();"><span>Vytvořit karavan</span></a></li>
+			    <li><a n:href="Caravan:show"><span>Výpis karavanů</span></a></li>
+                            <li><a n:href="Article:add"><span>Vytvořit článek</span></a></li>
+                            <li><a n:href="Article:"><span>Seznam článků</span></a></li>
+			    <li><a n:href="Settings:"><span>Nastavení</span></a></li>
                             <li><a href="#"><span>{$website}</span></a></li>
 			</ul>
 		</div>

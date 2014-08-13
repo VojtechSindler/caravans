@@ -8,7 +8,7 @@
     <head>
         <meta charset="utf-8">
 
-        <title>{ifset #title}{include title|striptags} | TODO nazev{/ifset}</title>
+        <title>{ifset #title}{include title|striptags} | CaravanAdmin{/ifset}</title>
 
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/admin.css">
         <link rel="shortcut icon" href="{$basePath}/favicon.ico">
@@ -17,7 +17,7 @@
         {block head}{/block}
     </head>
 
-    <body onload="menu();">
+    <body>
         <script> document.documentElement.className += ' js'</script>
 
         {include header.latte}
@@ -25,7 +25,7 @@
             <div class="shell">
                 <!--Navigační panel-->
                 <div class="small-nav">
-                    <a href="#">Domů</a>
+                    <a n:href="Homepage:">Domů</a>
                     <span n:foreach="$navigation as $nav">
                         <span>&gt;</span>
                         {$nav|firstUpper}

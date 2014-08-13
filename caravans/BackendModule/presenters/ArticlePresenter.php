@@ -27,6 +27,7 @@ class ArticlePresenter extends \BackendPresenter {
     }
 
     public function renderEdit($id) {
+        $this->navigation("Upravit článek");
         $this->id = $id;
         $this->title = "Upravit článek";
         $this->template->articles = $this->articleManager->getArticles();
@@ -34,12 +35,14 @@ class ArticlePresenter extends \BackendPresenter {
     }
 
     public function renderAdd() {
+        $this->navigation("Vytvořit článek");
         $this->title = "Vytvořit článek";
         $this->template->articles = $this->articleManager->getArticles();
         $this->sidebar("listOfArticles", "Seznam Článků");
     }
 
     public function renderView($id) {
+        $this->navigation("Zobrazení článku");
         $this->id = $id;
         $this->title = "Článek $id";
         $this->template->articles = $this->articleManager->getArticles();
@@ -101,7 +104,6 @@ class ArticlePresenter extends \BackendPresenter {
      * @return \Nette\Application\UI\Form
      */
     protected function createComponentAddEditForm() {
-
         $article = $this->articleManager->getArticles($this->id);
         $article = $article[0];
         $form = new Form();

@@ -1,54 +1,210 @@
-body {
-	font-size: 15px;
-	line-height: 1.6;
-	color: #333;
-	background: white;
+body{
+    padding: 0;
+    margin: 0;
+    background-image: url('../images/web/background.jpg');
 }
 
-h1 {
-	color: #3484D2;
+header{
+    width:100%;
+    text-align: center;
+    padding-top: 5px;
+    background-color: #dcd8d0;
+    border-bottom: 3px solid #bdb8b0;
+
+}
+header .login{
+    float:left; position: absolute; 
+    margin-top: 10px; margin-left: 10px;
+    font-family: OpenSans; font-size: 12px
+}
+header .login a{
+    text-decoration: none;
+    color: #666052
 }
 
-#ajax-spinner {
-	margin: 15px 0 0 15px;
-	padding: 13px;
-	background: white url('../images/spinner.gif') no-repeat 50% 50%;
-	font-size: 0;
-	z-index: 123456;
-	display: none;
+.header{
+    width:1000px;
+    text-align: center;
+    padding: 5px;
+    margin: auto;
+    border: 1px solid #bdb8b0;
+    border-top: none;
+    border-bottom: none;
+}
+.header td{
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #bdb8b0;
+    border-top: none;
+    border-bottom: none;
+    font-family: OpenSans ;
+
+}
+.menu{
+    padding: 10px;
+    text-decoration: none;
+    color: #666052;
+    font-size: 80%;
 }
 
-div.flash {
-	color: black;
-	background: #FFF9D7;
-	border: 1px solid #E2C822;
-	padding: 1em;
-	margin: 1em 0;
+.menu:hover{
+    padding: 10px;
+    background-color: #c02722;
+    border-radius: 20px;
+    cursor: pointer;
+    color:white;
+    text-decoration: none;
 }
 
-a[href^="#error:"] {
-	background: red;
-	color: white;
+.background1{
+    height: 465px;
+    width: 100%;
+    background-image: url('../images/web/background1.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+
 }
 
-form th, form td {
-	vertical-align: top;
-	font-weight: normal;
+.background2{
+    height: 465px;
+    width: 100%;
+    background-image: url('../images/web/background2.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
-form th {
-	text-align: right;
+#main{
+    margin: 0 auto;
+    margin-top:-930px;
+    width: 1000px;
+    min-height: 600px;
 }
 
-form .required label {
-	font-weight: bold;
+#caravan{
+    width:250px;
+    border-bottom-right-radius: 20px;
+    -webkit-box-shadow: 0px 4px 3px #000000; 
+    -moz-box-shadow: 0px 4px 3px #000000; 
+    background-color: #be2722;
+    text-align: center;
+    padding: 2px;
+}
+#obsah{
+    width: 100%;
+    min-height: 700px;
+    margin-top: 25px;
+    background-image: url('../images/web/background.jpg');
+    border-top: 5px solid #bdb8b0;
+    font-family: OpenSans;
+    padding: 5px;    
 }
 
-form .error {
-	color: #D00;
-	font-weight: bold;
+#obsah h2{
+    font-family: OpenSans Light;
 }
 
-html.js .jshidden {
-	display: none;
+button{
+    background-color: #c02722;
+    border-radius: 30px;
+    padding: 8px;
+    color:white;
+    cursor: pointer;
+}
+
+.greyToDark{
+    width: 100%;
+    margin: 0;
+    background-color: #666052;
+
+    -webkit-border-image:url(../images/web/bordertodark.jpg) 30 30 round; /* Safari 3.1-5 */
+    -o-border-image:url(../images/web/bordertodark.jpg) 30 30 round; /* Opera 11-12.1 */
+    border-image:url(../images/web/bordertodark.jpg) 30 30 round;
+    border-top: 30px;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.greyToDark img{
+    border:4px solid #bdb8b0;
+    width: 90%;
+    margin-left: 3%;
+    background-color: white;
+}
+
+.darkToWhite{
+    width: 99%;
+    margin: 0;
+    background-color: white;
+
+    -webkit-border-image:url(../images/web/darktowhite.jpg) 30 30 round; /* Safari 3.1-5 */
+    -o-border-image:url(../images/web/darktowhite.jpg) 30 30 round; /* Opera 11-12.1 */
+    border-image:url(../images/web/darktowhite.jpg) 30 30 round;
+    border-top: 30px;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    padding: 5px;
+}
+
+.whiteToGrey{
+    width: 100%;
+    margin: 0;
+    background-color: #c2beb5;
+
+    -webkit-border-image:url(../images/web/whitetogrey.jpg) 30 30 round; /* Safari 3.1-5 */
+    -o-border-image:url(../images/web/whitetogrey.jpg) 30 30 round; /* Opera 11-12.1 */
+    border-image:url(../images/web/whitetogrey.jpg) 30 30 round;
+    border-top: 30px;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    font-size: 70%;
+    padding-bottom: 5px;
+}
+
+.left{
+    float:left;
+    border-radius: 50px 0px 0px 50px;
+    margin-left:-40px;
+
+}
+.right{
+    float:right;
+    border-radius: 0px 50px 50px 2px;
+    margin-right:-40px;
+
+}
+.sipka{
+    border: 0;
+    height: 50px;
+    width:40px;
+    font-size: 150%;
+    margin-top:-100px
+
+}
+footer {
+    width:800px;
+    margin:0 auto;
+    margin-top:10px;
+    font-size: 90%;
+    text-align: center;
+}
+
+#footer{
+    width:40px;
+    float:right;
+    margin-right: -40px;
+    margin-top: -280px;
+}
+#footer img{
+    width:35px;
+    margin-bottom: 5px;
+    float:right;
+}
+
+@font-face{
+    font-family: OpenSans;
+    src: url('../fonts/OpenSans-Bold.ttf');
 }

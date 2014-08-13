@@ -8,10 +8,9 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>{ifset #title}{include title|striptags} | {/ifset}Nette Sandbox</title>
+	<title>{ifset #title}{include title|striptags} | {/ifset}Minikaravany.cz</title>
 
 	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
-	<link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
 	{block head}{/block}
 </head>
@@ -20,9 +19,25 @@
 	<script> document.documentElement.className+=' js' </script>
 
 	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+        {include header.latte}
+        
+                <section id='main' >
+            <div id='caravan'>
+                <img src='{$basePath}/images/web/karavany.jpg' style="width:90%;">
+            </div>
+            <div id='obsah'>
+               {include content}
+                <div id="footer">
+                    <img src="{$basePath}/images/web/mail.png">
+                    <img src="{$basePath}/images/web/face.png">
+                    <img src="{$basePath}/images/web/rate.png">
+                    <img style="margin-left:0;width: 40px" src="{$basePath}/images/web/zalozkakaravany.png">
+                </div>
+            </div>
+        </section>
+	
 
-	{include content}
-
+        {include footer.latte}
 	{block scripts}
 	<script src="{$basePath}/js/jquery.js"></script>
 	<script src="{$basePath}/js/netteForms.js"></script>
