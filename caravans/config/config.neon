@@ -47,3 +47,5 @@ constants:
 	galleryPath: '/htdocs/caravans/www/gallery/'
 	caravanGalleryPath: '/caravans/www/gallery/caravans/'
 	categoryItemsPerPage: 6
+	caravanImageWidth: 276
+	caravanImageHeight: 162
