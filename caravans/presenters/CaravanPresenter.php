@@ -17,6 +17,6 @@ class CaravanPresenter extends BasePresenter{
     
     public function renderShowAll(){
         $caravans = $this->caravan->readCaravans();
-        $this->template->caravans = array_map($caravans[""], $array1)
+        $this->template->caravans = array_map($caravans[""], $array1);
     }
 }
