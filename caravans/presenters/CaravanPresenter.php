@@ -16,7 +16,10 @@ class CaravanPresenter extends BasePresenter{
     public $caravan;
     
     public function renderShowAll(){
+        $this->template->columns = 3;
         $caravans = $this->caravan->readCaravans();
-        $this->template->caravans = array_map($caravans[""], $array1);
+        $caravans[0]["hlavni_obrazek"] = caravanGalleryPath.$caravans[0]["hlavni_obrazek"];
+        $this->template->caravans = $caravans;
+        $this->template->footerText = "Nabídka minikaravanů";
     }
 }

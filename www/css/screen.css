@@ -1,3 +1,12 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11.8.2014, 15:34:11
+    Author     : Bruno
+*/
 body{
     padding: 0;
     margin: 0;
@@ -12,16 +21,6 @@ header{
     border-bottom: 3px solid #bdb8b0;
 
 }
-header .login{
-    float:left; position: absolute; 
-    margin-top: 10px; margin-left: 10px;
-    font-family: OpenSans; font-size: 12px
-}
-header .login a{
-    text-decoration: none;
-    color: #666052
-}
-
 .header{
     width:1000px;
     text-align: center;
@@ -30,6 +29,15 @@ header .login a{
     border: 1px solid #bdb8b0;
     border-top: none;
     border-bottom: none;
+}
+header .login{
+    float:left; position: absolute; 
+    margin-top: 10px; margin-left: 10px;
+    font-family: OpenSans; font-size: 12px
+}
+header .login a{
+    text-decoration: none;
+    color: #666052
 }
 .header td{
     padding: 5px;
@@ -55,6 +63,33 @@ header .login a{
     cursor: pointer;
     color:white;
     text-decoration: none;
+}
+
+.submenu{
+    display: none;
+    position: absolute;
+    background-color: #dcd8d0;
+    margin-top: 20px;
+    min-width: 150px;
+    border: 2px solid white;
+    font-size: 70%;
+}
+.submenu:hover{
+    display: block;
+}
+.submenu img{
+    width: 100%;
+    margin-top:-15px;
+}
+
+.submenu ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 5px;
+    text-align: left;
+}
+.submenu li{
+    border-bottom: 1px inset #bdb8b0;
 }
 
 .background1{
@@ -92,22 +127,18 @@ header .login a{
 }
 #obsah{
     width: 100%;
-    min-height: 700px;
     margin-top: 25px;
     background-image: url('../images/web/background.jpg');
     border-top: 5px solid #bdb8b0;
     font-family: OpenSans;
-    padding: 5px;    
-}
-
-#obsah h2{
-    font-family: OpenSans Light;
 }
 
 button{
     background-color: #c02722;
     border-radius: 30px;
     padding: 8px;
+    padding-left: 15px ;
+    padding-right: 15px ;
     color:white;
     cursor: pointer;
 }
@@ -197,13 +228,107 @@ footer {
     float:right;
     margin-right: -40px;
     margin-top: -280px;
+
 }
 #footer img{
     width:35px;
     margin-bottom: 5px;
     float:right;
+    cursor: pointer;
 }
 
+.nadpis{
+    width:100%;
+    background-image: url('../images/web/background.jpg');
+    margin: 0;
+    padding: 0;
+    margin-top: 5px;
+}
+.whitefromgrey{
+    border:0;
+    border-image: url('../images/web/greytowhite.jpg') 30 30 round;
+    border-top: 30px;
+    background-color: white;
+}
+.rozcestnik td{
+    padding: 20px;
+    border-right: 1px dashed #bdb8b0;
+    vertical-align: top;
+}
+
+.rozcestnik img{
+    width: 95%;
+    border:5px solid #bdb8b0;
+    padding: 2px;
+}
+.rozcestnik p{
+    font-size: 80%;
+}
+
+.detail > div{
+    display: inline-block;
+    margin-left: 1.5%;
+    padding-right: 1.5%;
+    width: 330px; 
+    margin-bottom: 5px;
+    vertical-align: top;
+    border-right: 1px dashed #bdb8b0;
+}
+#mainImage{
+    width:98%;
+    border:3px solid #bdb8b0;
+}
+.galerie{
+    margin:0;
+}
+.galerie img{
+    margin-left:1%;
+    width: 30%;
+    border:1px solid #bdb8b0;
+}
+.galerie > h4{
+    margin-bottom: 0;
+}
+.cena{
+    margin:0;
+    padding: 0;
+    font-size: 200%;
+    padding-right: 10px;
+}
+.udaje hr{
+    vertical-align: middle;
+    display: inline-block;
+}
+.udaje{
+    margin-top: 15px;
+    width: 100%;
+}
+.udaje img{
+    width: 100px;
+    vertical-align: middle; 
+    cursor: pointer;
+}
+
+.vpravo{
+    
+    border-radius: 30px 0px 0px 0px;
+    padding: 20px;
+    margin:0;
+    margin-top: 10px;
+    background-color:  #c2beb5;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+.background{
+    background-image: url('../images/web/background.jpg');
+    width: 100%;
+    text-align: center;
+}
+input{
+    border-radius: 20px 20px 20px 20px;
+    background-color: #eee8d9;
+}
 @font-face{
     font-family: OpenSans;
     src: url('../fonts/OpenSans-Bold.ttf');

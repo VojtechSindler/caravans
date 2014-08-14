@@ -66,11 +66,20 @@ class CaravanManager extends \Caravans\Model\ModelContainer{
     }
     
     /**
-     * Vrací seznam všech karavanů.
+     * Vrací seznam všech karavanů včetně hlavních obrázků.
      * @return array<ActiveRow>
      */
     public function readCaravans(){
-        return $this->database->table("karavany")->select("*")->fetchAll();
+        return $this->database->query("
+            SELECT k.`id_karavan`, `znacka`, `typ`, `cena`, `sirka`, 
+            `delka`, `vyska`, `nastavba_sirka`,`nastavba_delka`,`nastavba_vyska`,
+            `vyska_vnitrni`,`luzko_delka`,`luzko_sirka`,`hmotnost_p`,
+            `hmotnost_pb`,`hmotnost_c`,`hmotnost_t`,`hmotnost_max`,`podvozek`,
+            `exterier`,`podvozek2`,`pneu`,`napajeni`,`datum_vlozeni`,`vybava`,
+            `popis`,`specialni_edice`,`barva`, g.`nazev` as `hlavni_obrazek`
+            FROM `karavany` as k
+            LEFT JOIN `hlavni_obrazky_karavany` as hok ON  hok.`id_karavan` = k.`id_karavan`
+            LEFT JOIN `galerie` as g ON g.`id_foto` = hok.`id_foto`")->fetchAll();
     }
     
     /**

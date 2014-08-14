@@ -43,7 +43,7 @@ class GalleryManagerControl extends UI\Control {
      */
     public function renderGallery(){
         $this->template->setFile(__DIR__."/gallery.latte");
-        $this->template->galleryPath = caravanGalleryPath;
+        $this->template->galleryPath = caravanGalleryPath2;
         $this->template->mainImage = $this->caravanImage->mainImage();
         $this->template->images = $this->caravanImage->images();
         $this->template->columns = 3; // kolik bude zobrazeno obrázků vedle sebe
@@ -73,15 +73,16 @@ class GalleryManagerControl extends UI\Control {
 
     public function addImagesFormSucceeded($form, $values) {
         try {
-            if (isset($values->mainImage)) {
+            if ($values->mainImage->name != null) {
                 $this->caravanImage->addMainImage($values->mainImage);
             }
-
+            
             if(!empty($values->images)) {
                 if ($values->kategorie == null)
                     throw new \Nette\InvalidStateException("Nezadal jsi kategorii");
                 $this->caravanImage->addImages($values->images, $values->kategorie);
             }
+             $this->redirect("this");
         } catch (\Nette\InvalidStateException $e) {
             $form->addError($e->getMessage());
         }

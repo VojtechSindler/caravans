@@ -220,13 +220,13 @@ class CaravanPresenter extends \BackendPresenter {
                 $post = $values->remove("mainImage")->remove("images")->remove("kategorie"); //odstranění obrázků
                 $this->caravan->save($post);
 
-                $this->caravanImage->setIdCaravan($this->caravan->getId()); //ID karavanu kterému patří obrázky
-                //Zpracování hlavního obrázku
-                if ($data->mainImage->isOk())
-                    $this->caravanImage->addMainImage($data->mainImage);
-
-                //Zpracování dalších obrázků
-                $this->caravanImage->addImages($data->images, $data->kategorie);
+//                $this->caravanImage->setIdCaravan($this->caravan->getId()); //ID karavanu kterému patří obrázky
+//                //Zpracování hlavního obrázku
+//                if ($data->mainImage->isOk())
+//                    $this->caravanImage->addMainImage($data->mainImage);
+//
+//                //Zpracování dalších obrázků
+//                $this->caravanImage->addImages($data->images, $data->kategorie);
                 $this->flashMessage("Karavan byl úspěšně vytvořen", \FlashMessageTypes::OK);
                 $this->redirect("this");
             }else{
