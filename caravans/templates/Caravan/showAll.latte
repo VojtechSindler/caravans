@@ -2,32 +2,7 @@
 
 {block content}
 <h1 n:block="title">Nabídka minikaravanů - TODO ZMenšování obrázků</h1>
-<<<<<<< HEAD
-<div class="whitefromgrey">
-    <table style="width: 99%;margin-left: 0.5%" class="rozcestnik" >
-        {var $counter = 1}
-        {foreach $caravans as $caravan}
-            {if $counter == $columns + 1}
-                <tr> 
-            {/if}
-            <td>
-                                <img src="{$caravan->hlavni_obrazek}">
-                                <h4>{$caravan->znacka." ".$caravan->typ}</h4>
-                                <p>ahoj jak se vede a co to tu máme? </p>
-                                <button onclick="window.location='detail.php';">Více info ></button>
-                            </td>
-                {if $counter == $columns}
-                    {$counter = 1}
-                </tr>
-            {else}{$counter++}
-            {/if}
-        {/foreach}
 
-
-    </table>
-</div>
-{/block}
-=======
 <section class="whitefromgrey rozcestnik">
     {var $counter = 1}
     {foreach $caravans as $caravan}
@@ -41,4 +16,3 @@
     {/foreach}
 </section>
 {/block}
->>>>>>> origin/master

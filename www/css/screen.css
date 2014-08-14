@@ -250,10 +250,14 @@ footer {
     border-top: 30px;
     background-color: white;
 }
-.rozcestnik td{
+.rozcestnik{
+    width: 100%;
+}
+.rozcestnik article{
+    display: inline-block;
+    width:29%;
     padding: 20px;
     border-right: 1px dashed #bdb8b0;
-    vertical-align: top;
 }
 
 .rozcestnik img{

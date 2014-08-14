@@ -78,13 +78,9 @@ class CaravanManager extends \Caravans\Model\ModelContainer{
             `exterier`,`podvozek2`,`pneu`,`napajeni`,`datum_vlozeni`,`vybava`,
             `popis`,`specialni_edice`,`barva`, g.`nazev` as `hlavni_obrazek`
             FROM `karavany` as k
-<<<<<<< HEAD
-            LEFT JOIN `hlavni_obrazky_karavany` as hok ON  hok.`id_karavan` = k.`id_karavan`
-            LEFT JOIN `galerie` as g ON g.`id_foto` = hok.`id_foto`")->fetchAll();
-=======
+
             JOIN `hlavni_obrazky_karavany` as hok ON  hok.`id_karavan` = k.`id_karavan`
             JOIN `galerie` as g ON g.`id_foto` = hok.`id_foto`")->fetchAll();
->>>>>>> origin/master
     }
     
     /**
