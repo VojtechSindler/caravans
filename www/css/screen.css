@@ -1,16 +1,11 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
-    Created on : 11.8.2014, 15:34:11
-    Author     : Bruno
+
+    Author     : Bruno Puzják
 */
 body{
     padding: 0;
     margin: 0;
-    background-image: url('../images/web/background.jpg');
+    background-image: url('img/background.jpg');
 }
 
 header{
@@ -29,15 +24,6 @@ header{
     border: 1px solid #bdb8b0;
     border-top: none;
     border-bottom: none;
-}
-header .login{
-    float:left; position: absolute; 
-    margin-top: 10px; margin-left: 10px;
-    font-family: OpenSans; font-size: 12px
-}
-header .login a{
-    text-decoration: none;
-    color: #666052
 }
 .header td{
     padding: 5px;
@@ -95,7 +81,7 @@ header .login a{
 .background1{
     height: 465px;
     width: 100%;
-    background-image: url('../images/web/background1.png');
+    background-image: url('img/background1.png');
     background-repeat: no-repeat;
     background-size: 100%;
 
@@ -104,7 +90,7 @@ header .login a{
 .background2{
     height: 465px;
     width: 100%;
-    background-image: url('../images/web/background2.png');
+    background-image: url('img/background2.png');
     background-repeat: no-repeat;
     background-size: 100%;
 }
@@ -128,7 +114,7 @@ header .login a{
 #obsah{
     width: 100%;
     margin-top: 25px;
-    background-image: url('../images/web/background.jpg');
+    background-image: url('img/background.jpg');
     border-top: 5px solid #bdb8b0;
     font-family: OpenSans;
 }
@@ -148,9 +134,9 @@ button{
     margin: 0;
     background-color: #666052;
 
-    -webkit-border-image:url(../images/web/bordertodark.jpg) 30 30 round; /* Safari 3.1-5 */
-    -o-border-image:url(../images/web/bordertodark.jpg) 30 30 round; /* Opera 11-12.1 */
-    border-image:url(../images/web/bordertodark.jpg) 30 30 round;
+    -webkit-border-image:url(img/bordertodark.jpg) 30 30 round; /* Safari 3.1-5 */
+    -o-border-image:url(img/bordertodark.jpg) 30 30 round; /* Opera 11-12.1 */
+    border-image:url(img/bordertodark.jpg) 30 30 round;
     border-top: 30px;
     border-left: 0;
     border-right: 0;
@@ -169,9 +155,9 @@ button{
     margin: 0;
     background-color: white;
 
-    -webkit-border-image:url(../images/web/darktowhite.jpg) 30 30 round; /* Safari 3.1-5 */
-    -o-border-image:url(../images/web/darktowhite.jpg) 30 30 round; /* Opera 11-12.1 */
-    border-image:url(../images/web/darktowhite.jpg) 30 30 round;
+    -webkit-border-image:url(img/darktowhite.jpg) 30 30 round; /* Safari 3.1-5 */
+    -o-border-image:url(img/darktowhite.jpg) 30 30 round; /* Opera 11-12.1 */
+    border-image:url(img/darktowhite.jpg) 30 30 round;
     border-top: 30px;
     border-left: 0;
     border-right: 0;
@@ -184,9 +170,9 @@ button{
     margin: 0;
     background-color: #c2beb5;
 
-    -webkit-border-image:url(../images/web/whitetogrey.jpg) 30 30 round; /* Safari 3.1-5 */
-    -o-border-image:url(../images/web/whitetogrey.jpg) 30 30 round; /* Opera 11-12.1 */
-    border-image:url(../images/web/whitetogrey.jpg) 30 30 round;
+    -webkit-border-image:url(img/whitetogrey.jpg) 30 30 round; /* Safari 3.1-5 */
+    -o-border-image:url(img/whitetogrey.jpg) 30 30 round; /* Opera 11-12.1 */
+    border-image:url(img/whitetogrey.jpg) 30 30 round;
     border-top: 30px;
     border-left: 0;
     border-right: 0;
@@ -239,18 +225,23 @@ footer {
 
 .nadpis{
     width:100%;
-    background-image: url('../images/web/background.jpg');
+    background-image: url('img/background.jpg');
     margin: 0;
     padding: 0;
     margin-top: 5px;
 }
 .whitefromgrey{
     border:0;
-    border-image: url('../images/web/greytowhite.jpg') 30 30 round;
+    border-image: url('img/greytowhite.jpg') 30 30 round;
     border-top: 30px;
     background-color: white;
 }
-.rozcestnik td{
+.rozcestnik{
+    width: 100%;
+}
+.rozcestnik article{
+    display: inline-block;
+    width:29%;
     padding: 20px;
     border-right: 1px dashed #bdb8b0;
     vertical-align: top;
@@ -321,7 +312,7 @@ footer {
     text-align: center;
 }
 .background{
-    background-image: url('../images/web/background.jpg');
+    background-image: url('img/background.jpg');
     width: 100%;
     text-align: center;
 }
@@ -331,5 +322,5 @@ input{
 }
 @font-face{
     font-family: OpenSans;
-    src: url('../fonts/OpenSans-Bold.ttf');
+    src: url('fonts/OpenSans-Bold.ttf');
 }
