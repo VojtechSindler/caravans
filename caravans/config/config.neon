@@ -44,9 +44,14 @@ constants:
 	caravanIdLength: 6
 	caravanImageIdLength: 8
 	imageNameLength: 24
+<<<<<<< HEAD
 	galleryPath: '\htdocs\caravans\www\gallery\'
 	caravanGalleryPath: 'C:\xampp\htdocs\caravans\www\gallery\caravans\'
 	caravanGalleryPath2: '\caravans\www\gallery\caravans\'
+=======
+	galleryPath: '/htdocs/caravans/www/gallery/'
+	caravanGalleryPath: '/caravans/www/gallery/caravans/'
+>>>>>>> origin/master
 	categoryItemsPerPage: 6
 	caravanImageWidth: 276
 	caravanImageHeight: 162
