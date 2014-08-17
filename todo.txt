@@ -4,11 +4,10 @@
    Například aby si každý presenter držel seznam svých odkazů a po 
    kliknutí na danný odkaz se do navigačního panelu vypsala celá větev jeho rodičů.
 
- 3. Vymyslet automatické zvýraznování otevřených položek v menu.
 
- 4. Přidávání galerie ke karavanu až v editu -> je potřeba vkládat do více kategorií, systém redirectuje po prvním uložení
+ 3. Přidávání galerie ke karavanu až v editu -> je potřeba vkládat do více kategorií, systém redirectuje po prvním uložení
  a nelze ukládat bez znalosti id, proto po uložení karavanu přesměrovat na edit, budou vyplněná všechna políčka a zobrazí
  se samostatný form pro galerii.
 
-5. Nefunguje mazání obrázků - potřeba absolutní cesta která je C:/xampp/htdocs/caravans, při jejím použití
+4. Nefunguje mazání obrázků - potřeba absolutní cesta která je C:/xampp/htdocs/caravans, při jejím použití
 nette blokuje zobrazení obrázku (není cesta v img src). Vyřešit až na hostingu.

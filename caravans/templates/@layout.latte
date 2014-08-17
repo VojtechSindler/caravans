@@ -1,47 +1,60 @@
 {**
  * @param string   $basePath web base path
  * @param array    $flashes  flash messages
- *}
+*}
 
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
 
-	<title>{ifset #title}{include title|striptags} | {/ifset}Minikaravany.cz</title>
+        <title>{ifset #title}{include title|striptags} | {/ifset}Minikaravany.cz</title>
 
-	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
-	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
-	{block head}{/block}
-</head>
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
+        <link rel="shortcut icon" href="{$basePath}/favicon.ico">
+        {block head}{/block}
+    </head>
 
-<body>
-	<script> document.documentElement.className+=' js' </script>
+    <body>
+        <script> document.documentElement.className += ' js'</script>
 
-	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+        <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
         {include header.latte}
-        
-                <section id='main' >
-            <div id='caravan'>
-                <img src='{$basePath}/images/web/karavany.jpg' style="width:90%;">
-            </div>
+
+        <section id='main' >
+            <a n:href="Homepage:">
+                <div id='caravan'>
+                    <img src='{$basePath}/images/web/karavany.jpg' style="width:90%;">
+                </div>
+            </a>
             <div id='obsah'>
-               {include content}
+                {include content}
+                <p class="whiteToGrey" style="text-align:center;">
+                    {!$footerText}
+                </p>
                 <div id="footer">
-                    <img src="{$basePath}/images/web/mail.png">
-                    <img src="{$basePath}/images/web/face.png">
-                    <img src="{$basePath}/images/web/rate.png">
-                    <img style="margin-left:0;width: 40px" src="{$basePath}/images/web/zalozkakaravany.png">
+                    <a n:href="Kontakt:">
+                        <img src="{$basePath}/images/web/mail.png">
+                    </a>
+                    <a href="https://www.facebook.com/pages/minikaravanycz/297933980360348?ref=ts&amp;fref=ts" target="_blank">
+                        <img src="{$basePath}/images/web/face.png" >
+                    </a>
+                    <a n:href="Recenze:">
+                        <img src="{$basePath}/images/web/rate.png">
+                    </a>
+                    <a n:href="Homepage:">
+                        <img style="margin-left:0;width: 40px" src="{$basePath}/images/web/zalozkakaravany.png">
+                    </a>
                 </div>
             </div>
         </section>
-	
+
 
         {include footer.latte}
-	{block scripts}
-	<script src="{$basePath}/js/jquery.js"></script>
-	<script src="{$basePath}/js/netteForms.js"></script>
-	<script src="{$basePath}/js/main.js"></script>
-	{/block}
-</body>
+        {block scripts}
+        <script src="{$basePath}/js/jquery.js"></script>
+        <script src="{$basePath}/js/netteForms.js"></script>
+        <script src="{$basePath}/js/main.js"></script>
+        {/block}
+    </body>
 </html>

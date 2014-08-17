@@ -1,38 +1,36 @@
 {block content}
 <div style='float: right;'>
-                    <img src='{$basePath}/images/web/bigcaravan.gif' style='float: right;margin-right: -100px;margin-top:-65px; width:400px'>
-                    <br>
-                    <button style='margin-left: 40%'>Modely zde...</button>
-                </div>
-                <h2 n:block="title">Vítejte ve světe MINIKARAVANŮ</h2>
+    <img src='{$basePath}/images/web/bigcaravan.gif' style='float: right;margin-right: -100px;margin-top:-65px; width:400px'>
+    <br>
+    <button style='margin-left: 40%'>Modely zde...</button>
+</div>
+<h2 n:block="title" style=" margin-left: 10px">Vítejte ve světe MINIKARAVANŮ</h2>
 
-                <p style='font-size: 70%'>
-                    Naše firma se zabývá prodejem a nově i výrobou stylových malých karavanů, souhrnně označovaných jako minikaravany, které si získávají stále větší oblibu mezi českými příznivci karavaningu a cestování vůbec. Díky svému úzkému zaměření právě na malé karavany jsme největším dodavatelem těchto typů karavanů v České republice.
-                    <br>
-                    <br>
-                    V naší nabídce najdete jak obytné minikaravany pro klasické kempování, tak i cargo verze či speciální shop verze určené pro různě zaměřené drobné obchodníky a firmy. Samozřejmě u nás v nabídce nechybí také velmi stylový a po celé Evropě známý minikaravan Caretta.
-                </p>
-                <table class='greyToDark' >
-                    <tr>
-                        <td><img src='{$basePath}/images/web/bigcaravan.gif'></td>
-                        <td><img src='{$basePath}/images/web/bigcaravan.gif'></td>
-                        <td><img src='{$basePath}/images/web/bigcaravan.gif'></td>
-                    </tr>
-                </table>
-                <button class="sipka left"><</button>
-                <button class="sipka right">></button>
-                <p class="darkToWhite" style="font-size: 70%">
-                    Výhodou minikaravanů je především to, že mohou být taženy i malými či nízkovýkonovými automobily, stejně jako čtyřkolkami či v případě některých speciálních typů i motorkářskými tříkolkami. Vzhledem ke své nízké váze a aerodynamickému tvaru mají minikaravany jen malý vliv na zvýšení spotřeby tažného vozidla, přitom však poskytují dostatečný komfort dvěma až třem dospělým osobám. Díky povolenému rychlostnímu limitu u většiny našich modelů není problémem ani cestovní rychlost 130 km/hod, což ocení především ti, kteří se vydají cestovat do zahraničí.
-                    <br>
-                    <br>
-                    Přes malé rozměry patří mezi standardní výbavu většiny našich obytných minikaravanů veliké dvojlůžko, kuchyň s lednicí, dostatek úložných prostor, elektrická výbava a komfortní osvětlení. Díky doplňkové výbavě můžete u nás zakoupené minikaravany rozšířit například o solární panel, střešní nosiče či nosiče na kola, audio/video soustavu nebo si vybrat ze speciálních verzí určených pro cyklisty nebo rybáře.
-                    <br>
-                    <br>
-                    K minikaravanům z naší nabídky si můžete pořídit i speciální stanové přístřešky nebo nafukovací stany (systém AirBeam®), které jsou ušity přímo pro naše modely. Budete tak dokonale chráněni před nepříznivým počasím. Navíc dokážeme naše karavany „obléct“ do barev, které budou ladit vašemu oku nebo s barvou vašeho vozu a to buď vhodným polepem nebo nástřikem celého karavanu.
-                    <br>
-                    <br>
-                    Všechny naše modely mají evropský certifikát pro schválený provoz po celé Evropě.
-                </p>
-                <p class="whiteToGrey" style="text-align:center;">
-                    Těšíme se na vaši návštěvu u nás a jsme připraveni naslouchat vašim zvláštním přáním a plnit vaše požadavky tak, abyste si s našimi minikaravany užili pohodové cestování a tu nejkrásnější dovolenou.
-                </p>
+<p style='font-size: 80%; margin-left: 10px'>
+    Naše firma se zabývá prodejem a nově i výrobou stylových malých karavanů, souhrnně označovaných jako minikaravany, které si získávají stále větší oblibu mezi českými příznivci karavaningu a cestování vůbec. Díky svému úzkému zaměření právě na malé karavany jsme největším dodavatelem těchto typů karavanů v České republice.
+    <br>
+    <br>
+    V naší nabídce najdete jak obytné minikaravany pro klasické kempování, tak i cargo verze či speciální shop verze určené pro různě zaměřené drobné obchodníky a firmy. Samozřejmě u nás v nabídce nechybí také velmi stylový a po celé Evropě známý minikaravan Caretta.
+</p>
+<table class='greyToDark' >
+    <tr id="slideshow">
+        <td id="1" class="active"><img src='{$basePath}/images/web/bigcaravan.gif'></td>
+        <td id="2" class="active"><img src='{$basePath}/images/web/bigcaravan.gif'></td>
+        <td id="3" class="active"><img src='{$basePath}/images/web/bigcaravan.gif'></td>
+        <td  class="noactive"><img src='{$basePath}/images/web/bigcaravan.gif'></td>
+    </tr>
+</table>
+    <button class="sipka left" onclick="slideshow('left');"><</button>
+<button class="sipka right"  onclick="slideshow('right');">></button>
+<p class="darkToWhite" style="font-size: 80%">
+    Výhodou minikaravanů je především to, že mohou být taženy i malými či nízkovýkonovými automobily, stejně jako čtyřkolkami či v případě některých speciálních typů i motorkářskými tříkolkami. Vzhledem ke své nízké váze a aerodynamickému tvaru mají minikaravany jen malý vliv na zvýšení spotřeby tažného vozidla, přitom však poskytují dostatečný komfort dvěma až třem dospělým osobám. Díky povolenému rychlostnímu limitu u většiny našich modelů není problémem ani cestovní rychlost 130 km/hod, což ocení především ti, kteří se vydají cestovat do zahraničí.
+    <br>
+    <br>
+    Přes malé rozměry patří mezi standardní výbavu většiny našich obytných minikaravanů veliké dvojlůžko, kuchyň s lednicí, dostatek úložných prostor, elektrická výbava a komfortní osvětlení. Díky doplňkové výbavě můžete u nás zakoupené minikaravany rozšířit například o solární panel, střešní nosiče či nosiče na kola, audio/video soustavu nebo si vybrat ze speciálních verzí určených pro cyklisty nebo rybáře.
+    <br>
+    <br>
+    K minikaravanům z naší nabídky si můžete pořídit i speciální stanové přístřešky nebo nafukovací stany (systém AirBeam®), které jsou ušity přímo pro naše modely. Budete tak dokonale chráněni před nepříznivým počasím. Navíc dokážeme naše karavany „obléct“ do barev, které budou ladit vašemu oku nebo s barvou vašeho vozu a to buď vhodným polepem nebo nástřikem celého karavanu.
+    <br>
+    <br>
+    Všechny naše modely mají evropský certifikát pro schválený provoz po celé Evropě.
+</p>

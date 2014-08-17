@@ -2,39 +2,52 @@
 
 {block content}
 <header>
-    
-            <p class="login">
-                <a n:href="Backend:Sign:in">Vstup do administrace</a></p>
+
+    <p class="login">
+        <a n:href="Backend:Sign:in">Vstup do administrace</a></p>
     <table class='header' rules='all' >
         <tr>
             <td style='width: 50px'>
                 <a n:href='Homepage:' ><img title='Domů' alt='Domů' src='{$basePath}/images/web/home.gif' ></a>
             </td>
-            <td>
+            <td onmouseover="submenu('modely');" onmouseout="hidesubmenu('modely')">
                 <a class='menu' n:href='Caravan:showAll'>MODELY</a>
+                <!--                <div id="modely" class="submenu" style="margin-left:-40px;">
+                                    <img src="{$basePath}/images/web/submenu.gif">
+                                    <ul>
+                                       <li class='menu'><a style='menu'>a</a></li>
+                                        <li class='menu' style="border:0;"><a style='menu'>b</a></li>
+                                    </ul>
+                                </div>-->
             </td>
-            <td>
-                <a class='menu' href=''>RECENZE</a>
+            <td onmouseover="submenu('recenze');" onmouseout="hidesubmenu('recenze');">
+                <a class='menu' n:href='Recenze:'>RECENZE</a>
             </td>
-            <td>
-                <a class='menu' href=''>NABÍDKA MINIKARAVANŮ</a>
+            <td onmouseover="submenu('nabidka');" onmouseout="hidesubmenu('nabidka');">
+                <a class='menu' n:href='Caravan:showAll'  >NABÍDKA MINIKARAVANŮ</a>
             </td>
-            <td>
-                <a class='menu' href=''>NOVINKY A ČLÁNKY</a>
+            <td onmouseover="submenu('novinky');" onmouseout="hidesubmenu('novinky');">
+                <a class='menu' n:href='Article:showAll'>NOVINKY A ČLÁNKY</a>
+                <div id="novinky" class="submenu">
+                    <img src="{$basePath}/images/web/submenu.gif">
+                    <ul>
+                        <li class='menu'><a class="menu" n:href="Article:showAll 'news'">> Novinky</a></li>
+                        <li class='menu' style="border:0;"><a class="menu" n:href="Article:showAll 'articles'">> Články</a></li>
+                    </ul>
+                </div>
             </td>
-            <td>
-                <a class='menu' href=''>KONTAKT</a>
+            <td onmouseover="submenu('kontakt');" onmouseout="hidesubmenu('kontakt');">
+                <a class='menu' n:href='Kontakt:'>KONTAKT</a>
             </td>
-            <td>
-                <a class='menu' href=''>E-SHOP</a>
+            <td onmouseover="submenu('shop');" onmouseout="hidesubmenu('shop');">
+                <a class='menu' n:href='Shop:'>E-SHOP</a>
             </td>
-            <td>
-                <a class='menu' href=''>VÝSTAVY</a>
+            <td onmouseover="submenu('vystavy');" onmouseout="hidesubmenu('vystavy');">
+                <a class='menu' n:href='Vystavy:'>VÝSTAVY</a>
             </td>
-            <td>
-                <a class='menu' href=''>DEALERSKÁ SÍŤ</a>
+            <td onmouseover="submenu('dealer');" onmouseout="hidesubmenu('dealer');">
+                <a class='menu' n:href='Dealer:'>DEALERSKÁ SÍŤ</a>
             </td>
-            
         </tr>
     </table>
 </header>

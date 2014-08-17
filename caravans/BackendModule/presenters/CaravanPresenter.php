@@ -67,7 +67,7 @@ class CaravanPresenter extends \BackendPresenter {
         $caravan = $this->caravan->getCaravan($idCaravan);
         $this->title = "Přidat výbavu pro karavan " . $caravan->znacka 
                 . " " . $caravan->typ." (s číslem ".$caravan->id_karavan.")";
-        $this->template->equipments = $this->caravan->caravanEquipment()->getEquipments();
+        $this->template->equipments = $this->caravan->caravanEquipment()->getCaravanEquipment();
     }
     
     protected function createComponentAddCaravanForm() {
@@ -220,13 +220,13 @@ class CaravanPresenter extends \BackendPresenter {
                 $post = $values->remove("mainImage")->remove("images")->remove("kategorie"); //odstranění obrázků
                 $this->caravan->save($post);
 
-                $this->caravanImage->setIdCaravan($this->caravan->getId()); //ID karavanu kterému patří obrázky
-                //Zpracování hlavního obrázku
-                if ($data->mainImage->isOk())
-                    $this->caravanImage->addMainImage($data->mainImage);
-
-                //Zpracování dalších obrázků
-                $this->caravanImage->addImages($data->images, $data->kategorie);
+//                $this->caravanImage->setIdCaravan($this->caravan->getId()); //ID karavanu kterému patří obrázky
+//                //Zpracování hlavního obrázku
+//                if ($data->mainImage->isOk())
+//                    $this->caravanImage->addMainImage($data->mainImage);
+//
+//                //Zpracování dalších obrázků
+//                $this->caravanImage->addImages($data->images, $data->kategorie);
                 $this->flashMessage("Karavan byl úspěšně vytvořen", \FlashMessageTypes::OK);
                 $this->redirect("this");
             }else{
@@ -258,6 +258,7 @@ class CaravanPresenter extends \BackendPresenter {
         try{
             $this->caravan->caravanEquipment()->save($values->nazev, 
                     $values->cena, $values->popis);
+            $this->redirect("this");
         } catch (\Nette\InvalidArgumentException $ex) {
             $form->addError($ex->getMessage());
         }
@@ -276,5 +277,9 @@ class CaravanPresenter extends \BackendPresenter {
         $this->caravanImage->setIdCaravan($idCaravan);
         $this->caravanImage->deleteMainImage()->deleteAllImages();
         $this->caravan->delete($idCaravan);
+    }
+    
+    public function handleDeleteEquipment($id){
+        $this->caravan->caravanEquipment()->delete($id);
     }
 }

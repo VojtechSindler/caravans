@@ -26,7 +26,7 @@ class ArticlePreviewControl extends UI\Control {
     }
 
     public function render() {
-        $articles = $this->articleManager->getArticles();
+        $articles = $this->articleManager->getAll();
         $this->template->articles = $articles;
         $httpRequest = $this->presenter->context->getService('httpRequest');
         $view = $httpRequest->getPost("view");

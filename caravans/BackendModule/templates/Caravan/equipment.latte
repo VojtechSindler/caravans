@@ -27,7 +27,7 @@
         </tr>
     </table>
 {/form}
-<h2>Přiřazení výbavy</h2>
+<h2>Speciální výbava karavanu</h2>
 <div class="table">
 <table width="50%" border="0" cellspacing="0" cellpadding="0">
     <tr>
@@ -41,7 +41,7 @@
         <td>{$equip->cena}</td>
         <td>{$equip->popis}</td>
         <td>
-            Smazat
+            <a n:href="deleteEquipment!, 'id' => $equip->id_vybava">Smazat</a>
         </td>
     </tr>
 </table>

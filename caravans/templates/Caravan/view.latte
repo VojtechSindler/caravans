@@ -1,0 +1,157 @@
+{* Latte template *}
+
+{block content}
+<h1>Minikaravan {$caravan->znacka}, číslo: {$caravan->id_karavan}, typ: {$caravan->typ}</h1>
+<div class="whitefromgrey detail">
+    {* levá strana *}
+    <div>
+        <img id="mainImage" src="img/bigcaravan.gif">
+        <div class="galerie">
+            <h4>Kategorie</h4>
+            <img src="img/bigcaravan.gif">
+            <img src="img/bigcaravan.gif">
+            <img src="img/bigcaravan.gif">
+        </div>
+    </div>  
+    {* střed *}
+    <div>
+        <table>
+            <tr>
+                <td colspan="2">
+                    <font class="cena">{$caravan->cena},-</font>bez DPH
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <font style="color: red" class="cena">{$caravan->cena + ($caravan->cena*0.2)},-</font>včetně DPH
+                </td>
+            </tr>
+        </table>
+
+        <table class="udaje" >
+            <tr>
+                <td style="font-size:100%" colspan="2"> Technické údaje <hr width="180"></td>
+            </tr>
+
+            <tr>
+                <td>
+                    Rozměry <sup>(v,š,d) [cm]</sup> :
+                </td>
+                <td>
+                    {$caravan->vyska.' x '.$caravan->sirka.' x '.$caravan->delka}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Výška vnitřní <sup>[cm]</sup> :
+                </td>
+                <td>
+                    {$caravan->vyska_vnitrni}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Rozměry lůžka <sup>(d,š) [cm]</sup> :
+                </td>
+                <td>
+                    {$caravan->luzko_delka.' x '.$caravan->luzko_sirka}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Hmotnost <font style="font-size: 75%">(celková)</font> :
+                </td>
+                <td>
+                    {$caravan->hmotnost_c} kg
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Hmotnost  <font style="font-size: 75%">(maximální)</font> :
+                </td>
+                <td>
+                    {$caravan->hmotnost_max} kg
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Hmotnost  <font style="font-size: 75%">(technická povolená)</font> :
+                </td>
+                <td>
+                    {$caravan->hmotnost_t} kg
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Hmotnost  <font style="font-size: 75%">(pohotovostni)</font> :
+                </td>
+                <td>
+                    {$caravan->hmotnost_p} kg
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Hmotnost<br> <font style="font-size: 75%">(pohotovostní - brzděná varianta)</font> :
+                </td>
+                <td >
+                    {$caravan->hmotnost_c} kg
+                </td>
+            </tr>
+        </table>
+
+        <table class="udaje" >
+            <tr>
+                <td style="font-size:100%" colspan="2"> Standartní výbava <hr width="160"></td>
+            </tr>
+            <tr>
+                <td>
+                    Lůžko
+                </td>
+                <td>
+                    1500mm x 2000mm
+                </td>
+            </tr>
+        </table>
+
+        <table class="udaje" >
+            <tr>
+                <td style="font-size:100%" colspan="2"> Doplňková výbava <hr width="50"> <img id="1" src="{$basePath}/images/web/more.png" onclick="change('1',{$basePath.'/images/web/'});"></td>
+            </tr>
+            <tr class="1 hide">
+                <td>
+                    Lůžko
+                </td>
+                <td>
+                    1500mm x 2000mm
+                </td>
+            </tr>
+        </table>
+
+        <table class="udaje" >
+            <tr>
+                <td style="font-size:100%" colspan="2"> Speciální edice <hr width="80"> <img id="2" src="{$basePath}/images/web/more.png" onclick="change('2',{$basePath.'/images/web/'});"></td>
+            </tr>
+            <tr class="2 hide">
+                <td>
+                    Lůžko
+                </td>
+                <td>
+                    1500mm x 2000mm
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    {* pravá strana *}
+    <div style="width:200px; border: 0;">
+        <h4 class="vpravo">Vaše cena</h4>
+        <div class="background" style="margin-left:0">hihihi<br>
+            <button style="width:50%">ahoj</button>
+        </div>
+        <div class="background" style="margin-top: 5px;margin-left: 0">Obchodní podmínky</div>
+        <h4 class="vpravo">zaslat na email</h4>
+        <div class="background"  style="margin-left:0; height:100px;">
+            {control sendEmail}
+        </div>
+    </div>                       
+</div>

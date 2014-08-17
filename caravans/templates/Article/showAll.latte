@@ -1,0 +1,25 @@
+{* Latte template *}
+
+{block content}
+<h1 n:block="title" style="margin-left:5px;">Novinky a články</h1>
+
+<section class="whitefromgrey rozcestnik" style="min-height: 400px">
+    {var $x=1}
+    {if $articles==null}
+        <p style="width: 100%;text-align: center;margin: 0;">Bohužel nebylo zatím nic zveřejněno.</p>
+    {/if}
+    {foreach $articles as $article}
+        {if $x==3}
+            <article style="border:0;">
+                {var $x=1}
+            {else}
+                <article>  
+                    {var $x=$x+1}
+                {/if}
+
+                <h4>{$article->nadpis} <font style="float:right;">{$article->datum}</font></h4>
+                <p>{!$article->perex} </p>
+                <a class="button"  n:href="Article:view $article->id_clanek">Více ></a>
+            </article>
+        {/foreach}
+</section>

@@ -31,9 +31,6 @@ class CaravanEquipmentManager extends ModelContainer{
      * @throws \Nette\InvalidArgumentException
      */
     public function save($name, $price, $info = null){
-        if($this->exists($name, $price))
-                throw new \Nette\InvalidArgumentException("Výbava ".$name." existuje. "
-                        . "Můžeš jí ve formuláři níže přiřadit karavanu.");
         $this->database->table("vybava_specialni")->insert(array(
             "nazev" => $name,
             "cena" => $price,
@@ -42,26 +39,23 @@ class CaravanEquipmentManager extends ModelContainer{
         $id = $this->database->table("vybava_specialni")->select("id_vybava")
                 ->where("nazev", $name)
                 ->where("cena", $price)->fetch()->id_vybava;
-        $this->assignEquip($id);
-    }
-    
-    public function assignEquip($idEquip){
+
         $this->database->table("karavany_vybava")->insert(array(
             "id_karavan" => $this->idCaravan,
-            "id_vybava" => $idEquip
+            "id_vybava" => $id
         ));
     }
     
-    public function exists($name, $price){
-        return $this->database->table("vybava_specialni")->where("nazev", $name)
-                ->where("cena", $price)->count() > 0;
+    /**
+     * Vrací výbavu karavanu.
+     */
+    public function getCaravanEquipment(){
+        return $this->database->query("SELECT `id_vybava`, `nazev`, `cena`, `popis` FROM `vybava_specialni`
+        JOIN `karavany_vybava` USING(`id_vybava`) WHERE `id_karavan` = '$this->idCaravan'")->fetchAll();
     }
     
-    public function getEquipments(){
-        return $this->database->query("SELECT vs.`id_vybava`, `id_karavan`,`nazev`, 
-            `cena`, `popis` FROM `vybava_specialni` AS vs 
-                    LEFT JOIN karavany_vybava AS kv 
-                    ON vs.id_vybava=kv.id_vybava 
-                    WHERE kv.id_vybava IS NULL")->fetchAll();
+    public function delete($id){
+        return $this->database->table("vybava_specialni")
+                ->where("id_vybava", $id)->delete();
     }
 }

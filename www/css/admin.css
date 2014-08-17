@@ -122,9 +122,9 @@ form .error {
 
 a.ico { color:#9d9c9a; font-size:10px; text-decoration: none; padding:0 0 0 14px; background-repeat:no-repeat; background-position:0 0; }
 a.ico:hover { color:#333;}
-a.del { background-image:url(../images/del.gif)}
+a.del { background-image:url(../images/del.gif) ;margin-left:14px;}
 a.edit { background-image:url(../images/edit.gif); margin-left:14px;}
-
+a.view { background-image:url(../images/eye.png);  padding:2px;padding-left: 20px}
 
 .form { padding:15px 10px 5px 10px; }
 .form form table{margin: auto;}

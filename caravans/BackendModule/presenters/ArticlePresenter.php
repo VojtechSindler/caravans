@@ -30,14 +30,14 @@ class ArticlePresenter extends \BackendPresenter {
         $this->navigation("Upravit článek");
         $this->id = $id;
         $this->title = "Upravit článek";
-        $this->template->articles = $this->articleManager->getArticles();
+        $this->template->articles = $this->articleManager->getAll();
         $this->sidebar("listOfArticles", "Seznam Článků");
     }
 
     public function renderAdd() {
         $this->navigation("Vytvořit článek");
         $this->title = "Vytvořit článek";
-        $this->template->articles = $this->articleManager->getArticles();
+        $this->template->articles = $this->articleManager->getAll();
         $this->sidebar("listOfArticles", "Seznam Článků");
     }
 
@@ -45,9 +45,9 @@ class ArticlePresenter extends \BackendPresenter {
         $this->navigation("Zobrazení článku");
         $this->id = $id;
         $this->title = "Článek $id";
-        $this->template->articles = $this->articleManager->getArticles();
+        $this->template->articles = $this->articleManager->getAll();
         $this->sidebar("listOfArticles", "Seznam Článků");
-        $article = $this->articleManager->getArticles($this->id);
+        $article = $this->articleManager->getAll($this->id);
         $this->template->article = $article[0];
     }
 
@@ -104,7 +104,7 @@ class ArticlePresenter extends \BackendPresenter {
      * @return \Nette\Application\UI\Form
      */
     protected function createComponentAddEditForm() {
-        $article = $this->articleManager->getArticles($this->id);
+        $article = $this->articleManager->getAll($this->id);
         $article = $article[0];
         $form = new Form();
         $form->addHidden("id_clanek", $article['id_clanek']);

@@ -19,9 +19,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         parent::startup();
         $this->template->website = website;
         $this->template->navigation = array();
+        $this->template->footerText = null;
         
     }
     public function setTitle($title){
         $this->template->title = $title;
+    }
+    
+    public function setFooterText($text){
+        $this->template->footerText = $text;
     }
 }
