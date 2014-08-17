@@ -5,7 +5,10 @@ namespace Caravans\Model;
 use \Caravans,
     Caravans\Model;
 use Nette\Utils\Image;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 /**
  * Třída pro práci s obrázky v databázi.
  * Pro obrázky generuje nová jména aby se zabránilo duplicitám. 
@@ -41,6 +44,7 @@ class CaravanImage extends Model\Gallery {
      */
     public function addMainImage(\Nette\Http\FileUpload $image) {
         $imageName = $this->createImageName($image->name);
+<<<<<<< HEAD
         $this->path = $this->galleryPath . $imageName;
         $thumbPath = $this->galleryPath . "thumbs\\" . $imageName;
         if ($imageName == null || $this->idCaravan == null)
@@ -51,6 +55,18 @@ class CaravanImage extends Model\Gallery {
 
         $image = Image::fromFile($thumbPath);
         $image->resize(caravanImageWidth, caravanImageHeight)->save($thumbPath);
+=======
+        $this->path = $this->galleryPath.$imageName;
+        $thumbPath = $this->galleryPath."thumbs\\".$imageName;
+        if($imageName == null || $this->idCaravan == null)
+            throw new \Nette\InvalidStateException();
+        $id = $this->createId();
+        bdump($image->move($thumbPath));
+        bdump($image->move($this->path));
+        
+//        $image = Image::fromFile($thumbPath);
+//                $image->resize(caravanImageWidth, caravanImageHeight)->save($thumbPath);
+>>>>>>> origin/master
         $this->database->table("galerie")->insert(array(
             "id_foto" => $id,
             "nazev" => $imageName,
@@ -75,6 +91,7 @@ class CaravanImage extends Model\Gallery {
             if (!$image->isOk())
                 continue;
             $imageName = $this->createImageName($image->name);
+<<<<<<< HEAD
             $path = $this->galleryPath . $imageName;
             $thumbPath = $this->galleryPath . "thumbs/" . $imageName;
             $id = $this->createId();
@@ -82,6 +99,14 @@ class CaravanImage extends Model\Gallery {
             $image->move($path);
             \Nette\Utils\FileSystem::copy($path, $thumbPath);
 
+=======
+            $path = $this->galleryPath.$imageName;
+            $thumbPath = $this->galleryPath."thumbs/".$imageName;
+            $id = $this->createId();
+
+            $image->move($path);
+            $image->move($thumbPath);
+>>>>>>> origin/master
             $image = Image::fromFile($thumbPath);
             $image->resize(caravanImageWidth, caravanImageHeight)->save($thumbPath);
             //uložení do tbl galerie

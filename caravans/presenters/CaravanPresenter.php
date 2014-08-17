@@ -16,11 +16,19 @@ class CaravanPresenter extends BasePresenter {
      * @var Model\CaravanManager @inject
      */
     public $caravan;
+<<<<<<< HEAD
     public $idCaravan;
 
     public function renderShowAll() {
         $caravans = $this->caravan->readCaravans();
 //        $caravans[0]["hlavni_obrazek"] = caravanGalleryPath.$caravans[0]["hlavni_obrazek"];
+=======
+    
+    public function renderShowAll(){
+        $this->template->columns = 3;
+        $caravans = $this->caravan->readCaravans();
+        $caravans[0]["hlavni_obrazek"] = caravanGalleryPath.$caravans[0]["hlavni_obrazek"];
+>>>>>>> origin/master
         $this->template->caravans = $caravans;
         $this->template->footerText = "Nabídka minikaravanů";
     }

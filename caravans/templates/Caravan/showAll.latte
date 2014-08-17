@@ -1,6 +1,7 @@
 {* Latte template *}
 
 {block content}
+<<<<<<< HEAD
 <h1 n:block="title" style="margin-left:5px">Nabídka minikaravanů - TODO ZMenšování obrázků</h1>
 
 <section class="whitefromgrey rozcestnik">
@@ -20,5 +21,20 @@
                 <a class="button"  n:href="Caravan:view $caravan->id_karavan">Více info ></a>
             </article>
         {/foreach}
+=======
+<h1 n:block="title">Nabídka minikaravanů - TODO ZMenšování obrázků</h1>
+
+<section class="whitefromgrey rozcestnik">
+    {var $counter = 1}
+    {foreach $caravans as $caravan}
+        <article>
+            <img src="{$caravan->hlavni_obrazek}">
+            <h4>{$caravan->znacka.''.$caravan->typ}</h4>
+            <p>ahoj jak se vede a co to tu máme? </p>
+            <button onclick="window.location = 'detail.php';">Více info ></button>
+        </article>
+
+    {/foreach}
+>>>>>>> origin/master
 </section>
 {/block}

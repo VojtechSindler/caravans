@@ -73,8 +73,12 @@ class GalleryManagerControl extends UI\Control {
 
     public function addImagesFormSucceeded($form, $values) {
         try {
+<<<<<<< HEAD
             bdump($values);
         if (isset($values->mainImage) && $values->mainImage->name != null) {
+=======
+            if ($values->mainImage->name != null) {
+>>>>>>> origin/master
                 $this->caravanImage->addMainImage($values->mainImage);
             }
             

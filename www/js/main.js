@@ -11,6 +11,7 @@ function submenu(id) {
 function hidesubmenu(id) {
     $("#" + id).hide();
 }
+<<<<<<< HEAD
 function change(id, cesta) {
     var src = document.getElementById("" + id).getAttribute("src");
     if (src == (cesta + 'more.png')) {
@@ -33,4 +34,14 @@ function slideshow(kam) {
             $('#1').removeAttr('id').removeClass('active').addClass('noactive').next().attr('id', 1).next().attr('id', 2).next().attr('id', 3).addClass('active').removeClass('noactive');
         }
     }
+=======
+function change(id) {
+    var src = document.getElementById("" + id).getAttribute("src");
+    if (src == 'img/more.png') {
+        src = 'img/less.png';
+    } else {
+        src = 'img/more.png';
+    }
+    document.getElementById("" + id).setAttribute("src",src);
+>>>>>>> origin/master
 }

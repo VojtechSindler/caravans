@@ -5,7 +5,11 @@
 
 <h2>Hlavní obrázek</h2>
 {if $mainImage != false}
+<<<<<<< HEAD
 <img src="{$galleryPath."thumbs\\".$mainImage->nazev}" border="1">
+=======
+<img src="{$galleryPath.$mainImage->nazev}" border="1">
+>>>>>>> origin/master
 <a n:href="deleteMainImage! imageName=>$mainImage->nazev" style="display: block">Smazat</a>
 {/if}
 <br>
