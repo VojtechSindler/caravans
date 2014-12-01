@@ -5,3 +5,5 @@
 $container = require __DIR__ . '/../caravans/bootstrap.php';
 
 $container->getService('application')->run();
+
+echo "AHOJ";
