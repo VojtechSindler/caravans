@@ -5,12 +5,8 @@
 
 <h2>Hlavní obrázek</h2>
 {if $mainImage != false}
-<<<<<<< HEAD
-<img src="{$galleryPath."thumbs\\".$mainImage->nazev}" border="1">
-=======
-<img src="{$galleryPath.$mainImage->nazev}" border="1">
->>>>>>> origin/master
-<a n:href="deleteMainImage! imageName=>$mainImage->nazev" style="display: block">Smazat</a>
+<img src="{$galleryPath."thumbs/".$mainImage->nazev}" border="1">
+<a n:href="deleteMainImage! imageName=>$mainImage->nazev, imageId=>$mainImage->id_foto" style="display: block">Smazat</a>
 {/if}
 <br>
 <h2>Další obrázky</h2>
@@ -21,7 +17,7 @@
                <tr> 
             {/if}
                    <td><img src="{$galleryPath."thumbs\\".$image->nazev}">
-                       <a n:href="deleteImage! imageName=>$image->nazev" style="display: block">Odstranit</a>
+                       <a n:href="deleteImage! imageName=>$image->nazev, imageId=>$image->id_foto" style="display: block">Odstranit</a>
                    </td>
             {if $counter == $columns}
                 {$counter = 1}

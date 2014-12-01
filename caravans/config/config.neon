@@ -20,9 +20,9 @@ nette:
 	session:
 		expiration: 14 days
 	database:
-		dsn: 'mysql:host=127.0.0.1;dbname=karavany'
-		user: root
-		password:
+		dsn: 'mysql:host=c146um.forpsi.com;dbname=f62049'
+		user: f62049
+		password: G22Gg2q
 		debugger: yes
 		options:
 			lazy: yes
@@ -34,27 +34,29 @@ services:
 	- Caravans\Model\CaravanImage
 	- Caravans\Model\CategoryManager
 	- Caravans\Model\ArticleManager
+	- Caravans\Model\StatisticsManager
 	router: @Caravans\RouterFactory::createRouter
 
 constants:
-	website: 'www.karavany.cz'
-	caravanCostMin: 10000
+	website: 'www.minikaravany.cz'
+	caravanCostMin: 1000
 	caravanCostMax: 1000000
 	maxImageSize: 3000
 	caravanIdLength: 6
 	caravanImageIdLength: 8
 	imageNameLength: 24
-<<<<<<< HEAD
-	galleryPath: '\htdocs\caravans\www\gallery\'
-	caravanGalleryPath: 'C:\xampp\htdocs\caravans\www\gallery\caravans\'
-	caravanGalleryPath2: '\caravans\www\gallery\caravans\'
+	galleryPath: '\www\gallery\'
+	caravanGalleryPath: 'gallery/caravans/'
+	caravanGalleryPath2: '/gallery/caravans/'
 	categoryItemsPerPage: 6
 	caravanImageWidth: 276
 	caravanImageHeight: 162
-=======
-	galleryPath: '/htdocs/caravans/www/gallery/'
-	caravanGalleryPath: '/caravans/www/gallery/caravans/'
-	categoryItemsPerPage: 6
-	caravanImageWidth: 276
-	caravanImageHeight: 162
->>>>>>> origin/master
+	adminEmail: 'obchod@minikaravany.cz'
+
+extensions:
+	translation: Kdyby\Translation\DI\TranslationExtension
+translation:
+	default: cs
+	whitelist: [cs, de] #....
+	fallback: [cs_CZ, cs]
+	debugger: on

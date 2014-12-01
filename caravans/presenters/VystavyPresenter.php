@@ -19,10 +19,7 @@ class VystavyPresenter extends BasePresenter {
     }
     
     public function renderDefault() {
-        $this->footerText = "Těšíme se na vaši návštěvu u nás a jsme připraveni "
-                . "naslouchat vašim zvláštním přáním a plnit vaše požadavky tak, "
-                . "abyste si s našimi minikaravany užili pohodové cestování a tu "
-                . "nejkrásnější dovolenou.";
+        
     }
 
 }

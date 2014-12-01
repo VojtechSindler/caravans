@@ -25,11 +25,12 @@ class GalleryManagerControl extends UI\Control {
     private $caravanImage;
     private $idCaravan = null;
 
-    public function __construct(Model\CategoryManager $cm, Model\CaravanImage $ci, $idCaravan) {
+    public function __construct(Model\CategoryManager $cm, Model\CaravanImage $ci, $idCaravan, $language) {
         $this->category = $cm;
         $this->caravanImage = $ci;
         $this->idCaravan = $idCaravan;
-        $this->caravanImage->setIdCaravan($this->idCaravan);
+        $this->caravanImage->setIdCaravan($this->idCaravan)->setLanguage($language);
+        
     }
 
     public function render() {
@@ -73,12 +74,7 @@ class GalleryManagerControl extends UI\Control {
 
     public function addImagesFormSucceeded($form, $values) {
         try {
-<<<<<<< HEAD
-            bdump($values);
         if (isset($values->mainImage) && $values->mainImage->name != null) {
-=======
-            if ($values->mainImage->name != null) {
->>>>>>> origin/master
                 $this->caravanImage->addMainImage($values->mainImage);
             }
             
@@ -93,13 +89,13 @@ class GalleryManagerControl extends UI\Control {
         }
     }
     
-    public function handleDeleteMainImage($imageName, $idCaravan){
-        $this->caravanImage->deleteMainImage($imageName);
+    public function handleDeleteMainImage($imageName, $imageId){
+        $this->caravanImage->deleteMainImage($imageName, $imageId);
         $this->redirect("this");
     }
     
-    public function handleDeleteImage($imageName){
-        $this->caravanImage->deleteImage($imageName);
+    public function handleDeleteImage($imageName, $imageId){
+        $this->caravanImage->_deleteImage($imageName, $imageId, $this->idCaravan);
         $this->redirect("this");
     }
 }

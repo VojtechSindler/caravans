@@ -6,17 +6,42 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Minikaravan</title>
     <style>
-    body {
-        background: url("{$basePath}/www/images/web/background.png")
-    }
     </style>
 </head>
 <body>
-    <p>Dobrý den,</p>
-
-    <p>Na vaší žádost, nebo žádost vašeho známého, vám zasíláme údaje o minikaravanu {$id_caravan}</p>
-    
-    <p>Těšíme se na vaší návštěvu www.minikaravany.cz</p>
-    <p>S pozdravem a přáním krásných dnů strávených na cestách,<br>www.minikaravany.cz</p>
+    <p>Dobrý den,<br>
+        posíláme vám informace o minikaravanu {$znacka.' '.$typ}, rozměry: {$rozmery} cm.<br>
+        {if $spec_vybava != null}
+            Zvolil jste následující výbavu: <br>
+        <table>
+            <tr>
+                <td>{$znacka.' '.$typ}</td>
+                <td>{$cena|number:2:'.':' '} Kč</td>
+            </tr>
+            {default $sum = 0}
+            {foreach $spec_vybava as $vybava}
+                <tr>
+                    <td>{$vybava[0]}</td>
+                    <td>{$vybava[1]|number:2:'.':' '} Kč</td>
+                </tr>
+                {var $sum = $sum+$vybava[1]}
+            {/foreach}
+            <tr>
+                <td><b>Cena výbavy: </b></td>
+                <td>{$sum|number:2:'.':' '} Kč</td>
+            </tr>
+            <tr>
+                <td><b>Cena celkem: </b></td>
+                <td>{$sum + $cena|number:2:'.':' '} Kč</td>
+            </tr>
+        </table>
+        {else}
+        <b>Cena: {$cena|number:2:'.':' '} Kč</b>
+        {/if}
+        <br>
+    Kompletní informace o karavanu získáte <a href="http://{$website}//caravan/view/?id={$id_karavan}">zde</a>
+    </p>
+    <p>S pozdravem a přáním krásných dnů strávených na cestách,<br>
+        <a href="http://www.minikaravany.cz">www.minikaravany.cz</a></p>
 </body>
 </html>

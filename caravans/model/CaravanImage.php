@@ -5,10 +5,7 @@ namespace Caravans\Model;
 use \Caravans,
     Caravans\Model;
 use Nette\Utils\Image;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 /**
  * Třída pro práci s obrázky v databázi.
  * Pro obrázky generuje nová jména aby se zabránilo duplicitám. 
@@ -27,7 +24,7 @@ class CaravanImage extends Model\Gallery {
      */
     private $galleryPath = null;
     private $idCaravan = null;
-
+    private $language;
     public function __construct(\Nette\Database\Context $db) {
         parent::__construct($db);
         $this->galleryPath = caravanGalleryPath;
@@ -37,16 +34,21 @@ class CaravanImage extends Model\Gallery {
         $this->idCaravan = $id;
         return $this;
     }
+    
+    public function setLanguage($lang){
+        $this->language = $lang;
+        return $this;
+    }
 
     /**
      * @param \Nette\Http\FileUpload $image
      * @throws \Nette\InvalidStateException
      */
     public function addMainImage(\Nette\Http\FileUpload $image) {
+        //file_put_contents("gallery/caravans/pokus.txt", "AHOJ");
         $imageName = $this->createImageName($image->name);
-<<<<<<< HEAD
         $this->path = $this->galleryPath . $imageName;
-        $thumbPath = $this->galleryPath . "thumbs\\" . $imageName;
+        $thumbPath = $this->galleryPath . "thumbs/" . $imageName;
         if ($imageName == null || $this->idCaravan == null)
             throw new \Nette\InvalidStateException();
         $id = $this->createId();
@@ -55,18 +57,6 @@ class CaravanImage extends Model\Gallery {
 
         $image = Image::fromFile($thumbPath);
         $image->resize(caravanImageWidth, caravanImageHeight)->save($thumbPath);
-=======
-        $this->path = $this->galleryPath.$imageName;
-        $thumbPath = $this->galleryPath."thumbs\\".$imageName;
-        if($imageName == null || $this->idCaravan == null)
-            throw new \Nette\InvalidStateException();
-        $id = $this->createId();
-        bdump($image->move($thumbPath));
-        bdump($image->move($this->path));
-        
-//        $image = Image::fromFile($thumbPath);
-//                $image->resize(caravanImageWidth, caravanImageHeight)->save($thumbPath);
->>>>>>> origin/master
         $this->database->table("galerie")->insert(array(
             "id_foto" => $id,
             "nazev" => $imageName,
@@ -75,7 +65,8 @@ class CaravanImage extends Model\Gallery {
 
         $this->database->table("hlavni_obrazky_karavany")->insert(array(
             "id_foto" => $id,
-            "id_karavan" => $this->idCaravan
+            "id_karavan" => $this->idCaravan,
+            "jazyk" => $this->language
         ));
     }
 
@@ -91,7 +82,6 @@ class CaravanImage extends Model\Gallery {
             if (!$image->isOk())
                 continue;
             $imageName = $this->createImageName($image->name);
-<<<<<<< HEAD
             $path = $this->galleryPath . $imageName;
             $thumbPath = $this->galleryPath . "thumbs/" . $imageName;
             $id = $this->createId();
@@ -99,14 +89,6 @@ class CaravanImage extends Model\Gallery {
             $image->move($path);
             \Nette\Utils\FileSystem::copy($path, $thumbPath);
 
-=======
-            $path = $this->galleryPath.$imageName;
-            $thumbPath = $this->galleryPath."thumbs/".$imageName;
-            $id = $this->createId();
-
-            $image->move($path);
-            $image->move($thumbPath);
->>>>>>> origin/master
             $image = Image::fromFile($thumbPath);
             $image->resize(caravanImageWidth, caravanImageHeight)->save($thumbPath);
             //uložení do tbl galerie
@@ -119,6 +101,7 @@ class CaravanImage extends Model\Gallery {
             $this->database->table("galerie_kategorie")->insert(array(
                 "id_kategorie" => $idCategory,
                 "id_karavan" => $this->idCaravan,
+                "jazyk" => $this->language,
                 "id_foto" => $id
             ));
         }
@@ -130,20 +113,23 @@ class CaravanImage extends Model\Gallery {
      * @params string $mainImage název hlavního obrázku
      * @return CaravanImage
      */
-    public function deleteMainImage($mainImage = null) {
+    public function deleteMainImage($mainImage = null, $imageId = null) {       
         if ($mainImage == null) {
             $mainImage = $this->mainImage();
+            if($mainImage == false) return $this;
             $imageName = $mainImage->nazev;
             $this->path = $this->galleryPath . $imageName;
-            $this->deleteImage($imageName);
+            $this->_deleteImage($imageName, $mainImage->id_foto, $this->idCaravan);
             $this->database->table("galerie")
                     ->where("id_foto", $mainImage->id_foto)->delete();
             //$this->database->table("hlavni_obrazky_karavany")->where("id_foto", $mainImage->id_foto)->delete();
         } else {
             $this->path = $this->galleryPath . $mainImage;
-            $this->deleteImage();
-            $this->database->table("galerie")
-                    ->where("nazev", $mainImage)->delete();
+            $this->_deleteImage($mainImage, $imageId, $this->idCaravan);
+//            $this->database->table("galerie")
+//                    ->where("nazev", $mainImage)->delete();
+            $this->database->table("hlavni_obrazky_karavany")
+                    ->where(array("id_karavan"=>$this->idCaravan, "jazyk"=>$this->language))->delete();
         }
         return $this;
     }
@@ -156,41 +142,63 @@ class CaravanImage extends Model\Gallery {
         $images = $this->images();
         foreach ($images as $image) {
             $this->path = $this->galleryPath . $image->nazev;
-            $this->deleteImage($image->nazev);
+            $this->_deleteImage($image->nazev, $image->id_foto, $this->idCaravan);
         }
         $this->database->query("DELETE galerie FROM galerie
             INNER JOIN galerie_kategorie ON galerie.id_foto = galerie_kategorie.id_foto
-            WHERE galerie_kategorie.id_karavan = ?", $this->idCaravan);
+            WHERE galerie_kategorie.id_karavan = ? AND galerie_kategorie.jazyk=?", $this->idCaravan, $this->language);
         return $this;
     }
 
-    public function deleteImage($imageName = null) {
-        if ($imageName == null)
+    public function _deleteImage($imageName, $imageId, $idCaravan) {
+        if ($imageId == null)
             throw new \Nette\InvalidArgumentException;
         $this->path = $this->galleryPath . $imageName;
         parent::deleteImage();
-        $this->database->table("galerie")->where("nazev", $imageName)->delete();
+        $this->database->table("galerie")->where("id_foto", $imageId)->delete();
+        $this->database->table("galerie_kategorie")->where(array("id_foto"=>$imageId,"id_karavan"=>$idCaravan, "jazyk"=>$this->language))->delete();
     }
 
     /*
      * Vrací informace o hlavním obrázku z databáze.
      * @return array
      */
-
     public function mainImage() {
         return $this->database->query("SELECT id_foto, nazev, datum FROM galerie
                 JOIN hlavni_obrazky_karavany USING(id_foto) 
-                WHERE hlavni=? AND id_karavan=?", 1, $this->idCaravan)->fetch();
+                WHERE hlavni=? AND id_karavan=? AND jazyk=?", 1, $this->idCaravan, $this->language)->fetch();
     }
 
+    public function copyMainImage($idActual, $idCurrent){
+//        $this->idCaravan = $idActual;
+//        $mainImage = $this->mainImage();
+//        $id = $this->createId();
+//         $this->database->table("galerie")->insert(array(
+//            "id_foto" => $id,
+//            "nazev" => $mainImage->nazev,
+//            "hlavni" => $mainImage->hlavni
+//        ));
+//
+//        $this->database->table("hlavni_obrazky_karavany")->insert(array(
+//            "id_foto" => $id,
+//            "id_karavan" => $idCurrent
+//        ));
+//        return $this;
+    }
+    
+    public function copyImages(){
+        
+    }
+    
     /**
      * Vrací informace o všech obrázcích kromě hlavního z databáze.
      * @return array
      */
     public function images() {
-        return $this->database->query("SELECT * FROM "
-                        . "`galerie` JOIN galerie_kategorie USING(id_foto) "
-                        . "WHERE hlavni=? AND id_karavan =?", 0, $this->idCaravan)->fetchAll();
+        return $this->database->query("SELECT g.id_foto, g.`nazev`, k.`nazev` as kategorie FROM "
+                        . "`galerie` as g JOIN galerie_kategorie USING(id_foto) "
+                        . "JOIN kategorie as k USING(id_kategorie) "
+                        . "WHERE hlavni=? AND id_karavan =? AND jazyk=? ORDER BY k.`nazev`", 0, $this->idCaravan, $this->language)->fetchAll();
     }
 
     /**
@@ -199,7 +207,7 @@ class CaravanImage extends Model\Gallery {
      */
     public function hasMainImage() {
         return $this->database->table("hlavni_obrazky_karavany")
-                        ->where("id_karavan", $this->idCaravan)->count() > 0;
+                        ->where(array("id_karavan"=> $this->idCaravan, "jazyk"=>$this->language))->count() > 0;
     }
 
     /**

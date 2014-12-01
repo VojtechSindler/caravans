@@ -17,26 +17,35 @@ class ArticlePresenter extends BasePresenter {
      */
     public $article;
 
-    public function renderShowAll($what="all") {
+    public function renderShowAll($what = "all") {
+
         switch ($what) {
-            case 'all': $this->template->articles = $this->article->getAll();
+            case 'all': $articles = $this->article->getAll(null, Model\Language::convertToInt($this->locale));
                 break;
-            case 'news': $this->template->articles = $this->article->getNews();
+            case 'news': $articles = $this->article->getNews(Model\Language::convertToInt($this->locale));
                 break;
-            case 'articles': $this->template->articles = $this->article->getArticles();
+            case 'articles': $articles = $this->article->getArticles(Model\Language::convertToInt($this->locale));
                 break;
             default:
                 break;
         }
-       
-        $this->template->footerText = 'Doporučujeme:';
+        $this->template->articles = $articles;
     }
 
-    public function renderView($id) {
-        $articles=$this->article->getAll($id);
-        $this->template->article=$articles[0];
-        
-       $this->template->footerText='<span style="float:left;margin-left:10px;">Publikováno: '.$articles[0]['datum'].'</span><font style="float:right;margin-right:10px">'.$articles[0]['jmeno'].' '.$articles[0]['prijmeni'].'</font><br>';
+    public function renderView($id, $title) {
+        $this->article->id = $id;
+        $articles = $this->article->getNewArticles(5, Model\Language::convertToInt($this->locale));
+        $this->template->news = $articles;
+        $article = $this->article->getAll($id, Model\Language::convertToInt($this->locale));
+        if (isset($article[0])) {
+            $this->template->article = $article[0];
+        }else{
+            $this->redirect("Article:showAll");
+        }
+    }
+
+    public function renderVystavy() {
+        $this->template->articles = $this->article->getExhibitions(Model\Language::convertToInt($this->locale));
     }
 
 }

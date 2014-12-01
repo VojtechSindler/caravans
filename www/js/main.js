@@ -4,6 +4,12 @@ function menu() {
     $(".menu").removeClass("active");
     $("#" + id).addClass("active");
 }
+function menuWeb() {
+    var id = document.title
+    id = id.substring(1, 3);
+    $(".menu").removeClass("menuActive");
+    $("#" + id).addClass("menuActive");
+}
 function submenu(id) {
     $("#" + id).show();
 }
@@ -11,37 +17,54 @@ function submenu(id) {
 function hidesubmenu(id) {
     $("#" + id).hide();
 }
-<<<<<<< HEAD
-function change(id, cesta) {
+function change(id, cesta, lang) {
+    if(lang == "de_DE"){
+       var more = "more_de.png";
+       var less = "less_de.png";
+    }else{
+       var more = "more.png";
+       var less = "less.png";
+   }
     var src = document.getElementById("" + id).getAttribute("src");
-    if (src == (cesta + 'more.png')) {
-        src = (cesta + 'less.png');
+    if (src == (cesta + more)) {
+        src = (cesta + less);
         $("." + id).show(400);
     } else {
-        src = (cesta + 'more.png');
+        src = (cesta + more);
         $("." + id).hide(400);
     }
     document.getElementById("" + id).setAttribute("src", src);
 }
 
+
 function slideshow(kam) {
+    var active = parseInt($('.active').attr("id"));
     if (kam == 'left') {
-        if ($('#1').prev().hasClass('noactive')) {
-            $('#3').removeAttr('id').removeClass('active').addClass('noactive').prev().attr('id', 3).prev().attr('id', 2).prev().attr('id', 1).addClass('active').removeClass('noactive');
+        var next=active-1;
+        if ($('#'+active).prev().hasClass('noactive')) {
+            $('#'+active).animate({left:"+1000"}).removeClass("active").addClass("noactive");
+            $('#'+next).addClass("active").removeClass("noactive").animate({left:"0"});
         }
     } else {
-        if ($('#3').next().hasClass('noactive')) {
-            $('#1').removeAttr('id').removeClass('active').addClass('noactive').next().attr('id', 1).next().attr('id', 2).next().attr('id', 3).addClass('active').removeClass('noactive');
+        var next=active+1;
+        if ($('#'+active).next().hasClass('noactive')) {
+            $('#'+active).animate({left:"-1000"}).removeClass("active").addClass("noactive");
+            $('#'+next).addClass("active").removeClass("noactive").animate({left:"0"});
         }
     }
-=======
-function change(id) {
-    var src = document.getElementById("" + id).getAttribute("src");
-    if (src == 'img/more.png') {
-        src = 'img/less.png';
-    } else {
-        src = 'img/more.png';
-    }
-    document.getElementById("" + id).setAttribute("src",src);
->>>>>>> origin/master
 }
+
+
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id))
+        return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/cs_CZ/sdk.js#xfbml=1&appId=1441883569432021&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+
+
+

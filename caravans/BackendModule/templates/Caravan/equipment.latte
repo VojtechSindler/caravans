@@ -13,6 +13,10 @@
             <td>{label nazev /}</td>
             <td>{input nazev class => 'field'}</td>
         </tr>
+                <tr>
+            <td>{label jazyk /}</td>
+            <td>{input jazyk class => 'field'}</td>
+        </tr>
         <tr>
             <td>{label cena /}</td>
             <td>{input cena class => 'small-field', style => 'width: 100px'} Kč</td>
@@ -41,7 +45,7 @@
         <td>{$equip->cena}</td>
         <td>{$equip->popis}</td>
         <td>
-            <a n:href="deleteEquipment!, 'id' => $equip->id_vybava">Smazat</a>
+            <a n:href="deleteEquipment!, 'id' => $equip->id_vybava, 'language' => $language">Smazat</a>
         </td>
     </tr>
 </table>

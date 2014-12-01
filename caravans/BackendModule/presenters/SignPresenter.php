@@ -18,6 +18,11 @@ class SignPresenter extends \Caravans\Presenters\BasePresenter {
         $this->setLayout("loginlayout");
         $this->setTitle("Přihlášení");
     }
+    
+    public function renderIn(){
+        $this->template->identity = $this->getUser()->identity;
+    }
+    
     /**
      * @return Nette\Application\UI\Form
      */
@@ -44,7 +49,7 @@ class SignPresenter extends \Caravans\Presenters\BasePresenter {
     }
 
     public function actionOut() {
-        $this->getUser()->logout();
+        $this->getUser()->logout(true);
         $this->flashMessage('Odhlášení proběhlo úspěšně.');
         $this->redirect('in');
     }

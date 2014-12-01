@@ -18,36 +18,39 @@ class ArticlePresenter extends \BackendPresenter {
     /** @var \Caravans\Model\ArticleManager @inject * */
     public $articleManager;
     public $id;
+    public $jazyk;
 
     public function startup() {
         parent::startup();
         $this->title = "Seznam článků";
+        $this->navigation("Články", "Seznam článků");
         $this->sidebar("articleViewSettings", "Změna zobrazení");
         $this->articleManager->setUserId($this->getUser()->identity->getId());
     }
 
-    public function renderEdit($id) {
-        $this->navigation("Upravit článek");
+    public function renderEdit($id,$jazyk) {
+        $this->navigation("Články", "Upravit článek");
         $this->id = $id;
+        $this->jazyk = $jazyk;
         $this->title = "Upravit článek";
-        $this->template->articles = $this->articleManager->getAll();
+        $this->template->articles = $this->articleManager->getAllAdmin();
         $this->sidebar("listOfArticles", "Seznam Článků");
     }
 
     public function renderAdd() {
-        $this->navigation("Vytvořit článek");
+        $this->navigation("Články", "Vytvořit článek");
         $this->title = "Vytvořit článek";
-        $this->template->articles = $this->articleManager->getAll();
+        $this->template->articles = $this->articleManager->getAllAdmin();
         $this->sidebar("listOfArticles", "Seznam Článků");
     }
 
-    public function renderView($id) {
-        $this->navigation("Zobrazení článku");
+    public function renderView($id, $jazyk) {
+        $this->navigation("Články", "Zobrazení článku");
         $this->id = $id;
         $this->title = "Článek $id";
-        $this->template->articles = $this->articleManager->getAll();
+        $this->template->articles = $this->articleManager->getAllAdmin();
         $this->sidebar("listOfArticles", "Seznam Článků");
-        $article = $this->articleManager->getAll($this->id);
+        $article = $this->articleManager->getAll($this->id, $jazyk);
         $this->template->article = $article[0];
     }
 
@@ -59,18 +62,30 @@ class ArticlePresenter extends \BackendPresenter {
     protected function createComponentAddArticleForm() {
         $form = new Form();
         $form->addText("nadpis", "Nadpis*")
-                ->setAttribute("maxlength", 30)
-                ->setRequired("Nevyplnil jsi pole %label")
-                ->addRule(Form::MAX_LENGTH, "%label může mít maximálně %d znaků", 255);
+                ->setRequired("Nevyplnil jsi pole %label");
 
         $form->addText("perex", "Perex");
 
+        $form->addSelect("kategorie", "Kategorie", 
+                array(Model\IArticleCategory::ARTICLE => "Článek", 
+                    Model\IArticleCategory::EXHIBITON => "Výstava"));
+        
         $form->addTextArea("text", "Text*")
                 ->setRequired("Nevyplnil jsi pole %label");
 
 
         $form->addCheckbox('novinka', 'Novinka');
+        $language = new Model\Language;
+        $items=array($language::CS=>"Český", $language::EN=>"Anglický", $language::DE=>"Německý");
+        
+        $form->addSelect("jazyk","Jazyk", $items);
 
+        $data=$this->articleManager->getAllAdmin();
+        foreach ($data as $key => $value) {
+            $IDs[$value->id_clanek]=$value->nadpis;
+        }
+        $form->addSelect("id_origin", "Překládáš článek", $IDs)->setPrompt(null);
+        
         $form->addSubmit("odeslat", "Vytvořit");
         $form->onSuccess[] = $this->addArticleFormSucceeded;
 
@@ -86,9 +101,9 @@ class ArticlePresenter extends \BackendPresenter {
      */
     public function addArticleFormSucceeded($form, $values) {
         try {
-            if ($values->perex == null) {
-                $values->perex = $this->articleManager->createPerex($values->text);
-            }
+//            if ($values->perex == null) {
+//                $values->perex = $this->articleManager->createPerex($values->text);
+//            }
             $this->articleManager->save($values);
 
             $this->flashMessage("Článek byl úspěšně vytvořen", \FlashMessageTypes::OK);
@@ -104,21 +119,26 @@ class ArticlePresenter extends \BackendPresenter {
      * @return \Nette\Application\UI\Form
      */
     protected function createComponentAddEditForm() {
-        $article = $this->articleManager->getAll($this->id);
+        if(is_null($this->jazyk)){
+            $article = $this->articleManager->getAllAdmin();
+        }else{
+            $article = $this->articleManager->getAll($this->id,$this->jazyk);
+        }
+        
         $article = $article[0];
         $form = new Form();
-        $form->addHidden("id_clanek", $article['id_clanek']);
-
+        $form->addHidden("id_clanek")->setDefaultValue($article["id_clanek"]);
         $form->addText("nadpis", "Nadpis*")
-                        ->setAttribute("maxlength", 30)
                         ->setRequired("Nevyplnil jsi pole %label")
-                        ->addRule(Form::MAX_LENGTH, "%label může mít maximálně %d znaků", 255)
                 ->defaultValue = $article['nadpis'];
 
         $form->addText("perex", "Perex")
                 ->defaultValue = $article['perex'];
 
-
+        $form->addSelect("kategorie", "Kategorie", 
+                array(Model\IArticleCategory::ARTICLE => "Článek", 
+                    Model\IArticleCategory::EXHIBITON => "Výstava"))->defaultValue = $article["kategorie"];
+        
         $form->addTextArea("text", "Text*")
                         ->setRequired("Nevyplnil jsi pole %label")
                 ->defaultValue = $article['text'];
@@ -126,6 +146,10 @@ class ArticlePresenter extends \BackendPresenter {
 
 
         $form->addCheckbox('novinka', 'Novinka');
+        $language = new Model\Language;
+        $items=array($language::CS=>"Český", $language::EN=>"Anglický", $language::DE=>"Německý");
+        $form->addSelect("jazyk","Jazyk", $items)->setDefaultValue($article["jazyk"]);
+
 
         $form->addSubmit("odeslat", "Editovat");
         $form->onSuccess[] = $this->addEditFormSucceeded;
@@ -142,9 +166,9 @@ class ArticlePresenter extends \BackendPresenter {
      */
     public function addEditFormSucceeded($form, $values) {
         try {
-            if ($values->perex == null) {
-                $values->perex = $this->articleManager->createPerex($values->text);
-            }
+//            if ($values->perex == null) {
+//                $values->perex = $this->articleManager->createPerex($values->text);
+//            }
             $this->articleManager->edit($values);
 
             $this->flashMessage("Článek byl úspěšně editován", \FlashMessageTypes::OK);
@@ -168,7 +192,6 @@ class ArticlePresenter extends \BackendPresenter {
         $form = new Form();
         $form->addSelect("view", "Zobrazení", array("Tabulkové","Náhledové"))
                 ->setAttribute("onchange", "this.form.submit();");
-        
         return $form;
     }
 

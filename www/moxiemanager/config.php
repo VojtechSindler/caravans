@@ -12,7 +12,7 @@ session_start();
 	$moxieManagerConfig['general.allow_override'] = 'hidden_tools,disabled_tools';
 
 	// Filesystem
-	$moxieManagerConfig['filesystem.rootpath'] = '../gallery/caravans/';
+	$moxieManagerConfig['filesystem.rootpath'] = '../gallery/articles/';
 	$moxieManagerConfig['filesystem.include_directory_pattern'] = '';
 	$moxieManagerConfig['filesystem.exclude_directory_pattern'] = '/^mcith$/i';
 	$moxieManagerConfig['filesystem.include_file_pattern'] = '';
@@ -51,8 +51,8 @@ session_start();
 	$moxieManagerConfig['upload.overwrite'] = false;
 	$moxieManagerConfig['upload.autoresize'] = false;
 	$moxieManagerConfig['upload.autoresize_jpeg_quality'] = 90;
-	$moxieManagerConfig['upload.max_width'] = 800;
-	$moxieManagerConfig['upload.max_height'] = 600;
+	$moxieManagerConfig['upload.max_width'] = 5000;
+	$moxieManagerConfig['upload.max_height'] = 5000;
 	$moxieManagerConfig['upload.chunk_size'] = '5mb';
 	$moxieManagerConfig['upload.allow_override'] = '*';
 

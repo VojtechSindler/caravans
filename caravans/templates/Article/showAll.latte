@@ -1,25 +1,24 @@
 {* Latte template *}
 
 {block content}
-<h1 n:block="title" style="margin-left:5px;">Novinky a články</h1>
+<h1 n:block="title" style="margin-left:5px;">{_messages.menu.c}</h1>
 
 <section class="whitefromgrey rozcestnik" style="min-height: 400px">
-    {var $x=1}
     {if $articles==null}
-        <p style="width: 100%;text-align: center;margin: 0;">Bohužel nebylo zatím nic zveřejněno.</p>
+        <p style="width: 100%;text-align: center;margin: 0;">{_messages.articlesAll.nic}</p>
     {/if}
     {foreach $articles as $article}
-        {if $x==3}
-            <article style="border:0;">
-                {var $x=1}
-            {else}
-                <article>  
-                    {var $x=$x+1}
-                {/if}
-
-                <h4>{$article->nadpis} <font style="float:right;">{$article->datum}</font></h4>
-                <p>{!$article->perex} </p>
-                <a class="button"  n:href="Article:view $article->id_clanek">Více ></a>
-            </article>
-        {/foreach}
+        <article style="margin-bottom: 8px; min-height: 230px" class="article">  
+            <h4 style='font-size:100%'>{$article->nadpis} </h4>
+            <div class="text" style="height:130px">
+            {if $article->perex == null}
+                <p>{!$article->text|truncate:200|striptags}</p>
+                {else}
+                <p>{!$article->perex|truncate:200|striptags}</p>
+            {/if}
+            </div>
+                <font style="float:right;font-style: oblique; font-size: 14px"><b>{$article->datum}</b></font>
+                <a class="button"  n:href="Article:view $article->id_clanek, $article->nadpis">{_messages.articlesAll.button} ></a>
+        </article>
+    {/foreach}
 </section>

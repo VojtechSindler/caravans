@@ -1,31 +1,43 @@
 /*
-<<<<<<< HEAD
     Author     : Bruno Puzjak
 */
 
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
+.active{
+    position: relative;
+    width:990px;
+    height: 200px;
+}
+.noactive{
+    position: relative;
+    width:990px;
+    height:200px;
+}
 
-#slideshow .active{
-    z-index:99;
-    display: table-cell;
+.fb{
+    background-color: #4965b4;
+    border-radius: 2px;
+    border:0;
+    padding: 1px;
+    padding-left: 3px;
+    padding-right: 3px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+    text-shadow: 0 -1px 0 #354c8c;
+    white-space: nowrap;
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+    border-spacing: 2px;
+    border-color: gray;
 }
-#slideshow .noactive{
-    z-index:99;
-    display: none;
-}
-=======
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 11.8.2014, 15:34:11
-    Author     : Bruno
-*/
->>>>>>> origin/master
 body{
     padding: 0;
     margin: 0;
     background-image: url('../images/web/background.jpg');
+    font-family: 'Open Sans', sans-serif;
 }
 
 header{
@@ -36,6 +48,7 @@ header{
     border-bottom: 3px solid #bdb8b0;
 
 }
+
 .header{
     width:1000px;
     text-align: center;
@@ -48,11 +61,12 @@ header{
 header .login{
     float:left; position: absolute; 
     margin-top: 10px; margin-left: 10px;
-    font-family: OpenSans; font-size: 12px
+    font-family: 'Open Sans', sans-serif; font-size: 12px
 }
 header .login a{
     text-decoration: none;
-    color: #666052
+    color: #666052;
+
 }
 .header td{
     padding: 5px;
@@ -61,14 +75,14 @@ header .login a{
     border: 1px solid #bdb8b0;
     border-top: none;
     border-bottom: none;
-    font-family: OpenSans ;
-
+    font-weight: bold;
 }
 .menu{
     padding: 10px;
     text-decoration: none;
     color: #666052;
     font-size: 80%;
+    text-transform: uppercase;
 }
 
 .menu:hover{
@@ -79,64 +93,47 @@ header .login a{
     color:white;
     text-decoration: none;
 }
+.menuActive{
+    background-color: #c02722;
+    border-radius: 20px;
+    color:white;
+
+}
 
 .submenu{
-<<<<<<< HEAD
     font-size: 15pt;
     display: none;
     position: absolute;
     margin-top: 5px;
     min-width: 150px;
+    font-weight: normal;
 }
 .submenu:hover{
     display: inherit;
+    font-weight: normal;
 }
 .submenu img{
     width: 100%;
-=======
-    display: none;
-    position: absolute;
-    background-color: #dcd8d0;
-    margin-top: 20px;
-    min-width: 150px;
-    border: 2px solid white;
-    font-size: 70%;
-}
-.submenu:hover{
-    display: block;
-}
-.submenu img{
-    width: 100%;
-    margin-top:-15px;
->>>>>>> origin/master
 }
 
 .submenu ul{
     list-style-type: none;
     margin: 0;
     padding: 5px;
-<<<<<<< HEAD
     margin-top:-5px ;
     text-align: left;
     background-color: #dcd8d0;
     border: 2px solid white;
     border-top: 0;
-=======
-    text-align: left;
->>>>>>> origin/master
 }
 .submenu li{
     border-bottom: 1px inset #bdb8b0;
 }
-<<<<<<< HEAD
 .submenu li:hover a{
     color:white;
-        padding-left: 25px;
+    padding-left: 25px;
 
 }
-=======
-
->>>>>>> origin/master
 .background1{
     height: 465px;
     width: 100%;
@@ -155,6 +152,7 @@ header .login a{
 }
 
 #main{
+    font-family: 'Open Sans', sans-serif;
     margin: 0 auto;
     margin-top:-930px;
     width: 1000px;
@@ -171,12 +169,12 @@ header .login a{
     padding: 2px;
 }
 #obsah{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
     width: 100%;
     margin-top: 25px;
     background-image: url('../images/web/background.jpg');
     border-top: 5px solid #bdb8b0;
-    font-family: OpenSans;
-<<<<<<< HEAD
 }
 button{
     background-color: #c02722;
@@ -186,8 +184,6 @@ button{
     padding-right: 15px ;
     color:white;
     cursor: pointer;
-=======
->>>>>>> origin/master
 }
 
 .button{
@@ -213,7 +209,9 @@ button{
     border-left: 0;
     border-right: 0;
     border-bottom: 0;
+    overflow: hidden;
 }
+
 .greyToDark *{
     margin-left: 5px;
 }
@@ -238,6 +236,7 @@ button{
     border-right: 0;
     border-bottom: 0;
     padding: 5px;
+    overflow: hidden;
 }
 
 .whiteToGrey{
@@ -254,6 +253,7 @@ button{
     border-bottom: 0;
     font-size: 75%;
     padding-bottom: 5px;
+    overflow: hidden;
 }
 .whiteToGrey *{
     margin-left: 5px;
@@ -275,14 +275,14 @@ button{
     height: 50px;
     width:40px;
     font-size: 150%;
-    margin-top:-100px
+    margin-top:-150px
 
 }
 footer {
     width:800px;
     margin:0 auto;
     margin-top:10px;
-    font-size: 90%;
+    font-size: 70%;
     text-align: center;
 }
 
@@ -291,7 +291,6 @@ footer {
     float:right;
     margin-right: -40px;
     margin-top: -280px;
-
 }
 #footer img{
     width:35px;
@@ -299,7 +298,10 @@ footer {
     float:right;
     cursor: pointer;
 }
-
+footer a{
+    color: black;
+    cursor: pointer;
+}
 .nadpis{
     width:100%;
     background-image: url('../images/web/background.jpg');
@@ -312,44 +314,77 @@ footer {
     border-image: url('../images/web/greytowhite.jpg') 30 30 round;
     border-top: 30px;
     background-color: white;
+    overflow: hidden;
 }
-<<<<<<< HEAD
 .whitefromgrey *{
     margin-left: 5px;
 }
-=======
->>>>>>> origin/master
+h1{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    font-size: 30px;
+    margin: 10px;
+}
 .rozcestnik{
+    font-family: 'Open Sans', sans-serif;
     width: 100%;
+    overflow: hidden;
 }
 .rozcestnik article{
     display: inline-block;
-<<<<<<< HEAD
     width:28%;
     padding: 20px;
-    border-right: 1px dashed #bdb8b0;
+    border: 2px solid #bdb8b0;
     vertical-align: top;
-    min-height: 165px;
+    min-height: 410px;
+    margin-bottom: 10px;
+    height: 50px;
 }
 
 
+
+.rozcestnik article h4{
+    font-size: 17px;
+    color: #C00000 ;
+    margin: 0px 10px 10px 5px;
+    height: 65px;
+}
+.rozcestnik .img{
+    height: 210px;
+    padding: 0;
+    margin:0;
+}
 .rozcestnik img{
     width: 95%;
+    height: 180px;
     border:5px solid #bdb8b0;
     padding: 2px;
+    margin-bottom: 10px;
 }
 .rozcestnik p{
     font-size: 80%;
 }
-
 .detail > div{
     display: inline-block;
     margin-left: 1.5%;
     padding-right: 1.5%;
-    width: 330px; 
+    width: 370px; 
     margin-bottom: 5px;
     vertical-align: top;
     border-right: 1px dashed #bdb8b0;
+}
+.rozcestnik .text{
+    height: 100px;
+    overflow: auto;
+}
+
+.nadp{
+    font-size: 22px;
+    margin-bottom: 10px
+}
+.x{
+    line-height: 28px;
+    padding: 10px 10px 20px 20px;
 }
 #mainImage{
     width:98%;
@@ -360,7 +395,7 @@ footer {
 }
 .galerie img{
     margin-left:1%;
-    width: 30%;
+    width: 40%;
     border:1px solid #bdb8b0;
 }
 .galerie > h4{
@@ -391,7 +426,6 @@ footer {
 }
 
 .vpravo{
-
     border-radius: 30px 0px 0px 0px;
     padding: 20px;
     margin:0;
@@ -413,87 +447,82 @@ input{
 
 .hide{
     display: none;
-=======
-    width:29%;
-    padding: 20px;
-    border-right: 1px dashed #bdb8b0;
 }
 
-.rozcestnik img{
-    width: 95%;
-    border:5px solid #bdb8b0;
-    padding: 2px;
+.error{
+    font-weight: bold;
+    color: red;
+    padding: 10px 0px 10px 0px;
 }
-.rozcestnik p{
-    font-size: 80%;
+.ok{
+    font-weight: bold;
+    color: green;
+    padding: 10px 0 10px 0;
 }
 
-.detail > div{
-    display: inline-block;
-    margin-left: 1.5%;
-    padding-right: 1.5%;
-    width: 330px; 
-    margin-bottom: 5px;
-    vertical-align: top;
-    border-right: 1px dashed #bdb8b0;
+.kontakt-form{
+    width: 500px;
+    margin: auto;
+    margin-top: 20px;
+    font-size: 16px;
 }
-#mainImage{
-    width:98%;
-    border:3px solid #bdb8b0;
+
+.kontakt-form input[type="text"], input[type="email"], textarea{
+    padding: 8px;
+    width: 250px;
+    font-size: 15px;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #bdb8b0;
+    font-family: 'Open Sans', sans-serif;
 }
-.galerie{
-    margin:0;
+
+.kontakt-form td{
+    padding-bottom: 8px;
 }
-.galerie img{
-    margin-left:1%;
-    width: 30%;
-    border:1px solid #bdb8b0;
+
+.kontakt-form textarea{
+    width: 400px; height: 100px;
 }
-.galerie > h4{
-    margin-bottom: 0;
+.new{
+    border: 1px solid grey;
 }
-.cena{
+.news {
+    margin:5px;
+    margin-bottom: 10px;
+    background-color: white;
+    border: 1px solid #d0d0d0;
+    border-radius: 2px;
+    padding: 4px;
+    box-shadow: #aeaeae 0px 0px 2px;
+    min-height:130px;
+}
+.news a{
+    text-decoration: none;
+}
+.news h4{
+    color: #C00000;
     margin:0;
     padding: 0;
-    font-size: 200%;
-    padding-right: 10px;
 }
-.udaje hr{
-    vertical-align: middle;
-    display: inline-block;
-}
-.udaje{
-    margin-top: 15px;
-    width: 100%;
-}
-.udaje img{
-    width: 100px;
-    vertical-align: middle; 
-    cursor: pointer;
+.news p{
+    text-align: center;
 }
 
-.vpravo{
-    
-    border-radius: 30px 0px 0px 0px;
-    padding: 20px;
-    margin:0;
-    margin-top: 10px;
-    background-color:  #c2beb5;
-    color: white;
-    padding: 10px;
-    text-align: center;
-}
-.background{
-    background-image: url('../images/web/background.jpg');
+.smallCaravanPreview{
     width: 100%;
-    text-align: center;
+    margin-top: 5px;
 }
-input{
-    border-radius: 20px 20px 20px 20px;
-    background-color: #eee8d9;
->>>>>>> origin/master
+
+.smallCaravanPreview .window{
+    width: 160px;
+    padding: 5px;
+    border: 1px solid #bdb8b0;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin-top: 5px;
+    font-size: 13px; 
 }
-@font-face{
-    font-family: OpenSans;
-    src: url('../fonts/OpenSans-Bold.ttf');
-}
+.window h4{margin-top: 5px; height: 35px; margin-bottom: 5px}
+.window img{width: 100%; margin: auto; margin-bottom: 10px}

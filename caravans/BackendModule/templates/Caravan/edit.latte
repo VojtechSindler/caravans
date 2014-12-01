@@ -6,6 +6,14 @@
     </div>
     <table class="table1">
         <tr>
+            <td>{label id_zaklad /}</td>
+            <td colspan="5">{input id_zaklad class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label jazyk /}</td>
+            <td colspan="5">{input jazyk class => 'field'}</td>
+        </tr>
+        <tr>
             <td>{label znacka /}</td>
             <td>{input znacka class => 'field'}</td>
         </tr>
@@ -36,15 +44,18 @@
             <td>{input napajeni class => 'field'}</td>
         </tr>
         <tr>
-                <td>{label barva /}</td>
+            <td>{label barva /}</td>
             <td>{input barva class => 'field'}</td>
         </tr>
-        
+        <tr>
+            <td>{label eshop_link /}</td>
+            <td>{input eshop_link class => 'field'}</td>
+        </tr>
         <tr>
             <td>{label popis /}</td>
             <td colspan="6">{input popis}</td>
         </tr>
-                <tr>
+        <tr>
             <td>{label vybava /}</td>
             <td colspan="6">{input vybava}</td>
         </tr>
@@ -52,28 +63,24 @@
             <th colspan="6">Rozměry [cm]</th>
         </tr>  
         <tr>
+            <td>{label vyska /}</td>
+            <td>{input vyska class => 'small-field'} cm</td>
+            
             <td>{label sirka /}</td>
             <td>{input sirka class => 'small-field'} cm</td>
 
             <td>{label delka /}</td>
             <td>{input delka class => 'small-field'} cm</td>
-
-            <td>{label vyska /}</td>
-            <td>{input vyska class => 'small-field'} cm</td>
         </tr>
         <tr>
-            <td>{label nastavba_sirka /}</td>
-            <td>{input nastavba_sirka class => 'small-field'} cm</td>
-
             <td>{label nastavba_delka /}</td>
             <td>{input nastavba_delka class => 'small-field'} cm</td>
-
-            <td>{label nastavba_vyska /}</td>
-            <td>{input nastavba_vyska class => 'small-field'} cm</td>
         </tr>
         <tr>
             <td>{label vyska_vnitrni /}</td>
             <td>{input vyska_vnitrni class => 'small-field'} cm</td>
+            <td>{label sirka_vnitrni /}</td>
+            <td>{input sirka_vnitrni class => 'small-field'} cm</td>
         </tr>
         <tr>
             <td>{label luzko_delka /}</td>
@@ -87,16 +94,8 @@
         <tr>
             <td>{label hmotnost_p /}</td>
             <td>{input hmotnost_p class => 'small-field'} kg</td>
-            <td>{label hmotnost_pb /}</td>
-            <td>{input hmotnost_pb class => 'small-field'} kg</td>
-            <td>{label hmotnost_c /}</td>
-            <td>{input hmotnost_c class => 'small-field'} kg</td>
-        </tr>
-        <tr>
             <td>{label hmotnost_t /}</td>
             <td>{input hmotnost_t class => 'small-field'} kg</td>
-            <td>{label hmotnost_max /}</td>
-            <td>{input hmotnost_max class => 'small-field'} kg</td>
         </tr>
         <tr>
             <td>{label specialni_edice/}</td>
@@ -111,16 +110,17 @@
 
 {control galleryManager}
 <div style="background:#EFCA4B; color:#818181; text-align: left; padding:7px 10px; font-weight: bold">Prohlížeč galerie
-<a onclick="hide()" style="float: right" id="hideLink">Skrýt</a>
+    <a onclick="hide()" style="float: right" id="hideLink">Skrýt</a>
 </div>
 <script type="text/javascript">
-    function hide(){
-        if($("#hideLink").text() == "Zobrazit")
-               $("#hideLink").text("Skrýt");
-           else $("#hideLink").text("Zobrazit");
-       $("#hide").toggle(500);
-}
+    function hide() {
+        if ($("#hideLink").text() == "Zobrazit")
+            $("#hideLink").text("Skrýt");
+        else
+            $("#hideLink").text("Zobrazit");
+        $("#hide").toggle(500);
+    }
 </script>
 <div id="hide">
-{control galleryManager:Gallery}
+    {control galleryManager:Gallery}
 </div>

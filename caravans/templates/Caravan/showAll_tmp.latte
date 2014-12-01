@@ -1,0 +1,24 @@
+{* Latte template *}
+
+{block content}
+<h1 n:block="title" style="margin-left:5px">Nabídka minikaravanů - TODO ZMenšování obrázků</h1>
+
+<section class="whitefromgrey rozcestnik">
+    {var $x=1}
+    {foreach $caravans as $caravan}
+        {if $x==3}
+            <article style="border:0;">
+                {var $x=1}
+            {else}
+                <article>    
+                    {var $x=$x+1}
+                {/if}
+
+                <img src="{$caravan->hlavni_obrazek}">
+                <h4>{$caravan->znacka.''.$caravan->typ}</h4>
+                <p>{$caravan->popis}</p>
+                <a class="button"  n:href="Caravan:view $caravan->id_karavan">Více info ></a>
+            </article>
+        {/foreach}
+</section>
+{/block}

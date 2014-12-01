@@ -3,7 +3,11 @@
 namespace Caravans\Presenters;
 
 use Nette,
-    Caravans\Model;
+    Caravans\Model,
+    Nette\Mail\Message,
+    Nette\Mail\SendmailMailer,
+    Nette\Latte\Engine;
+;
 
 /**
  * Homepage presenter.
@@ -19,28 +23,22 @@ class KontaktPresenter extends BasePresenter {
     }
 
     public function renderDefault() {
-        $this->footerText = "Těšíme se na vaši návštěvu u nás a jsme připraveni "
-                . "naslouchat vašim zvláštním přáním a plnit vaše požadavky tak, "
-                . "abyste si s našimi minikaravany užili pohodové cestování a tu "
-                . "nejkrásnější dovolenou.";
+
     }
 
     public function createComponentAddKontaktForm() {
         $form = new \Nette\Application\UI\Form();
+        $form->setTranslator($this->translator);
+        $form->addText('jmeno', 'messages.contactForm.name')
+                ->setRequired('Musíte zadat vaše jméno');
 
-        $form->addText('jmeno')
-                ->setRequired('Musíte zadat vaše jméno')
-                ->setAttribute("style", "border-radius:0px; background-color:white");
-
-        $form->addText('mail')
+        $form->addText('mail', 'messages.contactForm.email')
                 ->setRequired("Musíte zadat váš email")
-                ->setType('email')
-                ->setAttribute("style", "border-radius:0px; background-color:white");
-        $form->addTextArea('text')
-                ->setRequired("Musíte zadat text")
-                ->setAttribute("style", "width:90%;height:100px");
+                ->setType('email');
+        $form->addTextArea('text', 'messages.contactForm.message')
+                ->setRequired("Musíte zadat text");
 
-        $form->addSubmit('submit', 'Odeslat');
+        $form->addSubmit('submit', 'messages.contactForm.button');
 
         $form->onSuccess[] = $this->AddKontaktFormSuccessed;
 
@@ -50,7 +48,7 @@ class KontaktPresenter extends BasePresenter {
     public function AddKontaktFormSuccessed($form, $values) {
         $mail = new \Nette\Mail\Message();
         $mail->setFrom($values->mail)
-                ->addTo('minikaravany@email.cz')
+                ->addTo(adminEmail)
                 ->setSubject("Minikaravany dotaz")
                 ->setBody($values->text . ' ' . $values->jmeno);
 

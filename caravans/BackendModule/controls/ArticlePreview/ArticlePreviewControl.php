@@ -2,13 +2,11 @@
 
 namespace Caravans\BackendModule\Controls;
 
-use Nette\Application\UI;
-
 /**
  * @author Bruno Puzják
  * @package caravans_backend_controls
  */
-class ArticlePreviewControl extends UI\Control {
+class ArticlePreviewControl extends \Nette\Application\UI\Control {
 
     /** @var \Caravans\Model\ArticleManager */
     private $articleManager;
@@ -26,7 +24,11 @@ class ArticlePreviewControl extends UI\Control {
     }
 
     public function render() {
-        $articles = $this->articleManager->getAll();
+        $articles = $this->articleManager->getAllAdmin(null, true);
+        array_map(function($data){
+            $data->kategorie = \Caravans\Model\CategoryTranslator::translate($data->kategorie);
+        }, $articles);
+        
         $this->template->articles = $articles;
         $httpRequest = $this->presenter->context->getService('httpRequest');
         $view = $httpRequest->getPost("view");
@@ -37,20 +39,19 @@ class ArticlePreviewControl extends UI\Control {
         }
     }
 
-    public function handleEdit($id) {
-        $this->presenter->redirect("edit", $id);
+    public function handleEdit($id,$jazyk) {
+        $this->presenter->redirect("edit", $id, $jazyk);
     }
 
-    public function handleView($id) {
-        $this->presenter->redirect("view", $id);
+    public function handleView($id, $jazyk) {
+        $this->presenter->redirect("view", $id, $jazyk);
     }
 
-    public function handleDelete($id) {
-        $this->articleManager->delete($id);
+    public function handleDelete($id, $jazyk) {
+        $this->articleManager->delete($id, $jazyk);
         $this->flashMessage("Článek byl úspěšně odstraněn", \FlashMessageTypes::OK);
         $this->redirect("this");
     }
-
 }
 
 ?>

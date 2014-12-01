@@ -13,16 +13,21 @@ use Nette,
  */
 class HomepagePresenter extends BasePresenter {
 
+    /**
+     *
+     * @var Model\ArticleManager @inject
+     */
+    public $article;
+
     public function startup() {
         parent::startup();
         $this->setLayout("layout");
     }
-    
+
     public function renderDefault() {
-        $this->footerText = "Těšíme se na vaši návštěvu u nás a jsme připraveni "
-                . "naslouchat vašim zvláštním přáním a plnit vaše požadavky tak, "
-                . "abyste si s našimi minikaravany užili pohodové cestování a tu "
-                . "nejkrásnější dovolenou.";
+        $this->article->id=1;
+        $articles = $this->article->getNewArticles(3,Model\Language::convertToInt($this->locale));
+        $this->template->news = $articles;
     }
 
 }

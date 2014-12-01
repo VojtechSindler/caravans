@@ -1,9 +1,38 @@
 {* Latte template *}
 
 {block content}
-<h1 style="margin-left:5px;">{$article->nadpis}<span style="float: right;margin-right: 5px;">Facebook</span></h1>
-<section class="whitefromgrey">
-    <div style="padding: 10px;margin: 0;height: 100%;">
-    {!$article->text}
+
+<h1 style="margin-left:5px;">{$article->nadpis} <span style="float: right;margin-right: 5px;">
+
+    </span></h1>
+
+<div class="whitefromgrey detail">
+    <div style="min-height: 700px;  padding: 10px;margin: 0;height: 100%;width: 650px;border:0;">
+        {*if $article->perex != null*}
+<!--            <p><b>{*!$article->perex*}</b></p>-->
+        {*/if*}
+        <p>{!$article->text}</p>
     </div>
-</section>
+    <div style="text-align: right;width:300px; border: 0;float:right;border-left:1px dashed black; margin-left:0">
+        <div class="fb-like" data-href="http://www.minikaravany.cz/article/view/{$article->id_clanek}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+        <h4 style="margin-left: 50px;" class="vpravo">{_messages.homepage.newsTitle}:</h4>
+        <div style="margin-left: 50px; padding: 10px 0 10px 0 ">
+            {foreach $news as $art}
+                <a n:href="Article:view $art->id_clanek" style="margin:0;font-size: 14px;text-decoration: none;color:black;">
+                    <div class="news">
+
+                        <h4 style="margin-top: 5px;color: #C00000 ; text-align: left; margin-left: 5px">{$art->nadpis}</h4>
+                                    {if $art->perex == null}
+                <p>{!$art->text|truncate:200|striptags}</p>
+                {else}
+                <p>{!$art->perex|truncate:200|striptags}</p>
+            {/if}
+                    </div> 
+                </a>
+            {/foreach}
+        </div> 
+
+
+
+    </div>
+</div>

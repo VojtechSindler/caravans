@@ -2,17 +2,13 @@
 
 {block content}
 <header>
-
-    <p class="login">
-        <a n:href="Backend:Sign:in">Vstup do administrace</a></p>
     <table class='header' rules='all' >
         <tr>
             <td style='width: 50px'>
-                <a n:href='Homepage:' ><img title='Domů' alt='Domů' src='{$basePath}/images/web/home.gif' ></a>
+                <a n:href='Homepage:' ><img title='{_messages.menu.home}' alt='{_messages.menu.home}' src='{$basePath}/images/web/home.gif' ></a>
             </td>
             <td onmouseover="submenu('modely');" onmouseout="hidesubmenu('modely')">
-<<<<<<< HEAD
-                <a class='menu' n:href='Caravan:showAll'>MODELY</a>
+                <a id="od" class='menu' n:href='Caravan:showAll'>{_messages.menu.a}</a>
                 <!--                <div id="modely" class="submenu" style="margin-left:-40px;">
                                     <img src="{$basePath}/images/web/submenu.gif">
                                     <ul>
@@ -21,67 +17,40 @@
                                     </ul>
                                 </div>-->
             </td>
-            <td onmouseover="submenu('recenze');" onmouseout="hidesubmenu('recenze');">
-                <a class='menu' n:href='Recenze:'>RECENZE</a>
+            <td  onmouseover="submenu('recenze');" onmouseout="hidesubmenu('recenze');">
+                <a id="ec" class='menu' n:href='Recenze:'>{_messages.menu.b}</a>
             </td>
-            <td onmouseover="submenu('nabidka');" onmouseout="hidesubmenu('nabidka');">
-                <a class='menu' n:href='Caravan:showAll'  >NABÍDKA MINIKARAVANŮ</a>
-            </td>
+            <!--            <td onmouseover="submenu('nabidka');" onmouseout="hidesubmenu('nabidka');">
+                            <a id="kl" class='menu' n:href='Caravan:showAll'  >SKLADOVÁ NABÍDKA</a>
+                        </td>-->
             <td onmouseover="submenu('novinky');" onmouseout="hidesubmenu('novinky');">
-                <a class='menu' n:href='Article:showAll'>NOVINKY A ČLÁNKY</a>
-                <div id="novinky" class="submenu">
-                    <img src="{$basePath}/images/web/submenu.gif">
-                    <ul>
-                        <li class='menu'><a class="menu" n:href="Article:showAll 'news'">> Novinky</a></li>
-                        <li class='menu' style="border:0;"><a class="menu" n:href="Article:showAll 'articles'">> Články</a></li>
-                    </ul>
-                </div>
+                <a id="kt" class='menu' n:href='Article:showAll'>{_messages.menu.c}</a>
+                <!--                <div id="novinky" class="submenu">
+                                    <img src="{$basePath}/images/web/submenu.gif">
+                                    <ul>
+                                        <li class='menu'><a class="menu" n:href="Article:showAll 'news'">> Novinky</a></li>
+                                        <li class='menu' style="border:0;"><a class="menu" n:href="Article:showAll 'articles'">> Články</a></li>
+                                    </ul>
+                                </div>-->
             </td>
             <td onmouseover="submenu('kontakt');" onmouseout="hidesubmenu('kontakt');">
-                <a class='menu' n:href='Kontakt:'>KONTAKT</a>
+                <a id="on" class='menu' n:href='Kontakt:'>{_messages.menu.d}</a>
             </td>
             <td onmouseover="submenu('shop');" onmouseout="hidesubmenu('shop');">
-                <a class='menu' n:href='Shop:'>E-SHOP</a>
+                <a id="-s" class='menu' n:href='Shop:'>{_messages.menu.e}</a>
             </td>
             <td onmouseover="submenu('vystavy');" onmouseout="hidesubmenu('vystavy');">
-                <a class='menu' n:href='Vystavy:'>VÝSTAVY</a>
+                <a id="ýs" class='menu' n:href='Article:vystavy'>{_messages.menu.f}</a>
             </td>
             <td onmouseover="submenu('dealer');" onmouseout="hidesubmenu('dealer');">
-                <a class='menu' n:href='Dealer:'>DEALERSKÁ SÍŤ</a>
-=======
-                <a class='menu' href='rozcestnik.php'>MODELY</a>
-<!--                <div id="modely" class="submenu" style="margin-left:-40px;">
-                    <img src="{$basePath}/images/web/submenu.gif">
-                    <ul>
-                        <li><a>a</a></li>
-                        <li><a>b</a></li>
-                    </ul>
-                </div>-->
-            </td>
-            <td onmouseover="submenu('recenze');" onmouseout="hidesubmenu('recenze')">
-                <a class='menu' href=''>RECENZE</a>
-            </td>
-            <td onmouseover="submenu('nabidka');" onmouseout="hidesubmenu('nabidka')">
-                <a class='menu' n:href='Caravan:showAll'  >NABÍDKA MINIKARAVANŮ</a>
-            </td>
-            <td onmouseover="submenu('novinky');" onmouseout="hidesubmenu('novinky')">
-                <a class='menu' href=''>NOVINKY A ČLÁNKY</a>
-            </td>
-            <td onmouseover="submenu('kontakt');" onmouseout="hidesubmenu('kontakt')">
-                <a class='menu' href=''>KONTAKT</a>
-            </td>
-            <td onmouseover="submenu('shop');" onmouseout="hidesubmenu('shop')">
-                <a class='menu' href=''>E-SHOP</a>
-            </td>
-            <td onmouseover="submenu('vystavy');" onmouseout="hidesubmenu('vystavy')">
-                <a class='menu' href=''>VÝSTAVY</a>
-            </td>
-            <td onmouseover="submenu('dealer');" onmouseout="hidesubmenu('dealer')">
-                <a class='menu' href=''>DEALERSKÁ SÍŤ</a>
->>>>>>> origin/master
+                <a id="ea" class='menu' n:href='Dealer:'>{_messages.menu.g}</a>
             </td>
         </tr>
+        <div style="position: absolute; font-size: 13px; top:15px; right: 20px ">
+            <a n:href="changeLocale!, cs" style="color: black"><img src="{$basePath}/images/vlajka21.png" alt="Český jazyk"></a>
+            <a n:href="changeLocale!, de" style="color: black"><img src="{$basePath}/images/vlajka22.png" alt="Německý jazyk"></a>
+        </div>
     </table>
 </header>
 <div class='background1'></div>
-<div class='background2'></div>
+<div class='background2'></div> 

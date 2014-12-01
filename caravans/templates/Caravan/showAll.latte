@@ -1,40 +1,51 @@
 {* Latte template *}
 
 {block content}
-<<<<<<< HEAD
-<h1 n:block="title" style="margin-left:5px">Nabídka minikaravanů - TODO ZMenšování obrázků</h1>
+<h1 style="margin-left:5px">{block title}{_messages.caravansAll.title}{/block}
+    <span style="float:right; font-size: 12px"><b>{_messages.caravansAll.download}: </b><br>
+        {if $lang == "de_DE"}
+            <a href="/files/Minikaravan C6_tech.datei.pdf" target="_blank">Minikaravan C6_tech.datei</a><br>
+            <a href="/files/Minikaravan C6_Preisliste.pdf" target="_blank">Minikaravan C6_Preisliste</a><br>
+            <a href="/files/Minikaravan C1_preisliste+tech.datei.pdf" target="_blank">Minikaravan C1_preisliste+tech.datei</a>
+            {else}
+                <a href="/files/Ceník_C6.pdf" target="_blank">ceník karavanu C6</a><br>
+                <a href="/files/C1-ceník+tech.data.pdf" target="_blank">C1-ceník+tech.data</a><br>
+                <a href="/files/C6-tech.data.pdf" target="_blank">C6-tech.data</a>
+        {/if}
+        </span>
+</h1>
 
 <section class="whitefromgrey rozcestnik">
-    {var $x=1}
-    {foreach $caravans as $caravan}
-        {if $x==3}
-            <article style="border:0;">
-                {var $x=1}
-            {else}
-                <article>    
-                    {var $x=$x+1}
-                {/if}
+    {if count($caravans) == 0}
+        <div style="text-align: center; min-height: 400px">
+            {_messages.commons.sorry}
+        </div>
+    {else}
+        {foreach $caravans as $caravan}
+            <article>
+                <h4>{$caravan->znacka.' '.$caravan->typ}</h4>
+                <div class="img">
+                    <img src="{$galleryPath.$caravan->hlavni_obrazek}">
+                </div>
+                <div class="text">
+                    <b>{_messages.caravan.price}:
+                        {if $lang == 'cs_CZ'}
+                        {$caravan->cena + ($caravan->cena*0.21)|number:0:', ':' '} Kč
+                        {else}
+                            €{$caravan->cena + ($caravan->cena*0.21)|number:0:', ':' '}
+                            {/if}
+                        </b><br>
+                        
+                    <b>{_messages.caravan.size}: </b>{$caravan->delka.' x '.$caravan->sirka.' x '.$caravan->vyska.'cm'}<br>
+                    <b>{_messages.caravan.totalWeight}: </b>{$caravan->hmotnost_p}kg
 
-                <img src="{$caravan->hlavni_obrazek}">
-                <h4>{$caravan->znacka.''.$caravan->typ}</h4>
-                <p>{$caravan->popis}</p>
-                <a class="button"  n:href="Caravan:view $caravan->id_karavan">Více info ></a>
+                    <p>{*$caravan->popis|substr:0, 100}{if $caravan->popis != null}...{/if*}</p>
+                </div>
+                <a class="button" n:href="Caravan:view $caravan->id_karavan, $caravan->znacka.' '.$caravan->typ">{_messages.caravansAll.button} ></a>
+                {if $caravan->eshop_link != null}
+                    <a href="{$caravan->eshop_link}" target="_blank" style="margin-left: 30px;"><b>Přejít na eshop</b></a>
+                {/if}
             </article>
         {/foreach}
-=======
-<h1 n:block="title">Nabídka minikaravanů - TODO ZMenšování obrázků</h1>
-
-<section class="whitefromgrey rozcestnik">
-    {var $counter = 1}
-    {foreach $caravans as $caravan}
-        <article>
-            <img src="{$caravan->hlavni_obrazek}">
-            <h4>{$caravan->znacka.''.$caravan->typ}</h4>
-            <p>ahoj jak se vede a co to tu máme? </p>
-            <button onclick="window.location = 'detail.php';">Více info ></button>
-        </article>
-
-    {/foreach}
->>>>>>> origin/master
+    {/if}
 </section>
-{/block}

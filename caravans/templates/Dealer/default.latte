@@ -1,6 +1,13 @@
 {* Latte template *}
 
 {block content}
-<section class="whitefromgrey" style="height: 500px">
-    <div style="text-align: center;width: 100%">Omlouváme se, ale tato stránka je momentálně ve výstavbě<br>Děkujeme za pochopení</div>
-</section>
+<h1>
+    {block title}
+    {_messages.menu.g}
+    {/block}
+   
+</h1>
+<div class="whitefromgrey">
+    <div style="text-align: center; min-height: 400px">
+       {_messages.dealer.info|noescape}</div>
+</div>
