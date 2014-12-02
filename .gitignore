@@ -1,11 +1,16 @@
 log/*
 temp/*
 vendor/*
+www/captcha/*
+www/moxiemanager/*
+www/tinymce/*
+www/adminer/*
+www/fonts/*
 !vendor/others
 
 .DS_Store
 !.gitignore
 !.htaccess
 !web.config
-app/config/config.local.neon
+caravans/config/config.neon
 /nbproject/private/
