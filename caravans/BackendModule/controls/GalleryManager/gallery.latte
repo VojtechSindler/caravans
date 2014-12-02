@@ -1,0 +1,28 @@
+{* Latte template *}
+
+{block content}
+
+
+<h2>Hlavní obrázek</h2>
+{if $mainImage != false}
+<img src="{$galleryPath."thumbs/".$mainImage->nazev}" border="1">
+<a n:href="deleteMainImage! imageName=>$mainImage->nazev, imageId=>$mainImage->id_foto" style="display: block">Smazat</a>
+{/if}
+<br>
+<h2>Další obrázky</h2>
+<table>
+        {var $counter = 1}
+        {foreach $images as $image}
+            {if $counter == $columns + 1}
+               <tr> 
+            {/if}
+                   <td><img src="{$galleryPath."thumbs\\".$image->nazev}">
+                       <a n:href="deleteImage! imageName=>$image->nazev, imageId=>$image->id_foto" style="display: block">Odstranit</a>
+                   </td>
+            {if $counter == $columns}
+                {$counter = 1}
+               </tr>
+         {else}{$counter++}
+             {/if}
+             {/foreach}
+</table>

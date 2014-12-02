@@ -1,0 +1,30 @@
+{* Latte template *}
+
+{block content}
+<div class="table">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>ID</th>
+            <th>Značka</th>
+            <th>Cena [Kč]</th>
+            <th>Rozměry (v,š,d)[cm]</th>
+            <th>Základ</th>
+            <th>Jazyk</th>
+            <th>Datum vložení</th>
+            <th>Akce</th>
+        </tr>
+        <tr n:foreach="$caravans as $caravan">
+            <td>{$caravan->id_karavan}</td>
+            <td>{$caravan->znacka." ". $caravan->typ}</td>
+            <td>{$caravan->cena}</td>
+            <td>{$caravan->vyska." x ".$caravan->sirka." x ".$caravan->delka}</td>
+            <td align="center">{$caravan->id_zaklad ?: "-"}</td>
+            <td align="center"><img src="{$basePath}/images/vlajka{$caravan->jazyk}.png" alt="jazyk"></td>
+            <td>{$caravan->datum_vlozeni}</td>
+            <td>
+                <a n:href="Caravan:edit idCaravan => $caravan->id_karavan, language=> $caravan->jazyk" class="ico edit">Upravit</a>
+                <a n:href="delete! idCaravan => $caravan->id_karavan, language=> $caravan->jazyk" class="ico del">Smazat</a>
+                </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,95 @@
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+*}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="ALL,FOLLOW" />
+        <meta http-equiv="Cache-Control" content="public">
+        <meta name="viewport" content="width=device-width, initial-scale=2.0, user-scalable=yes minimum-scale=0.5 maximum-scale=1.0">
+        <meta name="author" content="Vladimír Antoš, Bruno Puzják">
+        <title>{ifset #title}{include title|striptags} | {/ifset}Minikaravany.cz</title>
+        <meta name="description" content="{$description|striptags}">
+        <meta name="keywords" content="{$keywords|implode:','|striptags}">
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
+        <script src="{$basePath}/js/jquery-1.11.0.min.js"></script>
+        <script src="{$basePath}/js/lightbox.min.js"></script>
+        <link href="{$basePath}/css/lightbox.css" rel="stylesheet" />
+        <link rel="shortcut icon" href="{$basePath}/images/web/karavany.jpg" />
+        {block head}{/block}
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-54182420-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+    </head>
+
+    <body onload="menuWeb();">
+        
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/{$lang|noEscape}/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+        <script> document.documentElement.className += ' js'</script>
+
+        {include header.latte}
+
+        <section id='main' >
+            <a n:href="Homepage:">
+                <div id='caravan'>
+                    <img src='{$basePath}/images/web/karavany.jpg' style="width:90%;">
+                </div>
+            </a>
+            <div id='obsah'>
+                {include content}
+                <p class="whiteToGrey" style="text-align:center; font-size: 13px">
+                    {_messages.footer.text2}
+                </p>
+                <div id="footer">
+                    <a href="mailto:{$email}">
+                        <img src="{$basePath}/images/web/mail.png">
+                    </a>
+                    <a href="https://www.facebook.com/pages/minikaravanycz/297933980360348?ref=ts&amp;fref=ts" target="_blank">
+                        <img src="{$basePath}/images/web/face.png" >
+                    </a>
+                    <a n:href="Recenze:">
+                        <img src="{$basePath}/images/web/rate.png">
+                    </a>
+                    <a n:href="Homepage:">
+                        <img style="margin-left:0;width: 40px" src="{$basePath}/images/web/zalozkakaravany.png">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        {include footer.latte}
+        {block scripts}
+        <script src="{$basePath}/js/jquery.js"></script>
+        <script src="{$basePath}/js/netteForms.js"></script>
+        <script src="{$basePath}/js/main.js"></script>
+        <script type="text/javascript" src="{$basePath}/js/nette.ajax.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                $.nette.init();
+            });
+        </script>
+        {/block}
+    </body>
+</html>

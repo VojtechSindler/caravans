@@ -1,0 +1,38 @@
+{* Latte template *}
+
+{block content}
+<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+<span style="float:right;"><img src="{$basePath}/images/vlajka{$article->jazyk}.png"></span>
+<table class="table1" style="margin-top:30px">
+    <tr>
+        <td>
+            <h2>Nadpis:</h2></td>
+        <td>{$article->nadpis}</td>
+    </tr>
+    <tr>
+        <td><h2>Perex:</h2></td>
+        <td>{!$article->perex}</td>
+    </tr>
+    <tr>
+        <td><h2>Text:</h2></td>
+        <td colspan="4">{!$article->text}</td>
+    <tr>
+        <th colspan="4">Informace o článku:</th>
+    </tr>
+    <tr>
+        <td colspan="2">Vytvořeno:
+            {$article->datum}</td>
+        <td>
+            Uživatelem:
+            {$article->jmeno.' '.$article->prijmeni}</td>
+
+    </tr>
+    <tr>
+        <th colspan="4">Akce:</th>
+    </tr>
+    <tr>
+        <td><a n:href="edit, $article->id_clanek" class="ico edit">Edit</a></td>
+        <td> <a n:href="delete, $article->id_clanek" class="ico del">Delete</a></td>
+        <td>Facebook</td>
+    </tr>
+</table>

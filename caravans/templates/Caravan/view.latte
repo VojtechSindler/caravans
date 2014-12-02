@@ -1,0 +1,317 @@
+﻿{* Latte template *}
+
+{block content}
+<h1>
+    {block title}
+    {$caravan->znacka.' '.$caravan->typ}
+    {/block}
+    <span style="float: right; font-size: 18px; padding-top: 10px">{_messages.commons.additionDate}: {$caravan->datum_vlozeni|date:'d. m. Y'}</span>
+</h1>
+<div class="whitefromgrey detail">
+    {* levá strana *}
+    <div style="width: 320px">
+        <a href="{$galleryPath.$caravan->hlavni_obrazek}" data-lightbox="image-1">
+            <img id="mainImage" src="{$galleryPath.'thumbs\\'.$caravan->hlavni_obrazek}">
+        </a>
+        <div class="galerie">
+            {var $current = null}
+            {foreach $gallery as $picture}
+                {if $current != $picture->kategorie}
+                    <h4>{$picture->kategorie}</h4>
+                {/if}
+                {var $current = $picture->kategorie}
+                <a href="{$galleryPath.$picture->nazev}" data-lightbox="image-1" data-title="{$picture->kategorie}"
+                   style="text-decoration: none">
+                    <img src="{$galleryPath.'thumbs/'.$picture->nazev}" data-lightbox="image-1" data-title="My caption">
+                </a>
+            {/foreach}
+        </div>
+    </div>  
+    {* střed *}
+    <div>
+        <table>
+            <tr>
+                <td colspan="2">
+                    <font class="cena">
+                    {if $lang == "de_DE"}
+                        €
+                        {/if}
+                    {$caravan->cena|number:0:', ':' '},-</font>{_messages.caravan.notax}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <font style="color: red" class="cena">
+                                     {if $lang == "de_DE"}
+                        €
+                        {/if}
+                    {$caravan->cena + ($caravan->cena*0.21)|number:0:', ':' '},-</font>{_messages.caravan.tax}
+                </td>
+            </tr>
+        </table>
+
+        <table class="udaje">
+            <tr>
+                <td style="font-size:100%; font-weight: bold" colspan="2"> {_messages.caravan.technicalSpec} <hr width="180"></td>
+            </tr>
+
+            <tr>
+                <td style="width: 200px;">
+                    {_messages.caravan.size} <sup>(v,š,d)</sup> :
+                </td>
+                <td>
+                    {$caravan->vyska.' x '.$caravan->sirka.' x '.$caravan->delka.' cm'}
+                </td>
+            </tr>
+            <tr>
+                <td>{_messages.caravan.size2}: </td>
+                <td>{$caravan->nastavba_delka.' cm'}</td>
+            </tr>
+            <tr>
+                <td>
+                    {_messages.caravan.innerSize} <sup>(v,š)</sup>:
+                </td>
+                <td>
+                    {$caravan->vyska_vnitrni.' x '.$caravan->sirka_vnitrni.' cm'}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {_messages.caravan.betSize}<sup>(d,š)</sup> :
+                </td>
+                <td>
+                    {$caravan->luzko_delka.' x '.$caravan->luzko_sirka.' cm'}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {_messages.caravan.maxWeight2}:
+                </td>
+                <td>
+                    {$caravan->hmotnost_t} kg
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {_messages.caravan.maxWeight}:
+                </td>
+                <td>
+                    {$caravan->hmotnost_p} kg
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {_messages.caravan.chassis}:
+                </td>
+                <td >
+                    {$caravan->podvozek}
+                    {if $caravan->podvozek2 != null}
+                        , {$caravan->podvozek2}
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {_messages.caravan.pneu}:
+                </td>
+                <td >
+                    {$caravan->pneu}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {_messages.caravan.power}:
+                </td>
+                <td >
+                    {$caravan->napajeni}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {_messages.caravan.color}:
+                </td>
+                <td >
+                    {$caravan->barva}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {_messages.caravan.extern}:
+                </td>
+                <td >
+                    {$caravan->exterier}
+                </td>
+            </tr>
+            {if $caravan->eshop_link != null}
+                <tr>
+                    <td colspan="2" align="center"><a href="{$caravan->eshop_link}" target="_blank"><b>Přejít na eshop</b></a></td>
+                </tr>
+            {/if}
+            <tr>
+                <td colspan="2">
+                    {$caravan->popis}
+                </td>
+            </tr>
+        </table>
+
+        <table class="udaje" >
+            <tr>
+                <td style="font-size:100%; font-weight: bold" colspan="2"> {_messages.caravan.standartEquip} <hr width="160"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    {$caravan->vybava}
+                </td>
+            </tr>
+        </table>
+        <table class="udaje">
+            <tr>
+                <td style="font-size:100%; font-weight: bold" colspan="2"> {_messages.caravan.additionalEquip} <hr width="50"> 
+                    {if $lang == "de_DE"}
+                    <img id="1" src="{$basePath}/images/web/more_de.png" onclick="change('1',{$basePath.'/images/web/'}, {$lang});">
+                    {else}<img id="1" src="{$basePath}/images/web/more.png" onclick="change('1',{$basePath.'/images/web/'}, {$lang});">
+                    {/if}
+                </td>
+            </tr>
+            {if count($equipments) == 0}
+                <tr class="1 hide"><td style="color: red">{_messages.caravan.additionalEquipError}</td></tr>
+            {else}
+
+            <tr><td colspan="2" class="1 hide">
+                    <i style="margin-left: 0">{_messages.caravan.additionalEquipText|noescape}<br>
+                        <span style="color: red; margin-left: 0; font-weight: bold">{_messages.caravan.additionalEquipPriceInfo}</span></i>
+                </td></tr>
+                            {foreach $equipments as $equip}            
+                    <tr class="1 hide" onmouseover="showDialog()">
+                        <td title="{$equip->popis}">
+                            {$equip->nazev}
+                        </td>
+                        <td style="text-align: center;">{$equip->cena|number:2:'.':' '}</td>
+                        <td>
+                            {if !key_exists($equip->id_vybava, $addedEquipments)}
+                                <a n:href="calculate! idCaravan=>$caravan->id_karavan, id_equip=>$equip->id_vybava, name=>$equip->nazev, price=>$equip->cena">{_messages.caravan.additionalEquipAdd}</a>
+                            {else} <span style="color: green; font-weight: bold">{_messages.caravan.additionalEquipAdd2}</span>
+                            {/if}
+                        </td>
+                    </tr>
+                {/foreach}
+            {/if}
+        </table>
+
+        <table class="udaje" >
+            <tr>
+                <td style="font-size:100%; font-weight: bold" colspan="2"> {_messages.caravan.special} <hr width="80"> 
+                    {if $lang == "de_DE"}
+                    <img id="2" src="{$basePath}/images/web/more_de.png" onclick="change('2',{$basePath.'/images/web/'}, {$lang});">
+                    {else}
+                        <img id="2" src="{$basePath}/images/web/more.png" onclick="change('2',{$basePath.'/images/web/'}, {$lang});">
+                        {/if}
+                    </td>
+            </tr>
+            <tr class="2 hide">
+                <td colspan="2">
+                    {if count($caravan->specialni_edice) == 0}
+                        <span style="color: red">Pro tento karavan zatím není k dispozici žádná doplňková edice.</span>
+                    {else}
+                        {$caravan->specialni_edice}
+                    {/if}
+                </td>
+            </tr>
+        </table>
+        {if $children != null}
+            <div class="smallCaravanPreview udaje">
+                <div style="font-size:100%; font-weight: bold" colspan="2"> {_messages.caravan.similar} <hr width="160"></div>
+                    {foreach $children as $child}
+                    <div class="window">
+                        <h4>{$child->znacka.' '.$child->typ}</h4>
+                        <img src="{$galleryPath.'thumbs/'.$child->hlavni_obrazek}">
+                        {if $lang == "de_DE"}
+                            <b>{_messages.caravan.price}: €{$child->cena + ($child->cena*0.21)|number:0:', ':' '}</b><br>
+                           {else}
+                        <b>{_messages.caravan.price}: {$child->cena + ($child->cena*0.21)|number:0:', ':' '} Kč</b><br>
+                        {/if}
+                        <a class="button" n:href="Caravan:view $child->id_karavan, $child->znacka.' '.$child->typ" style="float: left; font-size: 12px; margin-top: 5px">{_messages.caravansAll.button} ></a>
+                    </div>
+                {/foreach}
+            </div>
+        {/if}
+    </div>
+    {* pravá strana *}
+    <div style="width:200px; border: 0;">
+        <div class="fb-like" data-href="http://www.minikaravany.cz/caravan/view/{$caravan->id_karavan}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+        <h4 class="vpravo">{_messages.caravan.right.price}</h4>
+        <div class="background" style="margin-left:0;font-size: 13px; padding: 30px 0px 30px 0px;">
+            {snippet cart}
+                {if empty($addedEquipments)}
+                    {_messages.caravan.right.text}<br><br>
+                {else}
+                    <table style="width: 100%; text-align: left; font-size: 12px">
+                        {default $sum = 0}
+                        <tr>
+                            <td>{$caravan->znacka}</td>
+                            {if $lang == "de_DE"}
+                                <td align="right" style="padding-right: 10px" colspan="2">€ {$caravan->cena|number:2:'.':' '}</td>
+                            {else}
+                            <td align="right" style="padding-right: 10px" colspan="2">{$caravan->cena|number:2:'.':' '} Kč</td>
+                            {/if}
+                        </tr>
+                        {foreach $addedEquipments as $id => $item}
+                            <tr>
+                                <td>{$item[0]}</td>
+                                {if $lang == "de_DE"}
+                                    <td align="right">€ {$item[1]|number:2:'.':' '}
+                                    {else}
+                                <td align="right" style="margin-right: 5px">{$item[1]|number:2:'.':' '} Kč
+                                {/if}<a n:href="removeEquip! idCaravan=>$caravan->id_karavan, id_equip=>$id" title="Odebrat"> X</a></td>
+                            </tr>
+                            {var $sum += $item[1]}
+                        {/foreach}
+                        <tr>
+                            <td style="font-weight: bold;">{_messages.caravan.right.equipPrice}</td>
+                            {if $lang == "de_DE"}
+                                <td align="right" style="padding-right: 10px" colspan="2">€ {$sum|number:2:'.':' '}</td>
+                            {else}
+                                <td align="right" style="padding-right: 10px" colspan="2">{$sum|number:2:'.':' '} Kč</td>
+                            {/if}
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">{_messages.caravan.right.total}</td>
+                            
+                            {if $lang == "de_DE"}
+                                <td align="right" style="padding-right: 10px" colspan="2">€ {$sum+$caravan->cena|number:2:'.':' '}</td>
+                            {else}
+                                <td align="right" style="padding-right: 10px" colspan="2">{$sum+$caravan->cena|number:2:'.':' '} Kč</td>
+                            {/if}
+                        </tr>
+                    </table>
+                {/if}
+                <!--<button style="width:50%">Spočítat</button>-->
+            {/snippet}
+        </div>
+        <div class="background" style="margin-top: 5px;margin-left: 0; height: 20px; padding: 10px 0 10px 0 ">
+            <a href="" style=" color: rgb(50,54,39); font-weight: bold">{_messages.caravan.right.conditions} >></a></div>
+        <h4 class="vpravo">{_messages.caravan.right.sendEmailTitle}</h4>
+        <div class="background"  style="margin-left:0;">
+            <span style="font-size: 13px; padding: 30px 5px 30px 5px;">{_messages.caravan.right.sendEmailText}</span>
+            {form sendEmail}
+                <table>
+                    <tr>
+                        <th>{input email}</th>
+                    </tr>
+                    <tr>
+                        <th>{input captcha}</th>
+                    </tr>
+                    <tr>
+                        <td><img src="/captcha/{$captcha}"></td>
+                    </tr>
+                    <tr>
+                        <th>{input odeslat}</th>
+                    </tr>
+                </table>
+            {/form}
+
+
+            <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+        </div>
+    </div>                       
+</div>

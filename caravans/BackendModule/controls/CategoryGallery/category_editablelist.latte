@@ -1,0 +1,19 @@
+{* Latte template *}
+
+{block content}
+{if count($categories)}
+<div class="table" style="width: 440px">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>Název</th>
+            <th width="110" class="ac">Akce</th>
+        </tr>
+        <tr n:foreach="$categories as $category">
+            <td>{$category->nazev}</td>
+            <td><a n:href="delete!, 'id' => $category->id_kategorie" class="ico del">Delete</a>
+                <a n:href="edit, $category->id_kategorie" class="ico edit">Edit</a></td>
+        </tr>
+    </table>
+    {control pagingRenderer}
+</div>
+{/if}

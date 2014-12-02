@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:/backend.sign/in
+Sitemap: http://minikaravany.cz/sitemap.xml

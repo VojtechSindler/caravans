@@ -1,0 +1,56 @@
+{* Latte template *}
+
+{block content}
+<header>
+    <table class='header' rules='all' >
+        <tr>
+            <td style='width: 50px'>
+                <a n:href='Homepage:' ><img title='{_messages.menu.home}' alt='{_messages.menu.home}' src='{$basePath}/images/web/home.gif' ></a>
+            </td>
+            <td onmouseover="submenu('modely');" onmouseout="hidesubmenu('modely')">
+                <a id="od" class='menu' n:href='Caravan:showAll'>{_messages.menu.a}</a>
+                <!--                <div id="modely" class="submenu" style="margin-left:-40px;">
+                                    <img src="{$basePath}/images/web/submenu.gif">
+                                    <ul>
+                                       <li class='menu'><a style='menu'>a</a></li>
+                                        <li class='menu' style="border:0;"><a style='menu'>b</a></li>
+                                    </ul>
+                                </div>-->
+            </td>
+            <td  onmouseover="submenu('recenze');" onmouseout="hidesubmenu('recenze');">
+                <a id="ec" class='menu' n:href='Recenze:'>{_messages.menu.b}</a>
+            </td>
+            <!--            <td onmouseover="submenu('nabidka');" onmouseout="hidesubmenu('nabidka');">
+                            <a id="kl" class='menu' n:href='Caravan:showAll'  >SKLADOVÁ NABÍDKA</a>
+                        </td>-->
+            <td onmouseover="submenu('novinky');" onmouseout="hidesubmenu('novinky');">
+                <a id="kt" class='menu' n:href='Article:showAll'>{_messages.menu.c}</a>
+                <!--                <div id="novinky" class="submenu">
+                                    <img src="{$basePath}/images/web/submenu.gif">
+                                    <ul>
+                                        <li class='menu'><a class="menu" n:href="Article:showAll 'news'">> Novinky</a></li>
+                                        <li class='menu' style="border:0;"><a class="menu" n:href="Article:showAll 'articles'">> Články</a></li>
+                                    </ul>
+                                </div>-->
+            </td>
+            <td onmouseover="submenu('kontakt');" onmouseout="hidesubmenu('kontakt');">
+                <a id="on" class='menu' n:href='Kontakt:'>{_messages.menu.d}</a>
+            </td>
+            <td onmouseover="submenu('shop');" onmouseout="hidesubmenu('shop');">
+                <a id="-s" class='menu' n:href='Shop:'>{_messages.menu.e}</a>
+            </td>
+            <td onmouseover="submenu('vystavy');" onmouseout="hidesubmenu('vystavy');">
+                <a id="ýs" class='menu' n:href='Article:vystavy'>{_messages.menu.f}</a>
+            </td>
+            <td onmouseover="submenu('dealer');" onmouseout="hidesubmenu('dealer');">
+                <a id="ea" class='menu' n:href='Dealer:'>{_messages.menu.g}</a>
+            </td>
+        </tr>
+        <div style="position: absolute; font-size: 13px; top:15px; right: 20px ">
+            <a n:href="changeLocale!, cs" style="color: black"><img src="{$basePath}/images/vlajka21.png" alt="Český jazyk"></a>
+            <a n:href="changeLocale!, de" style="color: black"><img src="{$basePath}/images/vlajka22.png" alt="Německý jazyk"></a>
+        </div>
+    </table>
+</header>
+<div class='background1'></div>
+<div class='background2'></div> 

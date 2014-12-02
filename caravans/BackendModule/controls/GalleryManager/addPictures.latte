@@ -1,0 +1,38 @@
+{* Latte template *}
+
+{block content}
+{form addImagesForm}
+    <table class="table1">
+                        <tr>
+            <th colspan="6">Galerie</th>
+        </tr>
+    <tr n:if="$form->ownErrors" class="msg msg-error" style="">
+        <td n:foreach="$form->ownErrors as $error" colspan="4"><p>{$error}</p></td>
+    </tr>
+        <tr>
+            <td>{label mainImage /}</td>
+            <td colspan="6">{input mainImage}</td>
+        </tr>  
+        <tr>
+            <td>{label kategorie /}</td>
+            <td>{input kategorie class=>"field"}</td>
+        </tr>
+                <tr>
+            <td>{label images /}</td>
+            <td colspan="6">{input images}</td>
+        </tr> 
+        <tr>
+            <td colspan="6">
+                <p class="notice">
+                    Nikdy nevkládej více obrázků najednou, skript pak může být vykonáván příliš dlouho.
+                    Ideální je maximálně 4 - 5 obrázků najednou.<br>Důležitá je také jejich velikost.
+                    Systém nedovolí nahrát obrázek větší než <b>{$maxImageSize} kB</b>
+                </p>
+            </td>
+        </tr>
+                    <tr>
+            <td></td>
+            <td>{input odeslat class=>"button"}</td>
+        </tr>
+</table>
+{/form}

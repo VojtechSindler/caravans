@@ -1,0 +1,28 @@
+{* Latte template *}
+
+{block scontent}
+<table>
+    <tr>
+        <td>Počet článků: </td>
+        <td>{$statistics["clanky"]} ({$size["clanky"]} KB)</td>
+    </tr>
+    <tr>
+        <td>Poslední vložení článku: </td>
+        <td>{$lastArticle->datum_vytvoreni|date:'d.m.Y H:i'}</td>
+    </tr>
+</table>
+    <br>
+    <table>
+    <tr>
+        <td>Počet karavanů: </td>
+        <td>{$statistics["karavany"]} ({$size["karavany"]} KB)</td>
+    </tr>
+    <tr>
+        <td>Poslední vložení karavanu: </td>
+        <td>{$lastCaravan->datum_vlozeni|date:'d.m.Y H:i'}</td>
+    </tr>
+            <tr style='height: 50px'>
+        <td>Počet obrázků: </td>
+        <td>{$statistics["galerie"]} ({$gallerySize} MB)</td>
+    </tr>
+    </table>

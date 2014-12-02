@@ -1,0 +1,33 @@
+{* Latte template *}
+
+{block header}
+<div id="header" >
+	<div class="shell">
+		<!-- Logo + Top Nav -->
+		<div id="top">
+			<h1><a n:href="Homepage:">CaravanAdmin</a></h1>
+			<div id="top-navigation">
+				Vítejte <strong>{$userName}</strong>
+				<span>|</span>
+				<a n:href="Options:" id='ení'>Nastavení</a>
+				<span>|</span>
+				<a n:href="Sign:out">Odhlášení</a>
+			</div>
+		</div>
+		<!-- End Logo + Top Nav -->
+		
+		<!-- Main Nav -->
+		<div id="navigation">
+			<ul>
+			    <li><a id="trá" n:href="Homepage:" class="menu active"><span>Domů</span></a></li>
+			    <li><a id="ara" n:href="Caravan:add" class="menu"><span>Vytvořit karavan</span></a></li>
+			    <li><a id="ava" n:href="Caravan:show"><span>Výpis karavanů</span></a></li>
+                            <li><a id="lán" n:href="Article:add"><span>Vytvořit článek</span></a></li>
+                            <li><a id="nků" n:href="Article:"><span>Seznam článků</span></a></li>
+			    <li><a id="sys" n:href="SettingsGallery:"><span>Nastavení galerie</span></a></li>
+                            <li><a href="http://{$website}" target="blank"><span>{$website}</span></a></li>
+			</ul>
+		</div>
+		<!-- End Main Nav -->
+	</div>
+</div>

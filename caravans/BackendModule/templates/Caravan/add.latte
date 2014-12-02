@@ -1,0 +1,118 @@
+{* Latte template *}
+
+{block content}
+
+{form addCaravanForm}
+    <div n:if="$form->ownErrors" class="msg msg-error" >
+        <p n:foreach="$form->ownErrors as $error">{$error}</p>
+    </div>
+    <table class="table1">
+                <tr>
+            <td>{label id_zaklad /}</td>
+            <td colspan="5">{input id_zaklad class => 'field'}</td>
+        </tr>
+           <tr>
+            <td>{label jazyk /}</td>
+            <td colspan="5">{input jazyk class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label id_origin /}</td>
+            <td colspan="5">{input id_origin class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label znacka /}</td>
+            <td>{input znacka class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label typ /}</td>
+            <td>{input typ class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label cena /}</td>
+            <td>{input cena class => 'small-field'} Kč</td>
+        </tr>
+        <tr>
+            <td>{label exterier /}</td>
+            <td>{input exterier class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label podvozek /}</td>
+            <td>{input podvozek class => 'field'}</td>
+            <td>{label podvozek2 /}</td>
+            <td>{input podvozek2 class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label pneu /}</td>
+            <td>{input pneu class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label napajeni /}</td>
+            <td>{input napajeni class => 'field'}</td>
+        </tr>
+        <tr>
+                <td>{label barva /}</td>
+            <td>{input barva class => 'field'}</td>
+        </tr>
+                        <tr>
+                <td>{label eshop_link /}</td>
+            <td>{input eshop_link class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label popis /}</td>
+            <td colspan="6">{input popis}</td>
+        </tr>
+                <tr>
+            <td>{label vybava /}</td>
+            <td colspan="6">{input vybava}</td>
+        </tr>
+        <tr>
+            <th colspan="6">Rozměry [cm]</th>
+        </tr>  
+        <tr>
+            <td>{label vyska /}</td>
+            <td>{input vyska class => 'small-field'} cm</td>
+            
+            <td>{label sirka /}</td>
+            <td>{input sirka class => 'small-field'} cm</td>
+
+            <td>{label delka /}</td>
+            <td>{input delka class => 'small-field'} cm</td>
+        </tr>
+        <tr>
+            <td>{label nastavba_delka /}</td>
+            <td>{input nastavba_delka class => 'small-field'} cm</td>
+        </tr>
+        <tr>
+            <td>{label vyska_vnitrni /}</td>
+            <td>{input vyska_vnitrni class => 'small-field'} cm</td>
+            <td>{label sirka_vnitrni /}</td>
+            <td>{input sirka_vnitrni class => 'small-field'} cm</td>
+        </tr>
+        <tr>
+            <td>{label luzko_delka /}</td>
+            <td>{input luzko_delka class => 'small-field'} cm</td>
+            <td>{label luzko_sirka /}</td>
+            <td>{input luzko_sirka class => 'small-field'} cm</td>
+        </tr>
+
+        <tr>
+            <th colspan="6">Hmotnost [kg]</th>
+        <tr>
+            <td>{label hmotnost_p /}</td>
+            <td>{input hmotnost_p class => 'small-field'} kg</td>
+            <td>{label hmotnost_t /}</td>
+            <td>{input hmotnost_t class => 'small-field'} kg</td>
+        </tr>
+
+
+        <tr>
+            <td>{label specialni_edice/}</td>
+            <td colspan="6">{input specialni_edice class => 'field'}</td>
+        </tr>
+        
+        <tr>
+            <td></td>
+            <td>{input odeslat class=>"button"}</td>
+        </tr>
+    </table>
+{/form}

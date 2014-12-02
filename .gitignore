@@ -6,6 +6,7 @@ www/moxiemanager/*
 www/tinymce/*
 www/adminer/*
 www/fonts/*
+www/gallery/*
 !vendor/others
 
 .DS_Store

@@ -1,0 +1,22 @@
+{* Latte template *}
+
+{block content}
+{form changePassword}
+    <div n:if="$form->ownErrors" class="msg msg-error" >
+        <p n:foreach="$form->ownErrors as $error">{$error}</p>
+    </div>
+    <table class="table1">
+        <tr>
+            <td>{label heslo /}</td>
+            <td>{input heslo class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label heslo2 /}</td>
+            <td>{input heslo2 class => 'field'}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>{input send class=>"button"}</td>
+        </tr>
+    </table>
+{/form}
