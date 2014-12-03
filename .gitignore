@@ -1,6 +1,7 @@
 log/*
 temp/*
 vendor/*
+nbproject/*
 www/captcha/*
 www/moxiemanager/*
 www/tinymce/*
