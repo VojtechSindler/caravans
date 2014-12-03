@@ -9,10 +9,10 @@ www/adminer/*
 www/fonts/*
 www/gallery/*
 !vendor/others
+.htaccess
+web.config
 
 .DS_Store
 !.gitignore
-!.htaccess
-!web.config
 caravans/config/config.neon
 /nbproject/private/
