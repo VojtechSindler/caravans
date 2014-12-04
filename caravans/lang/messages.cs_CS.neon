@@ -1,6 +1,5 @@
 homepage:
 	title: 'Vítejte ve světe MINIKARAVANŮ'
-	sorry: ''
 	text1: 'Zabýváme se prodejem a výrobou stylových malých karavanů, souhrnně označovaných jako minikaravany, které si získávají stále větší oblibu mezi českými příznivci karavaningu a cestování vůbec. Díky svému úzkému zaměření právě na malé karavany jsme největším dodavatelem těchto typů karavanů v České republice.'
 	text2: 'Náš sortiment zahrnuje jak obytné minikaravany pro klasické kempování, tak i speciálně upravené verze pro cyklisty, horolezce nebo třeba rybáře. Pro majitele tříkolek vyrábíme  skutečně malý minikaravan, který je určen speciálně za tyto stroje nebo za čtyřkolky.'
 	text3: 'Výhodou minikaravanů je především to, že mohou být taženy i malými či nízkovýkonovými automobily, stejně jako čtyřkolkami či motorkářskými tříkolkami. Vzhledem ke své nízké váze a aerodynamickému tvaru mají minikaravany jen malý vliv na zvýšení spotřeby tažného vozidla, přitom však poskytují dostatečný komfort dvěma až třem dospělým osobám. Díky povolenému rychlostnímu limitu u většiny našich modelů není problémem ani cestovní rychlost 130 km/hod, což ocení především ti, kteří se vydají cestovat na delší trasy.'
@@ -31,7 +30,7 @@ caravan:
 	totalWeight: 'Celková hmotnost'
 	innerSize: 'Vnitřní rozměry'
 	maxWeight: 'Pohotovostní hmotnost'
-	maxWeight2: 'Nejvyšší technicky přípustná hmotnost'
+	maxWeight2: 'Nejvyšší tech. přípustná hmot.'
 	extern: 'Exteriér'
 	tax: 's DPH'
 	notax: 'bez DPH'
@@ -50,6 +49,7 @@ caravan:
 	additionalEquipText: 'Najeď kurzorem na libovolný řádek a zobrazí se ti popis. Kliknutím na odkaz <span style="color: darkblue">Přidat</span>, umístíš položku do kalkulace (v pravém sloupci stránky nahoře).'
 	special: 'Speciální edice'
 	similar: 'Podobné karavany'
+	eshopLink: 'Přejít na eshop'
 	right:
 		price: 'Vaše cena'
 		text: 'Vyber doplňkovou výbavu kliknutím na tlačítko Přidat u příslušné položky.'
@@ -78,8 +78,8 @@ contact:
 	title: 'Kontaktní údaje na naši firmu'
 	id: 'IČO'
 	id2: 'DIČ'
-	address: 'Provozovna firmy'
-	address2: 'Sídlo firmy'
+	address: 'Adresa kanceláře'
+	address2: 'Fakturační adresa'
 contactForm:
 	title: 'Kontaktujte nás'
 	name: 'Jméno'
@@ -98,3 +98,7 @@ develop:
 footer:
 	text: 'Všechna práva vyhrazena'
 	text2: 'Obytné minikaravany od MINIKARAVANY.CZ představují velmi populární alternativu jak spojit rychlé, ekonomické a pohodlné cestování.'
+units:
+	height: 'v'
+	width: 'š'
+	length: 'd'

@@ -34,20 +34,28 @@
                 <td colspan="2">
                     <font class="cena">
                     {if $lang == "de_DE"}
-                        €
-                        {/if}
-                    {$caravan->cena|number:0:', ':' '},-</font>{_messages.caravan.notax}
+                        € {$caravan->cena_bez_DPH*$caravan->exchange_rate|number:0:', ':' '},-</font>{_messages.caravan.notax}
+                    {else}
+                    {$caravan->cena_bez_DPH*$caravan->exchange_rate|number:0:', ':' '},-</font>{_messages.caravan.notax}
+                    {/if}
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
                     <font style="color: red" class="cena">
-                                     {if $lang == "de_DE"}
-                        €
-                        {/if}
-                    {$caravan->cena + ($caravan->cena*0.21)|number:0:', ':' '},-</font>{_messages.caravan.tax}
+                        {if $lang == "de_DE"}
+                            € {$caravan->cena*$caravan->exchange_rate|number:0:', ':' '},-</font>{_messages.caravan.tax}
+                        {else}
+                    {$caravan->cena*$caravan->exchange_rate|number:0:', ':' '},-</font>{_messages.caravan.tax}
+                    {/if}
                 </td>
             </tr>
+            {if $lang == "de_DE"}
+                <tr>
+                    <td colspan="2" align="center" style="color: red">MwSt. 21% (Tschechische MwSt.)</td>
+                </tr>
+            {/if}
+            <tr></tr>
         </table>
 
         <table class="udaje">
@@ -57,7 +65,7 @@
 
             <tr>
                 <td style="width: 200px;">
-                    {_messages.caravan.size} <sup>(v,š,d)</sup> :
+                    {_messages.caravan.size} <sup>({_messages.units.height},{_messages.units.width}, {_messages.units.length})</sup> :
                 </td>
                 <td>
                     {$caravan->vyska.' x '.$caravan->sirka.' x '.$caravan->delka.' cm'}
@@ -69,7 +77,7 @@
             </tr>
             <tr>
                 <td>
-                    {_messages.caravan.innerSize} <sup>(v,š)</sup>:
+                    {_messages.caravan.innerSize} <sup>({_messages.units.height},{_messages.units.width})</sup>:
                 </td>
                 <td>
                     {$caravan->vyska_vnitrni.' x '.$caravan->sirka_vnitrni.' cm'}
@@ -77,7 +85,7 @@
             </tr>
             <tr>
                 <td>
-                    {_messages.caravan.betSize}<sup>(d,š)</sup> :
+                    {_messages.caravan.betSize}<sup>({_messages.units.length},{_messages.units.width})</sup> :
                 </td>
                 <td>
                     {$caravan->luzko_delka.' x '.$caravan->luzko_sirka.' cm'}
@@ -144,7 +152,7 @@
             </tr>
             {if $caravan->eshop_link != null}
                 <tr>
-                    <td colspan="2" align="center"><a href="{$caravan->eshop_link}" target="_blank"><b>Přejít na eshop</b></a></td>
+                    <td colspan="2" align="center"><a href="{$caravan->eshop_link}" target="_blank"><b>{_messages.caravan.eshopLink}</b></a></td>
                 </tr>
             {/if}
             <tr>
@@ -226,9 +234,9 @@
                         <h4>{$child->znacka.' '.$child->typ}</h4>
                         <img src="{$galleryPath.'thumbs/'.$child->hlavni_obrazek}">
                         {if $lang == "de_DE"}
-                            <b>{_messages.caravan.price}: €{$child->cena + ($child->cena*0.21)|number:0:', ':' '}</b><br>
+                            <b>{_messages.caravan.price}: € {$child->cena*$child->exchange_rate|number:0:', ':' '}</b><br>
                            {else}
-                        <b>{_messages.caravan.price}: {$child->cena + ($child->cena*0.21)|number:0:', ':' '} Kč</b><br>
+                        <b>{_messages.caravan.price}: {$child->cena*$child->exchange_rate|number:0:', ':' '} Kč</b><br>
                         {/if}
                         <a class="button" n:href="Caravan:view $child->id_karavan, $child->znacka.' '.$child->typ" style="float: left; font-size: 12px; margin-top: 5px">{_messages.caravansAll.button} ></a>
                     </div>
