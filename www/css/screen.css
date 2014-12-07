@@ -34,6 +34,7 @@
     border-color: gray;
 }
 body{
+    min-width: 1180px;
     padding: 0;
     margin: 0;
     background-image: url('../images/web/background.jpg');
@@ -156,6 +157,8 @@ header .login a{
     margin: 0 auto;
     margin-top:-930px;
     width: 1000px;
+    padding-left: 90px;
+    padding-right: 90px;
     min-height: 600px;
 }
 
