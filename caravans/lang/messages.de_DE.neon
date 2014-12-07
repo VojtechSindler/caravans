@@ -1,6 +1,5 @@
 homepage:
 	title: 'Willkommen in der Welt der Minicaravans'
-	sorry: '<b style="font-size: 20px; text-transform: uppercase">Wir entschuldigen uns für den Webausfall von 19. bis 21. November. Danke für Ihre Verständnis.</b>'
 	text1: 'Unsere Firma produziert und verkauft stylische kleine Wohnwagen, die als Minicaravans genannt sind. Minicaravans sind immer häufiger auf den Straßen zu sehen und sind immer beliebter  von den Caravaning Fans und von den Touristen durch den ganzen Europa. Unsere Firma spezialisiert sich nur auf die kleine Wohnwagen und durch diese Spezialisation sind wir der Größte Produzent in der Tschechischen Republik.'
 	text2: 'Unser Sortiment besteht sich nicht nur von Wohnwagen für klassisches Camping, aber auch von speziell bearbeiteten Typen für die Radfahrer, Bergsteiger oder Fischer. Für die Quadfahrer bieten wir einem wirklich kleinen Caravan an, der speziell für ein Quad geeignet ist.'
 	text3: 'Der Vorteil der Minicaravans ist vor allem die hohe Mobilität. Durch ihren kleinen Gewicht und den aerodynamischen Form können die Caravans auch zum Quad oder zu den Wagen mit der niedrigen Leistung angehängt werden. Der Einfluss an Kraftstoffverbrauch ist aus diesen Gründen sehr klein. Obwohl ist der Aussicht des Caravans sehr kompakt, bietet sehr bequemen Innenraum. Nicht der letzte Vorteil ist die maximalle Geschwindigkeit von 130 km/h, also man kann mit dem Caravan auch die lange Reisen auf der Autobahn verbringen.'
@@ -25,12 +24,12 @@ caravansAll:
 	button: 'Mehr infos'
 caravan:
 	price: 'Preis'
-	size: 'Masse'
-	size2: 'Aufbaumasse'
+	size: 'Gesamtmaße'
+	size2: 'Länge ohne Deichsel'
 	totalWeight: 'Gewicht'
-	innerSize: 'Vnitřní rozměry'
-	maxWeight: 'Maximal zulässiges Höchstgewicht'
-	maxWeight2: 'Technisch zulässige Gesamtgewicht'
+	innerSize: 'Innenmaße'
+	maxWeight: 'Leergewicht'
+	maxWeight2: 'Zul. Gesamtgewicht'
 	extern: 'Exterieur'
 	tax: 'mit MwSt.'
 	notax: 'ohne MwSt.'
@@ -49,6 +48,7 @@ caravan:
 	additionalEquipText: 'Schieben Sie den Cursor nach beliebige Zeile der Sonderausstattung und die Beschreibung zeigt sich an. Clicken Sie bitte auf Link „Hinzufügen“ und damit platzieren Sie den Betrag in der Berechnung. (oben in der rechten Kolumne der Seite)'
 	special: 'Spezielle Edition'
 	similar: 'Ähnliche Wohnwagen'
+	eshopLink: 'Zum E-shop'
 	right:
 		price: 'Ihre Preis'
 		text: 'Sonderausstatung wählen mit clicken auf die Taste Hinzfügen bei von Ihr gewählte Ausstattung'
@@ -74,8 +74,8 @@ contact:
 	title: 'Kontakt auf unsere Firma'
 	id: 'Firmen-Ident.-Nr.'
 	id2: 'Ust.-Ident.-Nr.'
-	address: 'Die Firmenbetrieb'
-	address2: 'Firmensitz'
+	address: 'Büro Adresse'
+	address2: 'Rechnung Adresse'
 contactForm:
 	title: 'Kontaktieren Sie uns'
 	name: 'Name'
@@ -94,3 +94,7 @@ develop:
 footer:
 	text: 'Alle rechte vorbehalten'
 	text2: 'Die Wohnwagen von MINIKARAVANY.CZ präsentiert sehr populäre Alternative für schnelles, sparsames und bequemes Reisen.'
+units:
+	height: 'Hö'
+	width: 'Br'
+	length: 'Lä'

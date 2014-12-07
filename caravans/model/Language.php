@@ -34,4 +34,10 @@ class Language {
         if($int == self::DE)
             return "de";
     }
+    
+    public static function convertToCountry($int){
+        if($int == self::CS)
+            return "Česká republika";
+        else return "Německo";
+    }
 }

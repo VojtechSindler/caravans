@@ -1,5 +1,12 @@
 {* Latte template *}
 
 {block content}
+
+<h2>Správce daní</h2>
+{control moneyControl}
+{control moneyControl:Table}
+<div style="margin-bottom: 40px"></div>
+
+<h2>Vytvořit kategorii galerie</h2>
 {control categoryGallery}
 {control categoryGallery:EditableListCategories}

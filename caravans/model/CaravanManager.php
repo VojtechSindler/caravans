@@ -74,8 +74,8 @@ class CaravanManager extends \Caravans\Model\ModelContainer {
 
     public function getCaravan($id, $lang = null) {
         if($lang != null)
-        return $this->database->query("SELECT k.`id_karavan`, `id_zaklad`, `znacka`, k.`jazyk`, `typ`, `cena`, `sirka`, 
-            `delka`, `vyska`, `nastavba_delka`,
+        return $this->database->query("SELECT k.`id_karavan`, `id_zaklad`, `znacka`, k.`jazyk`, `typ`, `cena`, cena / (1 + tax_rate/100) as `cena_bez_DPH`, `exchange_rate`, `tax_rate`,
+            `sirka`, `delka`, `vyska`, `nastavba_delka`,
             `vyska_vnitrni`, `sirka_vnitrni`, `luzko_delka`,`luzko_sirka`,`hmotnost_p`,
             `hmotnost_pb`,`hmotnost_c`,`hmotnost_t`,`hmotnost_max`,`podvozek`,
             `exterier`,`podvozek2`,`pneu`,`napajeni`,`datum_vlozeni`,`vybava`,
@@ -84,8 +84,9 @@ class CaravanManager extends \Caravans\Model\ModelContainer {
             LEFT JOIN `hlavni_obrazky_karavany` as hok ON  hok.`id_karavan` = k.`id_karavan` AND hok.jazyk =
 k.jazyk
             LEFT JOIN `galerie` as g ON g.`id_foto` = hok.`id_foto`
+            LEFT JOIN nastaveni as n ON n.id_jazyk = k.jazyk
             WHERE k.`id_karavan`=? AND k.`jazyk`=?", $id, $lang)->fetch();
-        else return $this->database->query("SELECT k.`id_karavan`, `id_zaklad`, `znacka`, k.`jazyk`, `typ`, `cena`, `sirka`, 
+        else return $this->database->query("SELECT k.`id_karavan`, `id_zaklad`, `znacka`, k.`jazyk`, `typ`, `cena`, cena / (1 + tax_rate/100) as `cena_bez_DPH`,`exchange_rate`, `tax_rate`, `sirka`, 
             `delka`, `vyska`,`nastavba_delka`,
             `vyska_vnitrni`, `sirka_vnitrni`, `luzko_delka`,`luzko_sirka`,`hmotnost_p`,
             `hmotnost_pb`,`hmotnost_c`,`hmotnost_t`,`hmotnost_max`,`podvozek`,
@@ -95,6 +96,7 @@ k.jazyk
             LEFT JOIN `hlavni_obrazky_karavany` as hok ON  hok.`id_karavan` = k.`id_karavan` AND hok.jazyk =
 k.jazyk
             LEFT JOIN `galerie` as g ON g.`id_foto` = hok.`id_foto`
+            LEFT JOIN nastaveni as n ON n.id_jazyk = k.jazyk
             WHERE k.`id_karavan`=?", $id)->fetch();
     }
 
@@ -104,7 +106,7 @@ k.jazyk
      */
     public function readCaravans($language = null) {
         return $this->database->query("
-            SELECT k.`id_karavan`, k.`jazyk`, `id_zaklad`, `znacka`, `typ`, `cena`, `sirka`, 
+            SELECT k.`id_karavan`, k.`jazyk`, `id_zaklad`, `znacka`, `typ`, `cena`, cena / (1 + tax_rate/100) as `cena_bez_DPH`, `exchange_rate`, `tax_rate`, `sirka`, 
             `delka`, `vyska`, `nastavba_delka`,
             `vyska_vnitrni`, `sirka_vnitrni`,  `luzko_delka`,`luzko_sirka`,`hmotnost_p`,
             `hmotnost_pb`,`hmotnost_c`,`hmotnost_t`,`hmotnost_max`,`podvozek`,
@@ -112,6 +114,7 @@ k.jazyk
             `popis`,`specialni_edice`, `eshop_link`, `barva`, g.`nazev` as `hlavni_obrazek`
             FROM `karavany` as k
             LEFT JOIN `hlavni_obrazky_karavany` as hok ON  hok.`id_karavan` = k.`id_karavan` AND hok.jazyk = k.jazyk
+            LEFT JOIN nastaveni as n ON n.id_jazyk = k.jazyk
             LEFT JOIN `galerie` as g ON g.`id_foto` = hok.`id_foto`".($language ? "WHERE k.`jazyk`='".$language."'" : null). "ORDER BY `datum_vlozeni` DESC")->fetchAll();
     }
 
@@ -150,19 +153,21 @@ k.jazyk
 
     public function getSimilarCaravans($idCaravan, $parent, $lang = null) {
         if ($parent == null) {
-            return $this->database->query("SELECT k.`id_karavan`, `id_zaklad`, `znacka`, `typ`, `cena`,g.`nazev` as `hlavni_obrazek` FROM karavany as k
+            return $this->database->query("SELECT k.`id_karavan`, `id_zaklad`, `znacka`, `typ`, `cena`,g.`nazev` as `hlavni_obrazek`, `exchange_rate` FROM karavany as k
                         LEFT JOIN `hlavni_obrazky_karavany` as hok ON  hok.`id_karavan` = k.`id_karavan` AND hok.jazyk =
 k.jazyk
                         LEFT JOIN `galerie` as g ON g.`id_foto` = hok.`id_foto` 
+                        LEFT JOIN nastaveni as n ON n.id_jazyk = k.jazyk
                         WHERE id_zaklad=" . $idCaravan . " AND k.`jazyk` =?                        
 ORDER BY `datum_vlozeni` DESC", $lang)->fetchAll();
         }else{
             return $this->database->query("SELECT k.`id_karavan`, k.`id_zaklad`, 
-`znacka`, `typ`, `cena`,g.`nazev` as `hlavni_obrazek` 
+`znacka`, `typ`, `cena`,g.`nazev` as `hlavni_obrazek`, `exchange_rate` 
 FROM `karavany` as k  
 LEFT JOIN `hlavni_obrazky_karavany` as hok ON hok.`id_karavan` = k.`id_karavan` AND hok.jazyk =
 k.jazyk
 LEFT JOIN `galerie` as g ON g.`id_foto` = hok.`id_foto` 
+LEFT JOIN nastaveni as n ON n.id_jazyk = k.jazyk
 WHERE (`id_zaklad` = ".$parent." OR k.`id_karavan`=".$parent.") AND k.`id_karavan`!=".$idCaravan." AND k.jazyk=?", $lang);
         }
     }

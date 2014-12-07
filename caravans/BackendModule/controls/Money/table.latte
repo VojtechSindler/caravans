@@ -1,0 +1,23 @@
+{* Latte template *}
+
+{block content}
+<div class="table" style="width: 440px">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>Stát</th>
+            <th>DPH</th>
+            <th>Směnný kurz</th>
+            <th>Akce</th>
+        </tr>  
+        {foreach $data as $d}
+            <tr>
+                <td>{\Caravans\Model\Language::convertToCountry($d->id_jazyk)}</td>
+                <td align="center">{$d->tax_rate} %</td>
+                <td align="center">{$d->exchange_rate}</td>
+                 <td><a n:href="edit, $d->id_jazyk" class="ico edit">Upravit</a>
+                     <a n:href="delete!, $d->id_jazyk" class="ico del">Smazat</a>
+                </td>
+            </tr>
+        {/foreach}
+    </table>
+</div>

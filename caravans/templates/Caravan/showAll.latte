@@ -30,11 +30,11 @@
                 <div class="text">
                     <b>{_messages.caravan.price}:
                         {if $lang == 'cs_CZ'}
-                        {$caravan->cena + ($caravan->cena*0.21)|number:0:', ':' '} Kč
+                        {$caravan->cena|number:0:', ':' '} Kč
                         {else}
-                            €{$caravan->cena + ($caravan->cena*0.21)|number:0:', ':' '}
+                            € {$caravan->cena*$caravan->exchange_rate|number:0:', ':' '}
                             {/if}
-                        </b><br>
+                    </b><br>
                         
                     <b>{_messages.caravan.size}: </b>{$caravan->delka.' x '.$caravan->sirka.' x '.$caravan->vyska.'cm'}<br>
                     <b>{_messages.caravan.totalWeight}: </b>{$caravan->hmotnost_p}kg
@@ -43,7 +43,7 @@
                 </div>
                 <a class="button" n:href="Caravan:view $caravan->id_karavan, $caravan->znacka.' '.$caravan->typ">{_messages.caravansAll.button} ></a>
                 {if $caravan->eshop_link != null}
-                    <a href="{$caravan->eshop_link}" target="_blank" style="margin-left: 30px;"><b>Přejít na eshop</b></a>
+                    <a href="{$caravan->eshop_link}" target="_blank" style="margin-left: 30px;"><b>{_messages.caravan.eshopLink}</b></a>
                 {/if}
             </article>
         {/foreach}

@@ -10,8 +10,9 @@
         </tr>
         <tr n:foreach="$categories as $category">
             <td>{$category->nazev}</td>
-            <td><a n:href="delete!, 'id' => $category->id_kategorie" class="ico del">Delete</a>
-                <a n:href="edit, $category->id_kategorie" class="ico edit">Edit</a></td>
+            <td><a n:href="edit, $category->id_kategorie" class="ico edit">Upravit</a>
+                <a n:href="delete!, 'id' => $category->id_kategorie" class="ico del">Smazat</a>
+                </td>
         </tr>
     </table>
     {control pagingRenderer}

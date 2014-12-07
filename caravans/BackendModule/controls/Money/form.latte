@@ -1,0 +1,22 @@
+{* Latte template *}
+
+{block content}
+{form taxForm}
+    <div n:if="$form->ownErrors" class="msg msg-error" >
+        <p n:foreach="$form->ownErrors as $error">{$error}</p>
+    </div>
+                <div n:foreach="$flashes as $flash" class="msg msg-{$flash->type}">
+                    <p><strong>{$flash->message}!</strong></p>
+                </div>
+    <table>
+        <tr>
+            <td>{label id_jazyk /}</td>
+            <td style="height: 40px; width: 150px;">{input id_jazyk class => 'field'}</td>
+            <td>{label tax_rate /}</td>
+            <td  style="height: 40px; width: 80px;">{input tax_rate class => 'small-field'} %</td>
+            <td>{label exchange_rate /}</td>
+            <td>{input exchange_rate class => 'small-field'}</td>
+        </tr>
+        <tr><td colspan="3" align="center">{input send class => 'button'}</td></tr>
+    </table>
+{/form}
