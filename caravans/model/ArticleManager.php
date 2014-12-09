@@ -9,7 +9,7 @@ namespace Caravans\Model;
  */
 class ArticleManager extends \Caravans\Model\ModelContainer {
 
-    private $id = null;
+    public $id = null;
     private $userId;
 
     public function __construct(\Nette\Database\Context $db) {
@@ -30,6 +30,7 @@ class ArticleManager extends \Caravans\Model\ModelContainer {
         do {
             $id = $this->randNumber(caravanIdLength);
         } while ($this->database->table("clanky")->where("id_clanek", $id)->count() == 1);
+        $this->id=$id;
         return (int) $id;
     }
 
@@ -98,11 +99,11 @@ class ArticleManager extends \Caravans\Model\ModelContainer {
     public function getAll($id = null, $jazyk = 21, $all = false) {
         if (is_null($id)) {
             if ($all)
-                $articles = $this->database->query("SELECT c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text,kategorie, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor and jazyk=$jazyk  ORDER BY datum_vytvoreni desc")->fetchAll();
+                $articles = $this->database->query("SELECT c.image, c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text,kategorie, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor and jazyk=$jazyk  ORDER BY datum_vytvoreni desc")->fetchAll();
             else
-                $articles = $this->database->query("SELECT c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text,kategorie, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor AND c.kategorie=? and jazyk=$jazyk  ORDER BY datum_vytvoreni desc", IArticleCategory::ARTICLE)->fetchAll();
+                $articles = $this->database->query("SELECT c.image, c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text,kategorie, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor AND c.kategorie=? and jazyk=$jazyk  ORDER BY datum_vytvoreni desc", IArticleCategory::ARTICLE)->fetchAll();
         } else {
-            $articles = $this->database->query("SELECT c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text,kategorie, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor and id_clanek=$id and jazyk=$jazyk ORDER BY datum_vytvoreni desc")->fetchAll();
+            $articles = $this->database->query("SELECT c.image, c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text,kategorie, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor and id_clanek=$id and jazyk=$jazyk ORDER BY datum_vytvoreni desc")->fetchAll();
         }
         return $articles;
     }
@@ -117,11 +118,11 @@ class ArticleManager extends \Caravans\Model\ModelContainer {
     public function getAllAdmin($id = null, $all = false) {
         if (is_null($id)) {
             if ($all)
-                $articles = $this->database->query("SELECT c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text,kategorie, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor ORDER BY datum_vytvoreni desc")->fetchAll();
+                $articles = $this->database->query("SELECT c.image,c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text,kategorie, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor ORDER BY datum_vytvoreni desc")->fetchAll();
             else
-                $articles = $this->database->query("SELECT c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text,kategorie, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor AND c.kategorie=? ORDER BY datum_vytvoreni desc", IArticleCategory::ARTICLE)->fetchAll();
+                $articles = $this->database->query("SELECT c.image, c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text,kategorie, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor AND c.kategorie=? ORDER BY datum_vytvoreni desc", IArticleCategory::ARTICLE)->fetchAll();
         } else {
-            $articles = $this->database->query("SELECT c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text,kategorie, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor and id_clanek=$id ORDER BY datum_vytvoreni desc")->fetchAll();
+            $articles = $this->database->query("SELECT c.image, c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text,kategorie, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor and id_clanek=$id ORDER BY datum_vytvoreni desc")->fetchAll();
         }
         return $articles;
     }
@@ -137,7 +138,7 @@ class ArticleManager extends \Caravans\Model\ModelContainer {
      * @return array
      */
     public function getNewArticles($limit = 5, $jazyk = 21) {
-        $articles = $this->database->query("SELECT c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor AND c.id_clanek != $this->id AND jazyk=$jazyk ORDER BY datum_vytvoreni desc LIMIT " . $limit)->fetchAll();
+        $articles = $this->database->query("SELECT c.image,c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor AND c.id_clanek != $this->id AND jazyk=$jazyk ORDER BY datum_vytvoreni desc LIMIT " . $limit)->fetchAll();
         return $articles;
     }
 
@@ -146,7 +147,7 @@ class ArticleManager extends \Caravans\Model\ModelContainer {
      * @return array
      */
     public function getNews( $jazyk = 21) {
-        $articles = $this->database->query("SELECT c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor and c.novinka=1 AND jazyk=$jazyk ORDER BY datum desc")->fetchAll();
+        $articles = $this->database->query("SELECT c.image, c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor and c.novinka=1 AND jazyk=$jazyk ORDER BY datum desc")->fetchAll();
         return $articles;
     }
 
@@ -155,7 +156,7 @@ class ArticleManager extends \Caravans\Model\ModelContainer {
      * @return array
      */
     public function getArticles( $jazyk = 21) {
-        $articles = $this->database->query("SELECT c.id_clanek,c.jazyk  ,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor and c.novinka=0AND jazyk=$jazyk ORDER BY datum desc")->fetchAll();
+        $articles = $this->database->query("SELECT c.image, c.id_clanek,c.jazyk  ,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor and c.novinka=0AND jazyk=$jazyk ORDER BY datum desc")->fetchAll();
         return $articles;
     }
 

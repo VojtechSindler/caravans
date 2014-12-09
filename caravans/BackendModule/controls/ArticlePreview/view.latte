@@ -20,7 +20,12 @@
 
             </tr>
             <tr>
-                <td style="padding-left: 10px" colspan="2">{!$article->perex}</td>
+                {if $article->image != ""}
+                <td style="padding-left: 10px"><img src="{$basePath}/{$article->image}" alt="foto"></td>
+                {else}
+                <td style="padding-left: 10px"><img src="{$basePath}/images/web/default.jpg" alt="foto"></td>
+                {/if}
+                <td style="padding-left: 10px">{$article->perex}</td>
             </tr>
             <tr>
                 <td style="padding-left: 10px" colspan="2" >

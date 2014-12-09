@@ -3,7 +3,7 @@
 {block content}
 <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
 <span style="float:right;"><img src="{$basePath}/images/vlajka{$article->jazyk}.png"></span>
-<table class="table1" style="margin-top:30px">
+<table class="table1" style="margin-top:30px;width: 100%">
     <tr>
         <td>
             <h2>Nadpis:</h2></td>
@@ -12,12 +12,15 @@
     <tr>
         <td><h2>Perex:</h2></td>
         <td>{!$article->perex}</td>
+        {if $article->image != ""}
+            <td><img src="{$basePath.'/'.$article->image}"></td>
+        {/if}
     </tr>
     <tr>
         <td><h2>Text:</h2></td>
-        <td colspan="4">{!$article->text}</td>
+        <td>{!$article->text}</td>
     <tr>
-        <th colspan="4">Informace o článku:</th>
+        <th colspan="3">Informace o článku:</th>
     </tr>
     <tr>
         <td colspan="2">Vytvořeno:
@@ -28,11 +31,11 @@
 
     </tr>
     <tr>
-        <th colspan="4">Akce:</th>
+        <th colspan="3">Akce:</th>
     </tr>
     <tr>
         <td><a n:href="edit, $article->id_clanek" class="ico edit">Edit</a></td>
         <td> <a n:href="delete, $article->id_clanek" class="ico del">Delete</a></td>
-        <td>Facebook</td>
+        <td></td>
     </tr>
 </table>

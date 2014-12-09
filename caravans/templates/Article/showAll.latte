@@ -8,17 +8,24 @@
         <p style="width: 100%;text-align: center;margin: 0;">{_messages.articlesAll.nic}</p>
     {/if}
     {foreach $articles as $article}
-        <article style="margin-bottom: 8px; min-height: 230px" class="article">  
+        <article >  
             <h4 style='font-size:100%'>{$article->nadpis} </h4>
-            <div class="text" style="height:130px">
-            {if $article->perex == null}
-                <p>{!$article->text|truncate:200|striptags}</p>
+            <div class="img" >
+                {if $article->image != ""}
+                    <img style="height:auto;max-height: 170px" src="{$basePath.'/'.$article->image}">
                 {else}
-                <p>{!$article->perex|truncate:200|striptags}</p>
-            {/if}
+                    <img style="height:auto;max-height: 170px" src="{$basePath}/images/web/default.jpg">
+                {/if}
             </div>
-                <font style="float:right;font-style: oblique; font-size: 14px"><b>{$article->datum}</b></font>
-                <a class="button"  n:href="Article:view $article->id_clanek, $article->nadpis">{_messages.articlesAll.button} ></a>
+            <div class="text" >
+                {if $article->perex == null}
+                    <p>{!$article->text|truncate:200|striptags}</p>
+                {else}
+                    <p>{!$article->perex|truncate:200|striptags}</p>
+                {/if}
+            </div>
+            <font style="float:right;font-style: oblique; font-size: 14px"><b>{$article->datum}</b></font>
+            <a class="button"  n:href="Article:view $article->id_clanek, $article->nadpis">{_messages.articlesAll.button} ></a>
         </article>
     {/foreach}
 </section>

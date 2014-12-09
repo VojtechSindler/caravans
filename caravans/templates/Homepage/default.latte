@@ -74,13 +74,17 @@
             {foreach $news as $art}
                 <a n:href="Article:view $art->id_clanek" style="margin:0;font-size: 14px;text-decoration: none;color:black;">
                     <div class="news">
-
                         <h4 style="margin-top: 5px;color: #C00000 ; text-align: left; margin-left: 5px">{$art->nadpis}</h4>
-                                    {if $art->perex == null}
-                <p>{!$art->text|truncate:200|striptags}</p>
-                {else}
-                <p>{!$art->perex|truncate:200|striptags}</p>
-            {/if}
+                        {if $art->image != ""}
+                            <img src="{$basePath}/{$art->image}" style="float:left">
+                        {else}
+                            <img src="{$basePath}/images/web/default.jpg" style="float:left">
+                        {/if}
+                        {if $art->perex == null}
+                            <p>{!$art->text|truncate:200|striptags}</p>
+                        {else}
+                            <p>{!$art->perex|truncate:200|striptags}</p>
+                        {/if}
                     </div> 
                 </a>
             {/foreach}

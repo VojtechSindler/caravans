@@ -65,6 +65,22 @@ tinymce.init({
     </tr>
 
     <tr>
+        <th colspan="6">Hlavní obrázek článku</th>
+    </tr>
+    <tr>
+        <td>{input mainImage class => 'field'}</td>
+        {if $image != ""}
+            <td>{input vymazObrazek}</td>
+
+        {/if}
+    </tr>
+            {if $image != ""}
+
+    <tr>
+            <td>Aktuální: <img src="{$basePath .'/'. $image}"></td>
+    </tr>
+        {/if}
+    <tr>
         <th colspan="6">Nastavení</th>
     </tr>
     <tr>
