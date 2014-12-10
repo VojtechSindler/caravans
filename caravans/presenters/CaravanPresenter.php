@@ -106,7 +106,6 @@ class CaravanPresenter extends BasePresenter {
         if (!key_exists($id_equip, $section->equipment[$idCaravan]))
             $section->equipment[$idCaravan][$id_equip] = array($name, $price);
         $this->template->addedEquipments = $section->equipment[$idCaravan];
-
         $this->redrawControl("cart");
     }
 
@@ -115,5 +114,4 @@ class CaravanPresenter extends BasePresenter {
         unset($section->equipment[$idCaravan][$id_equip]);
         $this->redirect("this");
     }
-
 }

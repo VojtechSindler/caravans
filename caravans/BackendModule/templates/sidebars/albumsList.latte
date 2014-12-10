@@ -1,0 +1,17 @@
+{* Latte template *}
+
+{block content}
+
+<table>
+    {foreach $albums as $album}
+    <div style="margin-bottom: 7px; float: left;">
+        <tr>
+            <td style="width: 150px; height: 30px;">{$album->language|upper} - {$album->name|truncate:30} ({$album->count()})</td>
+            <td>
+                <a n:href="Gallery:edit , $album->id, $album->lang" class="ico edit" title="Upravit"></a>
+                <a n:href="delete! $album->id, $album->lang" class="ico del" title="Smazat"></a>
+            </td>
+        </tr>
+    </div>
+{/foreach}
+</table>

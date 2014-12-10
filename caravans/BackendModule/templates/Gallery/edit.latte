@@ -1,0 +1,32 @@
+{* Latte template *}
+
+{block content}
+<a n:href="Gallery:">Návrat na správu galerie</a>
+<h2>Úprava galerie</h2>
+{form addGallery}
+        <div n:if="$form->ownErrors" class="msg msg-error" >
+        <p n:foreach="$form->ownErrors as $error">{$error}</p>
+    </div>
+    <table class="table1">
+        <tr>
+            <td>{label galerie_original /}</td>
+            <td>{input galerie_original class=>'field'}</td>
+        </tr>
+        <tr>
+            <td>{label jazyk/}</td>
+            <td>{input jazyk class=>'field'}</td>
+        </tr>
+        <tr>
+            <td>{label nazev/}</td>
+            <td>{input nazev class=>'field'}</td>
+        </tr>
+        <tr>
+            <td>{label popis /}</td>
+            <td colspan="2">{input popis}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>{input send class=>'button'}</td>
+        </tr>
+    </table>
+{/form}

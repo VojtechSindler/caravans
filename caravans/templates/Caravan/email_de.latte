@@ -16,27 +16,28 @@
         <table>
             <tr>
                 <td>{$znacka.' '.$typ}</td>
-                <td>€{$cena|number:2:'.':' '}</td>
+                <td>€ {$cena*$exchange_rate|number:2:'.':' '}</td>
             </tr>
             {default $sum = 0}
             {foreach $spec_vybava as $vybava}
                 <tr>
                     <td>{$vybava[0]}</td>
-                    <td>€{$vybava[1]|number:2:'.':' '}</td>
+                    <td>€ {$vybava[1]*$exchange_rate|number:2:'.':' '}</td>
                 </tr>
-                {var $sum = $sum+$vybava[1]}
+                {var $sum = $sum+$vybava[1]*$exchange_rate}
             {/foreach}
+            
             <tr>
                 <td><b>Ausstattungpreis: </b></td>
-                <td>€{$sum|number:2:'.':' '}</td>
+                <td>€ {$sum|number:2:'.':' '}</td>
             </tr>
             <tr>
                 <td><b>Gesamt: </b></td>
-                <td>€{$sum + $cena|number:2:'.':' '}</td>
+                <td>€ {$sum + $cena*$exchange_rate|number:2:'.':' '}</td>
             </tr>
         </table>
         {else}
-        <b>Preis: €{$cena|number:2:'.':' '}</b>
+        <b>Preis: € {$cena*$exchange_rate|number:2:'.':' '}</b>
         {/if}
         <br>
     Die komplette Informationen über den Wohnwagen können Sie<a href="http://{$website}//de/caravan/view/?id={$id_karavan}"> HIER </a>finden

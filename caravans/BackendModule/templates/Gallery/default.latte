@@ -1,0 +1,58 @@
+{block content}
+<p>Zadávej vždy nejprve galerii v češtině. Poté můžeš galerii přeložit, obrázky se do ní automaticky zkopírují z české lokace. Díky tomu budou galerie ve všech lokacích stejné. Zobrazují se zde pouze české galerie.</p>
+<h2>Vytvoření galerie</h2>
+{form addGallery}
+        <div n:if="$form->ownErrors" class="msg msg-error" >
+        <p n:foreach="$form->ownErrors as $error">{$error}</p>
+    </div>
+    <table class="table1">
+        <tr>
+            <td>{label galerie_original /}</td>
+            <td>{input galerie_original class=>'field'}</td>
+        </tr>
+        <tr>
+            <td>{label jazyk/}</td>
+            <td>{input jazyk class=>'field'}</td>
+        </tr>
+        <tr>
+            <td>{label nazev/}</td>
+            <td>{input nazev class=>'field'}</td>
+        </tr>
+        <tr>
+            <td>{label popis /}</td>
+            <td colspan="2">{input popis}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>{input send class=>'button'}</td>
+        </tr>
+    </table>
+{/form}
+
+<h2>Vložení obrázků</h2>
+{form addImages}
+            <div n:if="$form->ownErrors" class="msg msg-error" >
+        <p n:foreach="$form->ownErrors as $error">{$error}</p>
+    </div>
+    <table class="table1">
+        <tr>
+            <td>{label galerie/}</td>
+            <td>{input galerie class=>'field'}</td>
+        </tr>
+        <tr>
+            <td>{label main/}</td>
+            <td>{input main class=>'field'}</td>
+        </tr>
+        <tr>
+            <td>{label images/}</td>
+            <td>{input images class=>'field'}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>{input send class=> 'button'}</td>
+        </tr>
+    </table>
+{/form}
+
+<h2>Prohlížení galerií</h2>
+{control imageViewer}

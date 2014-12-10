@@ -1,0 +1,27 @@
+{* Latte template *}
+
+{block content}
+{foreach $albums as $album}
+    <h3 class='nadpis_maly'>{$album->name}</h3>
+    {var $al = $album->getImages() }
+    {if $al == null}
+        <span style="color: red">Galerie neobsahuje žádné obrázky</span><br><br>
+    {else}
+        <div class="obrazek_obal">
+            {foreach $al as $image}
+                {if $image == $album->mainImage}
+                    <div class="obrazek" style="background-color: #71b9eb ">
+                        <img src="{$galleryPath.$album->id.'/thumb/'.$image}">
+                        <a n:href="deleteMainImage! $album->id, $album->lang, $image">Smazat</a>
+                    </div>
+                {else}
+                    <div class="obrazek">
+                        <img src="{$galleryPath.$album->id.'/thumb/'.$image}">
+                        <a n:href="delete! $album->id, $album->lang, $image">Smazat</a>
+                    </div>
+                {/if}
+
+            {/foreach}
+        </div>
+    {/if}
+{/foreach}

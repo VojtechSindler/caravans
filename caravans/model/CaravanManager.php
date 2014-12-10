@@ -50,10 +50,11 @@ class CaravanManager extends \Caravans\Model\ModelContainer {
      * @return bool
      */
     public function save(\Nette\Utils\ArrayHash $data) {
-        if($data->id_origin == null) //originální verze karavanu v CZ
+        if ($data->id_origin == null) //originální verze karavanu v CZ
             $data->id_karavan = $this->createId();
-        else $data->id_karavan = $data->id_origin;
-        if($data->id_zaklad == 0)
+        else
+            $data->id_karavan = $data->id_origin;
+        if ($data->id_zaklad == 0)
             $data->id_zaklad = null;
         $data->remove("id_origin");
         $this->database->table("karavany")->insert($data);
@@ -61,11 +62,11 @@ class CaravanManager extends \Caravans\Model\ModelContainer {
 
     public function edit($id, $data) {
         $id_zaklad = $data->id_zaklad;
-        return $this->database->table("karavany")->where(array("id_karavan"=> $id, "jazyk" => $data->jazyk))->update($data);
+        return $this->database->table("karavany")->where(array("id_karavan" => $id, "jazyk" => $data->jazyk))->update($data);
     }
 
     public function delete($id, $language) {
-        return $this->database->table("karavany")->where(array("id_karavan"=> $id, "jazyk" => $language))->delete() > 0;
+        return $this->database->table("karavany")->where(array("id_karavan" => $id, "jazyk" => $language))->delete() > 0;
     }
 
     public function getGallery() {
@@ -73,8 +74,8 @@ class CaravanManager extends \Caravans\Model\ModelContainer {
     }
 
     public function getCaravan($id, $lang = null) {
-        if($lang != null)
-        return $this->database->query("SELECT k.`id_karavan`, `id_zaklad`, `znacka`, k.`jazyk`, `typ`, `cena`, cena / (1 + tax_rate/100) as `cena_bez_DPH`, `exchange_rate`, `tax_rate`,
+        if ($lang != null)
+            return $this->database->query("SELECT k.`id_karavan`, `id_zaklad`, `znacka`, k.`jazyk`, `typ`, `cena`, cena / (1 + tax_rate/100) as `cena_bez_DPH`, `exchange_rate`, `tax_rate`,
             `sirka`, `delka`, `vyska`, `nastavba_delka`,
             `vyska_vnitrni`, `sirka_vnitrni`, `luzko_delka`,`luzko_sirka`,`hmotnost_p`,
             `hmotnost_pb`,`hmotnost_c`,`hmotnost_t`,`hmotnost_max`,`podvozek`,
@@ -86,7 +87,8 @@ k.jazyk
             LEFT JOIN `galerie` as g ON g.`id_foto` = hok.`id_foto`
             LEFT JOIN nastaveni as n ON n.id_jazyk = k.jazyk
             WHERE k.`id_karavan`=? AND k.`jazyk`=?", $id, $lang)->fetch();
-        else return $this->database->query("SELECT k.`id_karavan`, `id_zaklad`, `znacka`, k.`jazyk`, `typ`, `cena`, cena / (1 + tax_rate/100) as `cena_bez_DPH`,`exchange_rate`, `tax_rate`, `sirka`, 
+        else
+            return $this->database->query("SELECT k.`id_karavan`, `id_zaklad`, `znacka`, k.`jazyk`, `typ`, `cena`, cena / (1 + tax_rate/100) as `cena_bez_DPH`,`exchange_rate`, `tax_rate`, `sirka`, 
             `delka`, `vyska`,`nastavba_delka`,
             `vyska_vnitrni`, `sirka_vnitrni`, `luzko_delka`,`luzko_sirka`,`hmotnost_p`,
             `hmotnost_pb`,`hmotnost_c`,`hmotnost_t`,`hmotnost_max`,`podvozek`,
@@ -115,7 +117,7 @@ k.jazyk
             FROM `karavany` as k
             LEFT JOIN `hlavni_obrazky_karavany` as hok ON  hok.`id_karavan` = k.`id_karavan` AND hok.jazyk = k.jazyk
             LEFT JOIN nastaveni as n ON n.id_jazyk = k.jazyk
-            LEFT JOIN `galerie` as g ON g.`id_foto` = hok.`id_foto`".($language ? "WHERE k.`jazyk`='".$language."'" : null). "ORDER BY `datum_vlozeni` DESC")->fetchAll();
+            LEFT JOIN `galerie` as g ON g.`id_foto` = hok.`id_foto`" . ($language ? "WHERE k.`jazyk`='" . $language . "'" : null) . "ORDER BY `datum_vlozeni` DESC")->fetchAll();
     }
 
     /**
@@ -137,16 +139,17 @@ k.jazyk
         $latte = new \Latte\Engine();
         $params = $this->getCaravan($idCaravan, $lang);
         $mail = new \Nette\Mail\Message();
-        if($lang == Language::CS)
+        if ($lang == Language::CS)
             $file = __DIR__ . '/../templates/Caravan/email.latte';
-        else $file = __DIR__ . '/../templates/Caravan/email_de.latte';
+        else
+            $file = __DIR__ . '/../templates/Caravan/email_de.latte';
         $mail->setFrom(adminEmail)
                 ->addTo($email)
                 ->setSubject("Minikaravan " . $params->znacka . " " . $params->typ)
                 ->setHtmlBody(
                         $latte->renderToString($file, array("id_karavan" => $idCaravan, "znacka" => $params->znacka,
                             "rozmery" => $params->vyska . "x" . $params->sirka . "x" . $params->delka,
-                            "typ" => $params->typ, "cena" => $params->cena, "spec_vybava" => $equip, "website" => website)));
+                            "typ" => $params->typ, "cena" => $params->cena, "spec_vybava" => $equip, "website" => website, "exchange_rate" => $params->exchange_rate)));
         $send = new \Nette\Mail\SendmailMailer();
         $send->send($mail);
     }
@@ -154,13 +157,12 @@ k.jazyk
     public function getSimilarCaravans($idCaravan, $parent, $lang = null) {
         if ($parent == null) {
             return $this->database->query("SELECT k.`id_karavan`, `id_zaklad`, `znacka`, `typ`, `cena`,g.`nazev` as `hlavni_obrazek`, `exchange_rate` FROM karavany as k
-                        LEFT JOIN `hlavni_obrazky_karavany` as hok ON  hok.`id_karavan` = k.`id_karavan` AND hok.jazyk =
-k.jazyk
+                        LEFT JOIN `hlavni_obrazky_karavany` as hok ON  hok.`id_karavan` = k.`id_karavan` AND hok.jazyk = k.jazyk
                         LEFT JOIN `galerie` as g ON g.`id_foto` = hok.`id_foto` 
                         LEFT JOIN nastaveni as n ON n.id_jazyk = k.jazyk
                         WHERE id_zaklad=" . $idCaravan . " AND k.`jazyk` =?                        
 ORDER BY `datum_vlozeni` DESC", $lang)->fetchAll();
-        }else{
+        } else {
             return $this->database->query("SELECT k.`id_karavan`, k.`id_zaklad`, 
 `znacka`, `typ`, `cena`,g.`nazev` as `hlavni_obrazek`, `exchange_rate` 
 FROM `karavany` as k  
@@ -168,7 +170,7 @@ LEFT JOIN `hlavni_obrazky_karavany` as hok ON hok.`id_karavan` = k.`id_karavan` 
 k.jazyk
 LEFT JOIN `galerie` as g ON g.`id_foto` = hok.`id_foto` 
 LEFT JOIN nastaveni as n ON n.id_jazyk = k.jazyk
-WHERE (`id_zaklad` = ".$parent." OR k.`id_karavan`=".$parent.") AND k.`id_karavan`!=".$idCaravan." AND k.jazyk=?", $lang);
+WHERE (`id_zaklad` = " . $parent . " OR k.`id_karavan`=" . $parent . ") AND k.`id_karavan`!=" . $idCaravan . " AND k.jazyk=?", $lang);
         }
     }
 
