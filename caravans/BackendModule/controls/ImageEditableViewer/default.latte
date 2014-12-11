@@ -11,12 +11,12 @@
             {foreach $al as $image}
                 {if $image == $album->mainImage}
                     <div class="obrazek" style="background-color: #71b9eb ">
-                        <img src="{$galleryPath.$album->id.'/thumb/'.$image}">
+                        <img src="{$galleryPath.$album->id.'/thumb/1-'.$image}">
                         <a n:href="deleteMainImage! $album->id, $album->lang, $image">Smazat</a>
                     </div>
                 {else}
                     <div class="obrazek">
-                        <img src="{$galleryPath.$album->id.'/thumb/'.$image}">
+                        <img src="{$galleryPath.$album->id.'/thumb/1-'.$image}">
                         <a n:href="delete! $album->id, $album->lang, $image">Smazat</a>
                     </div>
                 {/if}

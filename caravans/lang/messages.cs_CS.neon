@@ -12,7 +12,7 @@ menu:
 	home: 'Domů'
 	aa: 'Hlavní stránka'
 	a: 'Modely'
-	b: 'Recenze'
+	b: 'Galerie'
 	c: 'Aktuality'
 	d: 'Kontakt'
 	e: 'E-shop'
@@ -74,6 +74,7 @@ articlesAll:
 gallery:
 	picture: 'Obrázek'
 	from: 'z'
+	button: 'Zobrazit galerii'
 contact:
 	title: 'Kontaktní údaje na naši firmu'
 	id: 'IČO'

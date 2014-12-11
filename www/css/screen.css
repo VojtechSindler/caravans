@@ -529,3 +529,30 @@ input{
 }
 .window h4{margin-top: 5px; height: 35px; margin-bottom: 5px}
 .window img{width: 100%; margin: auto; margin-bottom: 10px}
+
+.album{
+    width: 100%;
+    min-height: 300px;
+}
+
+.album .main{ 
+    text-align: center;
+    margin: auto;
+    width: 500px;
+    margin-bottom: 20px;
+}
+
+.album .galerie{width: 75%; margin: auto; margin-bottom: 20px;}
+
+.album .galerie img{
+    border:1px solid #bdb8b0;
+    width: 100px;
+    height: 70px;
+}
+
+.album p{
+    margin: 0 40px 30px 30px; 
+    font-size: 14px; 
+    font-style: italic; 
+    text-align: center
+}

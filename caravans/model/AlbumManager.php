@@ -9,7 +9,8 @@ namespace Caravans\Model;
 class AlbumManager extends Gallery {
 
     const TABLE = "fotogalerie";
-
+    const MINI100x100 = "~1-.*\.jpg|.png|.gif|.JPG|.PNG|.GIF~";
+    const SMALL = "~2-.*\.jpg|.png|.gif|.JPG|.PNG|.GIF~";
     /**
      * @var int
      */
@@ -170,9 +171,16 @@ class AlbumManager extends Gallery {
      */
     public function create($name, $lang, $idOriginal = null, $description = null) {
         $id = $idOriginal == null ? time() : $idOriginal;
+        $image = null;
+        if($idOriginal != null){ //zkopírování hlavního obrázku z české galerie do jiné lokace
+            $image = $this->database->table(self::TABLE)
+                    ->select("hlavni_obrazek")
+                    ->where(array("id_galerie" => $idOriginal, "jazyk" => Language::CS))->fetch()->hlavni_obrazek;
+        }
         try {
             $this->database->table(self::TABLE)->insert(
-                    array("id_galerie" => $id, "jazyk" => $lang, "nazev" => $name, "popis" => $description));
+                    array("id_galerie" => $id, "jazyk" => $lang, 
+                        "nazev" => $name, "popis" => $description, "hlavni_obrazek" => $image));
         } catch (\PDOException $ex) {
             if ($ex->getCode() == 23000)
                 throw new \Nette\InvalidArgumentException("Tato galerie už existuje");
@@ -233,6 +241,7 @@ class AlbumManager extends Gallery {
         $album->description = $result->popis;
         $album->lang = $result->jazyk;
         $album->date = $result->datum_vytvoreni;
+        $album->mainImage = $result->hlavni_obrazek;
         return $album;
     }
 
@@ -294,11 +303,13 @@ class AlbumManager extends Gallery {
     }
 
     public function getImages() {
+        bdump($this->getPath());
+        $iterator = new \FilesystemIterator($this->getPath());
         $images = array();
-        $iterator = new \DirectoryIterator($this->getPath());
-        foreach ($iterator as $image)
+        foreach ($iterator as $image){
             if ($image->isFile())
                 $images[] = $image->getFilename();
+        }
         return $images;
     }
 
@@ -310,10 +321,11 @@ class AlbumManager extends Gallery {
         $path = galleryPath . $id . "/";
         foreach ($images as $image) {
             $image->move($path . $image->name);
-            $this->resize($path, $image->name, 100, 100);
+            $this->resize($path, $image->name,1, 176, 70);
+            $this->resize($path, $image->name,2, galleryImageWidth, galleryImageHeight);
         }
     }
-
+    
     /**
      * @param int $id
      * @param \Nette\Http\FileUpload $image
@@ -330,7 +342,8 @@ class AlbumManager extends Gallery {
      */
     public function deletePicture($id, $image) {
         unlink($this->path($id) . $image);
-        unlink($this->path($id) . "thumb/" . $image);
+        unlink($this->path($id) . "thumb/1-" . $image);
+        unlink($this->path($id) . "thumb/2-" . $image);
     }
 
         
@@ -355,8 +368,8 @@ class AlbumManager extends Gallery {
      * @param int $height
      * @return \Caravans\Model\AlbumManager
      */
-    private function resize($dir, $fileName, $width, $height) {
-        $thumbPath = $dir . "/thumb/" . $fileName;
+    private function resize($dir, $fileName, $prefix, $width, $height) {
+        $thumbPath = $dir . "/thumb/".$prefix.'-' . $fileName;
         \Nette\Utils\FileSystem::copy($dir . "/" . $fileName, $thumbPath);
         $image = \Nette\Utils\Image::fromFile($thumbPath);
         $image->resize($width, $height)->save($thumbPath);

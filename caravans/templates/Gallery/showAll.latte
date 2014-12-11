@@ -1,0 +1,28 @@
+{* Latte template *}
+
+{block content}
+<h1 style="margin-left:5px">{block title}Galerie{/block}</h1>
+
+    <section class="whitefromgrey rozcestnik">
+        {if count($albums) == 0}
+            <div style="text-align: center; min-height: 400px">
+                {_messages.commons.sorry}
+            </div>
+        {else}
+            {foreach $albums as $album}
+                <article>
+                    <h4>{$album->name}</h4>
+                    <div class="img">
+                        <img src="{$galleryPath.$album->id.'/thumb/2-'.$album->mainImage}">
+                    </div>
+                    {if $album->description}
+                        <div class="text">
+                            <p>{$album->description|truncate:120}</p>
+                        </div>
+                    {/if}
+                    <font style="float:right;font-style: oblique; font-size: 14px"><b>{$album->date|date: 'd.m.Y'}</b></font>
+                    <a class="button" n:href="Gallery:view $album->id, $album->name">{_messages.gallery.button} ></a>
+                </article>
+            {/foreach}
+        {/if}
+    </section>

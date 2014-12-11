@@ -1,0 +1,32 @@
+{* Latte template *}
+
+{block content}
+<h1>
+    {block title}
+    {$album->name}
+    {/block}
+    <span style="float: right; font-size: 18px; padding-top: 10px">
+        {_messages.commons.additionDate}: {$album->date|date:'d. m. Y'}
+    </span>
+</h1>
+<div class="whitefromgrey">
+    <div class="album">
+    {if $album->description}
+        <p>{$album->description}</p>
+    {/if}
+    <div class="main">
+        <a href="{$galleryPath.$album->id.'/'.$album->mainImage}" data-lightbox="image-1">
+            <img src="{$galleryPath.$album->id.'/thumb/2-'.$album->mainImage}">
+        </a>
+    </div>
+        <div class="galerie">
+            {var $pictures = $album->getImages($pattern)}
+            {foreach $pictures as $picture}
+                <a href="{$galleryPath.$album->id.'/'.$picture}" data-lightbox="image-1" data-title="{$album->name}"
+                   style="text-decoration: none">
+                    <img src="{$galleryPath.$album->id.'/thumb/1-'.$picture}" data-lightbox="image-1">
+                </a>
+            {/foreach}
+        </div>
+    </div>
+</div>

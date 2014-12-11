@@ -11,7 +11,7 @@ homepage:
 menu:
 	home: 'Startseite'
 	a: 'Modelle'
-	b: 'Rezension'
+	b: 'Galerie'
 	c: 'Aktuel'
 	d: 'Kontakt'
 	e: 'E-shop'
@@ -70,6 +70,10 @@ commons:
 articlesAll:
 	button: 'Mehr'
 	nic: 'Sorry, diese Seiten sind aktuell in der Bau.'
+gallery:
+	picture: 'Obrázek'
+	from: 'z'
+	button: 'Zobrazit galerii'
 contact:
 	title: 'Kontakt auf unsere Firma'
 	id: 'Firmen-Ident.-Nr.'
