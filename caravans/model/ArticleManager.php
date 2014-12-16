@@ -138,7 +138,7 @@ class ArticleManager extends \Caravans\Model\ModelContainer {
      * @return array
      */
     public function getNewArticles($limit = 5, $jazyk = 21) {
-        $articles = $this->database->query("SELECT c.image,c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor AND c.id_clanek != $this->id AND jazyk=$jazyk ORDER BY datum_vytvoreni desc LIMIT " . $limit)->fetchAll();
+        $articles = $this->database->query("SELECT c.image,c.id_clanek,c.jazyk,u.jmeno,u.prijmeni,c.nadpis,c.perex,c.text, DATE_FORMAT(c.datum_vytvoreni,'%d.%m.%Y')as'datum' FROM clanky c, uzivatele u WHERE u.id=c.id_autor AND c.id_clanek != $this->id AND jazyk=$jazyk  and kategorie=10 ORDER BY datum_vytvoreni desc LIMIT " . $limit)->fetchAll();
         return $articles;
     }
 
