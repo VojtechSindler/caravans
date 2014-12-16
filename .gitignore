@@ -14,5 +14,5 @@ web.config
 
 .DS_Store
 !.gitignore
-caravans/config/config.neon
+caravans/config/*
 /nbproject/private/
