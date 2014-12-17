@@ -57,7 +57,7 @@ caravan:
 		sendEmailText: 'Die Caravansangebot mit allen Preisen auf die Email Adresse schicken'
 		equipPrice: 'Ausstattungpreis'
 		total: 'Gesamt'
-		totalWithTax: 'Celkem s DPH'
+		totalWithTax: 'Gesamt mit MwSt.'
 		form:
 			email: 'Email'
 			captcha: 'Ubschreib den Text'
@@ -72,9 +72,9 @@ articlesAll:
 	button: 'Mehr'
 	nic: 'Sorry, diese Seiten sind aktuell in der Bau.'
 gallery:
-	picture: 'Obrázek'
+	picture: 'Bild'
 	from: 'z'
-	button: 'Zobrazit galerii'
+	button: 'Galerie zeigen'
 contact:
 	title: 'Kontakt auf unsere Firma'
 	id: 'Firmen-Ident.-Nr.'
