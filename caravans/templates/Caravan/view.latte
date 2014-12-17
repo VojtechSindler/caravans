@@ -36,17 +36,17 @@
                     {if $lang == "de_DE"}
                         € {$caravan->cena_bez_DPH*$caravan->exchange_rate|number:0:', ':' '},-</font>{_messages.caravan.notax}
                     {else}
-                    {$caravan->cena_bez_DPH*$caravan->exchange_rate|number:0:', ':' '},-</font>{_messages.caravan.notax}
+                        {$caravan->cena_bez_DPH*$caravan->exchange_rate|number:0:', ':' '},-</font>{_messages.caravan.notax}
                     {/if}
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
                     <font style="color: red" class="cena">
-                        {if $lang == "de_DE"}
-                            € {$caravan->cena*$caravan->exchange_rate|number:0:', ':' '},-</font>{_messages.caravan.tax}
-                        {else}
-                    {$caravan->cena*$caravan->exchange_rate|number:0:', ':' '},-</font>{_messages.caravan.tax}
+                    {if $lang == "de_DE"}
+                        € {$caravan->cena*$caravan->exchange_rate|number:0:', ':' '},-</font>{_messages.caravan.tax}
+                    {else}
+                        {$caravan->cena*$caravan->exchange_rate|number:0:', ':' '},-</font>{_messages.caravan.tax}
                     {/if}
                 </td>
             </tr>
@@ -176,20 +176,20 @@
             <tr>
                 <td style="font-size:100%; font-weight: bold" colspan="2"> {_messages.caravan.additionalEquip} <hr width="50"> 
                     {if $lang == "de_DE"}
-                    <img id="1" src="{$basePath}/images/web/more_de.png" onclick="change('1',{$basePath.'/images/web/'}, {$lang});">
+                        <img id="1" src="{$basePath}/images/web/more_de.png" onclick="change('1',{$basePath.'/images/web/'}, {$lang});">
                     {else}<img id="1" src="{$basePath}/images/web/more.png" onclick="change('1',{$basePath.'/images/web/'}, {$lang});">
                     {/if}
                 </td>
             </tr>
             {if count($equipments) == 0}
                 <tr class="1 hide"><td style="color: red">{_messages.caravan.additionalEquipError}</td></tr>
-            {else}
+                {else}
 
-            <tr><td colspan="2" class="1 hide">
-                    <i style="margin-left: 0">{_messages.caravan.additionalEquipText|noescape}<br>
-                        <span style="color: red; margin-left: 0; font-weight: bold">{_messages.caravan.additionalEquipPriceInfo}</span></i>
-                </td></tr>
-                            {foreach $equipments as $equip}            
+                <tr><td colspan="2" class="1 hide">
+                        <i style="margin-left: 0">{_messages.caravan.additionalEquipText|noescape}<br>
+                            <span style="color: red; margin-left: 0; font-weight: bold">{_messages.caravan.additionalEquipPriceInfo}</span></i>
+                    </td></tr>
+                    {foreach $equipments as $equip}            
                     <tr class="1 hide" onmouseover="showDialog()">
                         <td title="{$equip->popis}">
                             {$equip->nazev}
@@ -210,11 +210,11 @@
             <tr>
                 <td style="font-size:100%; font-weight: bold" colspan="2"> {_messages.caravan.special} <hr width="80"> 
                     {if $lang == "de_DE"}
-                    <img id="2" src="{$basePath}/images/web/more_de.png" onclick="change('2',{$basePath.'/images/web/'}, {$lang});">
+                        <img id="2" src="{$basePath}/images/web/more_de.png" onclick="change('2',{$basePath.'/images/web/'}, {$lang});">
                     {else}
                         <img id="2" src="{$basePath}/images/web/more.png" onclick="change('2',{$basePath.'/images/web/'}, {$lang});">
-                        {/if}
-                    </td>
+                    {/if}
+                </td>
             </tr>
             <tr class="2 hide">
                 <td colspan="2">
@@ -235,8 +235,8 @@
                         <img src="{$galleryPath.'thumbs/'.$child->hlavni_obrazek}">
                         {if $lang == "de_DE"}
                             <b>{_messages.caravan.price}: € {$child->cena*$child->exchange_rate|number:0:', ':' '}</b><br>
-                           {else}
-                        <b>{_messages.caravan.price}: {$child->cena*$child->exchange_rate|number:0:', ':' '} Kč</b><br>
+                        {else}
+                            <b>{_messages.caravan.price}: {$child->cena*$child->exchange_rate|number:0:', ':' '} Kč</b><br>
                         {/if}
                         <a class="button" n:href="Caravan:view $child->id_karavan, $child->znacka.' '.$child->typ" style="float: left; font-size: 12px; margin-top: 5px">{_messages.caravansAll.button} ></a>
                     </div>
@@ -258,21 +258,21 @@
                         <tr>
                             <td>{$caravan->znacka}</td>
                             {if $lang == "de_DE"}
-                                <td align="right" style="padding-right: 10px" colspan="2">€ {$caravan->cena|number:2:'.':' '}</td>
+                                <td align="right" style="padding-right: 10px" colspan="2">€ {$caravan->cena_bez_DPH*$caravan->exchange_rate|number:2:'.':' '}</td>
                             {else}
-                            <td align="right" style="padding-right: 10px" colspan="2">{$caravan->cena|number:2:'.':' '} Kč</td>
+                                <td align="right" style="padding-right: 10px" colspan="2">{$caravan->cena_bez_DPH|number:2:'.':' '} Kč</td>
                             {/if}
                         </tr>
                         {foreach $addedEquipments as $id => $item}
                             <tr>
                                 <td>{$item[0]}</td>
                                 {if $lang == "de_DE"}
-                                    <td align="right">€ {$item[1]|number:2:'.':' '}
+                                    <td align="right">€ {$item[1]*$caravan->exchange_rate|number:2:'.':' '}
                                     {else}
-                                <td align="right" style="margin-right: 5px">{$item[1]|number:2:'.':' '} Kč
-                                {/if}<a n:href="removeEquip! idCaravan=>$caravan->id_karavan, id_equip=>$id" title="Odebrat"> X</a></td>
+                                    <td align="right" style="margin-right: 5px">{$item[1]|number:2:'.':' '} Kč
+                                    {/if}<a n:href="removeEquip! idCaravan=>$caravan->id_karavan, id_equip=>$id" title="Odebrat"> X</a></td>
                             </tr>
-                            {var $sum += $item[1]}
+                            {var $sum += $item[1]*$caravan->exchange_rate}
                         {/foreach}
                         <tr>
                             <td style="font-weight: bold;">{_messages.caravan.right.equipPrice}</td>
@@ -284,11 +284,22 @@
                         </tr>
                         <tr>
                             <td style="font-weight: bold;">{_messages.caravan.right.total}</td>
-                            
+
                             {if $lang == "de_DE"}
-                                <td align="right" style="padding-right: 10px" colspan="2">€ {$sum+$caravan->cena|number:2:'.':' '}</td>
+                                <td align="right" style="padding-right: 10px" colspan="2">€ {$sum+$caravan->cena_bez_DPH*$caravan->exchange_rate|number:2:'.':' '}</td>
                             {else}
-                                <td align="right" style="padding-right: 10px" colspan="2">{$sum+$caravan->cena|number:2:'.':' '} Kč</td>
+                                <td align="right" style="padding-right: 10px" colspan="2">{$sum+$caravan->cena_bez_DPH|number:2:'.':' '} Kč</td>
+                            {/if}
+                        </tr>
+
+                        <tr>
+                            <td style="font-weight: bold;">{_messages.caravan.right.totalWithTax}</td>
+                            {var $EtotalPrice = $sum+$caravan->cena_bez_DPH * $caravan->exchange_rate}
+                            {var $totalPrice = $sum + $caravan->cena_bez_DPH}
+                            {if $lang == "de_DE"}
+                                <td align="right" style="padding-right: 10px" colspan="2">€ {$EtotalPrice + ($EtotalPrice * $caravan->tax_rate / 100)|number:2:'.':' '}</td>
+                            {else}
+                                <td align="right" style="padding-right: 10px" colspan="2">{$totalPrice + ($totalPrice * $caravan->tax_rate / 100)|number:2:'.':' '} Kč</td>
                             {/if}
                         </tr>
                     </table>
@@ -317,8 +328,6 @@
                     </tr>
                 </table>
             {/form}
-
-
             <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
         </div>
     </div>                       

@@ -57,6 +57,7 @@ caravan:
 		sendEmailText: 'Die Caravansangebot mit allen Preisen auf die Email Adresse schicken'
 		equipPrice: 'Ausstattungpreis'
 		total: 'Gesamt'
+		totalWithTax: 'Celkem s DPH'
 		form:
 			email: 'Email'
 			captcha: 'Ubschreib den Text'

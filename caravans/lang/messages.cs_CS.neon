@@ -58,6 +58,7 @@ caravan:
 		sendEmailText: 'Zaslat tento karavan a propočet na Váš email'
 		equipPrice: 'Cena výbavy'
 		total: 'Celkem'
+		totalWithTax: 'Celkem s DPH'
 		form:
 			email: 'Váš email'
 			captcha: 'Opiš text z obrázku'
