@@ -70,7 +70,7 @@
     </span>
     <div style="text-align: right;width:435px; border: 0;float:right;border-left:1px dashed black; margin-left:0">
         <h4 style="margin-left: 50px;margin-right: 10px; " class="vpravo">{_messages.homepage.newsTitle}:</h4>
-        <div style="margin-left: 50px; padding: 10px 0 10px 0;margin-right: 10px; ">
+        <div style="margin-left: 50px; padding: 10px 0 10px 0;margin-right: 10px;">
             {foreach $news as $art}
                 <a n:href="Article:view $art->id_clanek" style="margin:0;font-size: 14px;text-decoration: none;color:black;">
                     <div class="news">
@@ -88,7 +88,9 @@
                     </div> 
                 </a>
             {/foreach}
+            <a href="http://www.pujcovna-minikaravanu.cz/" style="text-decoration: none; position: relative; left: -5px" target="_blank">
+                <img src="{$basePath}/images/web/365x140-banner-b-náhled.jpg">
+            </a>
         </div> 
-        <img src="{$basePath}/images/web/365x140-banner-b-náhled.jpg">
     </div>
 </section>
