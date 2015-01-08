@@ -26,7 +26,7 @@ class HomepagePresenter extends BasePresenter {
 
     public function renderDefault() {
         $this->article->id=1;
-        $articles = $this->article->getNewArticles(3,Model\Language::convertToInt($this->locale));
+        $articles = $this->article->getNewArticles(2,Model\Language::convertToInt($this->locale));
         $this->template->news = $articles;
     }
 
