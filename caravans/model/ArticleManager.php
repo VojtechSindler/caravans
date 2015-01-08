@@ -29,7 +29,7 @@ class ArticleManager extends \Caravans\Model\ModelContainer {
         $id = null;
         do {
             $id = $this->randNumber(caravanIdLength);
-        } while ($this->database->table("clanky")->where("id_clanek", $id)->count() == 1);
+        } while ($this->database->table("clanky")->where("id_clanek", $id)->count() >= 1);
         $this->id=$id;
         return (int) $id;
     }

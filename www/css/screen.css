@@ -13,7 +13,8 @@
     width:990px;
     height:200px;
 }
-
+a.ico { color:#9d9c9a; font-size:10px; text-decoration: none; padding:0 0 0 14px; background-repeat:no-repeat; background-position:0 0; }
+a.pdf { background-image:url(../images/pdf.gif); margin-left:14px;}
 .fb{
     background-color: #4965b4;
     border-radius: 2px;
@@ -173,7 +174,6 @@ header .login a{
 }
 #obsah{
     font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
     width: 100%;
     margin-top: 25px;
     background-image: url('../images/web/background.jpg');
