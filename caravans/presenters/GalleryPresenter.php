@@ -17,7 +17,7 @@ class GalleryPresenter extends BasePresenter {
     
     public function startup() {
         parent::startup();
-        $this->template->galleryPath = galleryPath2;
+        $this->template->galleryPath = caravanGalleryPath2;
     }
     
     public function renderShowAll(){

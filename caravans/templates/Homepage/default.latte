@@ -76,9 +76,9 @@
                     <div class="news">
                         <h4 style="margin-top: 5px;color: #C00000 ; text-align: left; margin-left: 5px">{$art->nadpis}</h4>
                         {if $art->image != ""}
-                            <img src="{$basePath}/{$art->image}" style="float:left">
+                            <img src="{$basePath}/{str_replace('/article','/article/thumbs',$art->image)}" style="float:left">
                         {else}
-                            <img src="{$basePath}/images/web/default.jpg" style="float:left">
+                            <img src="{$basePath}/images/web/default.jpg" style="float:left; max-width: 160px;max-height: 120px">
                         {/if}
                         {if $art->perex == null}
                             <p>{!$art->text|truncate:200|striptags}</p>

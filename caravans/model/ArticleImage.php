@@ -43,6 +43,7 @@ class ArticleImage extends Model\Gallery {
             throw new \Nette\InvalidStateException();
 
         $image = Image::fromFile($this->path);
+        $image->resize(280, $image->height)->save($this->path);
         $image->resize(160, 160)->save($this->path);
         $this->database->query("UPDATE clanky SET image='$this->path' WHERE id_clanek = $id");
     }
@@ -55,12 +56,14 @@ class ArticleImage extends Model\Gallery {
         $this->idArticle = $id;
         $imageName = $this->createImageName($image->name);
         $this->path = $this->galleryPath . $imageName;
+        $pathThumbs = $this->galleryPath . "thumbs/" . $imageName;
         $image->move($this->path);
         if ($imageName == null || $this->idArticle == null)
             throw new \Nette\InvalidStateException();
 
         $image = Image::fromFile($this->path);
-        $image->resize(160, 160)->save($this->path);
+        $image->resize(280, $image->height)->save($this->path);
+        $image->resize(160, 160)->save($pathThumbs);
         $this->database->query("UPDATE clanky SET image='$this->path' WHERE id_clanek = $id");
     }
 
@@ -75,6 +78,8 @@ class ArticleImage extends Model\Gallery {
         $imageName = $mainImage->image;
         if ($imageName != "") {
             $this->path = $imageName;
+            parent::deleteImage();
+            $this->path = str_replace("/article", "/article/thumbs", $this->path);
             parent::deleteImage();
             $this->database->query("UPDATE clanky SET image='' WHERE id_clanek = $id");
         }
