@@ -182,7 +182,7 @@ class ArticlePresenter extends \BackendPresenter {
         $language = new Model\Language;
         $items = array($language::CS => "Český", $language::EN => "Anglický", $language::DE => "Německý");
         $form->addSelect("jazyk", "Jazyk", $items)->setDefaultValue($article["jazyk"]);
-
+        $form->addHidden("orig_jazyk")->setDefaultValue($article["jazyk"]);
 
         $form->addSubmit("odeslat", "Editovat");
         $form->onSuccess[] = $this->addEditFormSucceeded;

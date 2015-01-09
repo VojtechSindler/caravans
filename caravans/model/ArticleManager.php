@@ -74,7 +74,9 @@ class ArticleManager extends \Caravans\Model\ModelContainer {
         $data->id_autor = $this->userId;
         $id = $data->id_clanek;
         $data->remove("id_clanek");
-        return $this->database->table("clanky")->where("id_clanek=$id")->update($data);
+        $jazyk = $data->orig_jazyk;
+        $data->remove("orig_jazyk");
+        return $this->database->table("clanky")->where("id_clanek=$id")->where("jazyk = $jazyk")->update($data);
     }
 
     /** Vymaže článek
