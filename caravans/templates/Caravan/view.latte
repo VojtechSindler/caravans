@@ -293,13 +293,13 @@
                         </tr>
 
                         <tr>
-                            <td style="font-weight: bold;">{_messages.caravan.right.totalWithTax}</td>
+                            <td style="font-weight: bold; color: red">{_messages.caravan.right.totalWithTax}</td>
                             {var $EtotalPrice = $sum+$caravan->cena_bez_DPH * $caravan->exchange_rate}
                             {var $totalPrice = $sum + $caravan->cena_bez_DPH}
                             {if $lang == "de_DE"}
                                 <td align="right" style="padding-right: 10px" colspan="2">€ {$EtotalPrice + ($EtotalPrice * $caravan->tax_rate / 100)|number:2:'.':' '}</td>
                             {else}
-                                <td align="right" style="padding-right: 10px" colspan="2">{$totalPrice + ($totalPrice * $caravan->tax_rate / 100)|number:2:'.':' '} Kč</td>
+                                <td align="right" style="padding-right: 10px; color: red" colspan="2">{$totalPrice + ($totalPrice * $caravan->tax_rate / 100)|number:2:'.':' '} Kč</td>
                             {/if}
                         </tr>
                     </table>
