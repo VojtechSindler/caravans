@@ -81,9 +81,9 @@
                             <img src="{$basePath}/images/web/default.jpg" style="float:left; max-width: 160px;max-height: 120px">
                         {/if}
                         {if $art->perex == null}
-                            <p style="height:90px">{!$art->text|truncate:100|striptags}</p>
+                            <p style="height:90px;text-align: initial;padding-left: 170px;">{!$art->text|truncate:100|striptags}</p>
                         {else}
-                            <p style="height:90px">{!$art->perex|truncate:100|striptags}</p>
+                            <p style="height:90px;text-align: initial;padding-left: 170px;">{!$art->perex|truncate:100|striptags}</p>
                         {/if}
                     </div> 
                 </a>
