@@ -195,10 +195,10 @@ class CaravanImage extends Model\Gallery {
      * @return array
      */
     public function images() {
-        return $this->database->query("SELECT g.id_foto, g.`nazev`, k.`nazev` as kategorie FROM "
+        return $this->database->query("SELECT g.id_foto, g.`nazev`, k.`nazev` as kategorie, k.`poradi` FROM "
                         . "`galerie` as g JOIN galerie_kategorie USING(id_foto) "
                         . "JOIN kategorie as k USING(id_kategorie) "
-                        . "WHERE hlavni=? AND id_karavan =? AND jazyk=? ORDER BY k.`nazev`", 0, $this->idCaravan, $this->language)->fetchAll();
+                        . "WHERE hlavni=? AND id_karavan =? AND jazyk=? ORDER BY k.`poradi`,k.`nazev` ASC", 0, $this->idCaravan, $this->language)->fetchAll();
     }
 
     /**
