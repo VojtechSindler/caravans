@@ -26,7 +26,7 @@ class CategoryTranslator {
     public static function translate($type) {
         switch ($type) {
             case IArticleCategory::ARTICLE:
-                return "clanek";
+                return "aktualita";
                 break;
             case IArticleCategory::EXHIBITON:
                 return "výstava";

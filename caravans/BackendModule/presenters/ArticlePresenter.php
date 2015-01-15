@@ -25,39 +25,39 @@ class ArticlePresenter extends \BackendPresenter {
 
     public function startup() {
         parent::startup();
-        $this->title = "Seznam článků";
-        $this->navigation("Články", "Seznam článků");
+        $this->title = "Seznam aktualit";
+        $this->navigation("Aktuality", "Seznam aktualit");
         $this->sidebar("articleViewSettings", "Změna zobrazení");
         $this->articleManager->setUserId($this->getUser()->identity->getId());
     }
 
     public function renderEdit($id, $jazyk) {
-        $this->navigation("Články", "Upravit článek");
+        $this->navigation("Aktuality", "Upravit aktualitu");
         $this->id = $id;
         $this->jazyk = $jazyk;
-        $this->title = "Upravit článek";
+        $this->title = "Upravit aktualitu";
         $article = $this->articleManager->getAll($id);
         foreach ($article as $key => $value) {
             $image = $value->image;
         }
         $this->template->image = $image;
         $this->template->articles = $this->articleManager->getAllAdmin();
-        $this->sidebar("listOfArticles", "Seznam Článků");
+        $this->sidebar("listOfArticles", "Seznam aktualit");
     }
 
     public function renderAdd() {
-        $this->navigation("Články", "Vytvořit článek");
-        $this->title = "Vytvořit článek";
+        $this->navigation("Aktuality", "Vytvořit aktualitu");
+        $this->title = "Vytvořit aktualitu";
         $this->template->articles = $this->articleManager->getAllAdmin();
-        $this->sidebar("listOfArticles", "Seznam Článků");
+        $this->sidebar("listOfArticles", "Seznam aktualit");
     }
 
     public function renderView($id, $jazyk) {
-        $this->navigation("Články", "Zobrazení článku");
+        $this->navigation("Aktuality", "Zobrazení aktualit");
         $this->id = $id;
-        $this->title = "Článek $id";
+        $this->title = "Aktualita $id";
         $this->template->articles = $this->articleManager->getAllAdmin();
-        $this->sidebar("listOfArticles", "Seznam Článků");
+        $this->sidebar("listOfArticles", "Seznam aktualit");
         $article = $this->articleManager->getAll($this->id, $jazyk);
         $this->template->article = $article[0];
     }
@@ -84,7 +84,7 @@ class ArticlePresenter extends \BackendPresenter {
 
         $form->addText("perex", "Perex");
 
-        $form->addSelect("kategorie", "Kategorie", array(Model\IArticleCategory::ARTICLE => "Článek",
+        $form->addSelect("kategorie", "Kategorie", array(Model\IArticleCategory::ARTICLE => "Aktuality",
             Model\IArticleCategory::EXHIBITON => "Výstava"));
 
         $form->addTextArea("text", "Text*")
@@ -101,7 +101,7 @@ class ArticlePresenter extends \BackendPresenter {
         foreach ($data as $key => $value) {
             $IDs[$value->id_clanek] = $value->nadpis;
         }
-        $form->addSelect("id_origin", "Překládáš článek", $IDs)->setPrompt(null);
+        $form->addSelect("id_origin", "Překládáte aktualitu", $IDs)->setPrompt(null);
 
         $form->addSubmit("odeslat", "Vytvořit");
         $form->onSuccess[] = $this->addArticleFormSucceeded;
@@ -129,7 +129,7 @@ class ArticlePresenter extends \BackendPresenter {
             if (isset($image) && $image->name != null) {
                 $this->articleImage->addMainImage($image, $this->articleManager->id);
             }
-            $this->flashMessage("Článek byl úspěšně vytvořen", \FlashMessageTypes::OK);
+            $this->flashMessage("Aktualita byla úspěšně vytvořena", \FlashMessageTypes::OK);
             $this->redirect("default");
         } catch (Exception $ex) {
             $form->addError($ex->getMessage());
@@ -169,7 +169,7 @@ class ArticlePresenter extends \BackendPresenter {
         $form->addText("perex", "Perex")
                 ->defaultValue = $article['perex'];
 
-        $form->addSelect("kategorie", "Kategorie", array(Model\IArticleCategory::ARTICLE => "Článek",
+        $form->addSelect("kategorie", "Kategorie", array(Model\IArticleCategory::ARTICLE => "Aktuality",
                     Model\IArticleCategory::EXHIBITON => "Výstava"))->defaultValue = $article["kategorie"];
 
         $form->addTextArea("text", "Text*")
@@ -216,7 +216,7 @@ class ArticlePresenter extends \BackendPresenter {
             }
             $this->articleManager->edit($values);
 
-            $this->flashMessage("Článek byl úspěšně editován", \FlashMessageTypes::OK);
+            $this->flashMessage("Aktualita byla úspěšně editována", \FlashMessageTypes::OK);
             $this->redirect("default");
         } catch (Exception $ex) {
             $form->addError($ex->getMessage());

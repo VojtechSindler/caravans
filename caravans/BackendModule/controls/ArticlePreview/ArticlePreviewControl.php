@@ -49,7 +49,7 @@ class ArticlePreviewControl extends \Nette\Application\UI\Control {
 
     public function handleDelete($id, $jazyk) {
         $this->articleManager->delete($id, $jazyk);
-        $this->flashMessage("Článek byl úspěšně odstraněn", \FlashMessageTypes::OK);
+        $this->flashMessage("Aktualita byla úspěšně odstraněna", \FlashMessageTypes::OK);
         $this->redirect("this");
     }
 }
