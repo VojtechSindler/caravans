@@ -1,0 +1,80 @@
+{* Latte template *}
+
+{block content}
+<h2>Přidat prodejce</h2>
+{form createVendorForm}
+    <div n:if="$form->ownErrors" class="msg msg-error" >
+        <p n:foreach="$form->ownErrors as $error">{$error}</p>
+    </div>
+    <table class="table1">
+        <tr>
+            <td>{label id_kraj /}</td>
+            <td>{input id_kraj class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label nazev /}</td>
+            <td>{input nazev class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label adresa /}</td>
+            <td>{input adresa class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label mesto /}</td>
+            <td>{input mesto class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label psc /}</td>
+            <td>{input psc class => 'small-field'}</td>
+        </tr>
+        <tr>
+            <td>{label email /}</td>
+            <td>{input email class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label telefon /}</td>
+            <td>{input telefon class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label web /}</td>
+            <td>{input web class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label image /}</td>
+            <td>{input image class => 'field'}</td>
+        </tr>
+        <tr>
+            <td>{label send /}</td>
+            <td>{input send class => 'button'}</td>
+        </tr>
+    </table>
+{/form}
+
+<h2>Prodejci</h2>
+<div class="table">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>ID</th>
+            <th>Název</th>
+            <th>Adresa</th>
+            <th>Kraj</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Akce</th>
+        </tr>
+        {foreach $vendors as $vendor}
+            <tr>
+                <td>{$vendor->id_prodejce}</td>
+                <td>{$vendor->nazev}</td>
+                <td>{$vendor->adresa},<br>{$vendor->psc} {$vendor->mesto}</td>
+                <td>{$vendor->kraj->kraj}</td>
+                <td>{$vendor->email}</td>
+                <td>{$vendor->telefon|number:0:'':' '}</td>
+                <td>
+                <a n:href="Vendor:edit, $vendor->id_prodejce" class="ico edit">Upravit</a>
+                <a n:href="delete!, $vendor->id_prodejce" class="ico del">Smazat</a>
+                </td>
+            </tr>
+        {/foreach}
+    </table>
+</div>

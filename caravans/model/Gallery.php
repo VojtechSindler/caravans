@@ -53,21 +53,22 @@ class Gallery extends ModelContainer {
     /**
      * Odstraní složku včetně souborů
      * @param string $dir
+     * @param bool $withFolder Pokud je true, smaže se i samotná složka
      */
-    public function removeDir($dir) {
+    public function removeDir($dir, $withFolder = true) {
         $it = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
         $files = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::CHILD_FIRST);
         foreach ($files as $file) {
             if ($file->getFilename() === '.' || $file->getFilename() === '..') {
                 continue;
             }
-            if ($file->isDir()) {
+            if ($file->isDir() && $withFolder) {
                 rmdir($file->getRealPath());
             } else {
                 unlink($file->getRealPath());
             }
         }
+        if($withFolder)
         rmdir($dir);
     }
-
 }
